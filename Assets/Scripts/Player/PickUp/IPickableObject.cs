@@ -6,7 +6,7 @@ namespace Player.PickUp
 	{
 		Transform Transform { get; }
 		void PickUp();
-		void SetActive(bool value);
+		void SetPickUpStatus(bool value);
 		bool IsActive { get; }
 	}
 }

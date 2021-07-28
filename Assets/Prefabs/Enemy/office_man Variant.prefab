@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dd9836812f6ac418ec92344a3b672b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
+  _maxHealth: 1
   _animator: {fileID: 6417317354536346959}
   _dieAnimationKey: Die
   _takeDamageAnimationKey: TakeDamage
