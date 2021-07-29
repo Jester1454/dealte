@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Enemy.EnemyBehaviours.SensorySystems;
 using Enemy.EnemyStates;
 using FSM;
 using Player.Behaviours.HealthSystem;
+using RPGCharacterAnimsFREE;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,6 +19,7 @@ namespace Enemy
 		[SerializeField] private HealthBehaviour _healthBehaviour;
 		[SerializeField] private Rigidbody _rigidbody;
 		[SerializeField] private Collider _collider;
+		[SerializeField] private AnimatorEvents _animatorEvents;
 		
 		private StateMachine _stateMachine;
 		private NavMeshAgent _navMeshAgent;
@@ -27,27 +28,21 @@ namespace Enemy
 		{
 			_navMeshAgent = GetComponent<NavMeshAgent>();
 
-			var enemyContextData = new EnemyContextData(_animator, _navMeshAgent, transform, _sensorySystem, _rigidbody, _collider);
+			var enemyContextData = new EnemyContextData(_animator, _navMeshAgent, transform, _sensorySystem, _rigidbody, _collider, _animatorEvents);
 			
 			_stateMachine = new StateMachine(this);	
-			_healthBehaviour.OnTakeDamage += OnTakeDamage;
 			_stateMachine.AddState("Patrol", new PatrolState(false, enemyContextData, _patrolStateData));
 			_stateMachine.AddState("ChaseTarget", new ChaseTargetState(false, enemyContextData, _chasePlayerData));
 			_stateMachine.AddState("Die", new DeathState(false, enemyContextData));
-			_stateMachine.AddState("Attack", new MeleeAttackState(false, _meleeAttackStateData, enemyContextData));
+			_stateMachine.AddState("Attack", new MeleeAttackState(true, _meleeAttackStateData, enemyContextData));
 			
 			_stateMachine.AddTransition(new Transition("Patrol", "ChaseTarget", transition => _sensorySystem.VisibleTarget));
 			_stateMachine.AddTransition(new Transition("ChaseTarget", "Patrol", transition => !_sensorySystem.VisibleTarget));
-			_stateMachine.AddTransitionFromAny(new Transition("Any", "Die", transition => _healthBehaviour.CurrentHealth <= 0));
+			_stateMachine.AddTransitionFromAny(new Transition("Any", "Die", transition => _healthBehaviour.CurrentHealth <= 0, true));
 
 			_stateMachine.AddTransition(new Transition("Patrol", "Attack", AttackCondition));
 			_stateMachine.AddTransition(new Transition("ChaseTarget", "Attack", AttackCondition));
 			_stateMachine.AddTransition(new Transition("Attack", "ChaseTarget", transition => !AttackCondition(transition)));
-		}
-
-		private void OnTakeDamage()
-		{
-			
 		}
 
 		private bool AttackCondition(Transition arg)
@@ -63,11 +58,6 @@ namespace Enemy
 		private void Update()
 		{
 			_stateMachine.OnLogic();
-		}
-
-		private void OnDisable()
-		{
-			_healthBehaviour.OnTakeDamage -= OnTakeDamage;
 		}
 
 		private void OnDrawGizmos()

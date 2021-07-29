@@ -30,8 +30,6 @@ namespace Player.Movement
 		
 		private Vector3 _forward;
 		private Vector3 _right;
-
-		public bool IsRun => _animator.IsRun;
 		
 		private void Awake()
 		{

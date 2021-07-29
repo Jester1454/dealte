@@ -3,8 +3,11 @@ using FSM;
 using Player.Behaviours.AttackSystem;
 using UnityEngine;
 using System;
+using System.Collections;
 using Enemy.EnemyBehaviours.SensorySystems;
 using Player.Behaviours.HealthSystem;
+using RPGCharacterAnimsFREE;
+using UnityEngine.AI;
 
 namespace Enemy.EnemyStates
 {
@@ -15,11 +18,13 @@ namespace Enemy.EnemyStates
 		[SerializeField] private List<AttackCollider> _attackColliders;
 		[SerializeField] private float _damage;
 		[SerializeField] private float _rotationSpeed;
+		[SerializeField] private float _delayBetweenAttack;
 		
 		public float Range => _range;
 		public List<AttackCollider> AttackColliders => _attackColliders;
 		public float Damage => _damage;
 		public float RotationSpeed => _rotationSpeed;
+		public float DelayBetweenAttack => _delayBetweenAttack;
 	}
 	
 	public class MeleeAttackState : StateBase
@@ -30,6 +35,11 @@ namespace Enemy.EnemyStates
 		private readonly float _rotationSpeed;
 		private readonly Transform _transform;
 		private readonly SensorySystem _sensorySystem;
+		private readonly NavMeshAgent _agent;
+		private readonly AnimatorEvents _animatorEvents;
+		private bool _isAttack = false;
+		private readonly float _delayBetweenAttack;
+		private bool _requestExit;
 		
 		private static readonly int _attack = Animator.StringToHash("IsAttack");
 
@@ -41,6 +51,9 @@ namespace Enemy.EnemyStates
 			_rotationSpeed = meleeData.RotationSpeed;
 			_sensorySystem = data.SensorySystem;
 			_transform = data.Transform;
+			_agent = data.NavMeshAgent;
+			_animatorEvents = data.AnimatorEvents;
+			_delayBetweenAttack = meleeData.DelayBetweenAttack;
 		}
 
 		private void OnDamage(IGettingDamage gettingDamage)
@@ -54,17 +67,38 @@ namespace Enemy.EnemyStates
 			{
 				attackCollider.SetActive(value);
 			}
+
+			_isAttack = value;
 		}
 		
 		public override void OnEnter()
 		{
 			base.OnEnter();
 			Attack();
-						
+		}
+
+		private void OnFinishAttack()
+		{
+			_animator.SetBool(_attack, false);
+			
 			foreach (var attackCollider in _attackColliders)
 			{
-				attackCollider.OnDamage += OnDamage;
+				attackCollider.OnDamage -= OnDamage;
 			}
+			
+			SetActiveAttack(false);
+			_animatorEvents.OnFinishAttack -= OnFinishAttack;
+
+			if (!_requestExit)
+			{
+				mono.StartCoroutine(AttackDelay());
+			}
+		}
+
+		private IEnumerator AttackDelay()
+		{
+			yield return new WaitForSeconds(_delayBetweenAttack);
+			Attack();
 		}
 
 		public override void OnLogic()
@@ -82,6 +116,14 @@ namespace Enemy.EnemyStates
 
 		private void Attack()
 		{
+			_animatorEvents.OnFinishAttack += OnFinishAttack;
+			foreach (var attackCollider in _attackColliders)
+			{
+				attackCollider.OnDamage += OnDamage;
+			}
+			
+			_agent.isStopped = true;
+			
 			_animator.SetBool(_attack, true);
 			SetActiveAttack(true);
 		}
@@ -89,15 +131,17 @@ namespace Enemy.EnemyStates
 		public override void OnExit()
 		{
 			base.OnExit();
-
-			_animator.SetBool(_attack, false);
-			
-			foreach (var attackCollider in _attackColliders)
-			{
-				attackCollider.OnDamage -= OnDamage;
-			}
-			
 			SetActiveAttack(false);
+			_requestExit = false;
+		}
+
+		public override void RequestExit()
+		{
+			_requestExit = true;
+			if (!_isAttack)
+			{
+				fsm.StateCanExit();
+			}
 		}
 	}
 }

@@ -138,8 +138,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
-  m_Center: {x: -0.0000000102055315, y: -0.000000022429775, z: 0.00052367616}
+  m_Size: {x: 5, y: 13, z: 5}
+  m_Center: {x: -0.0000000102055315, y: -5.55, z: 0.00052367616}
 --- !u!114 &5675259377851602793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,10 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiObject: {fileID: 8589366117894324968}
   _playerTag: Player
-  _pickObject: {fileID: 4979438068082728398}
-  _throwObject: {fileID: 574777180382126779, guid: 8a258b56b9cf1e8438d3057eaa88316d,
-    type: 3}
+  _light: {fileID: 8319815524568082882, guid: 8a258b56b9cf1e8438d3057eaa88316d, type: 3}
   _throwOffset: 13
+  _animationDuration: 0.5
+  _pickUpCollider: {fileID: 7201523688429265162}
 --- !u!54 &6094845139192675295
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -185,8 +185,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.49000025, y: 0.49000025, z: 0.11384613}
-  m_Center: {x: -0.0000000102055315, y: -0.000000022429775, z: 0.00052367616}
+  m_Size: {x: 0.49000025, y: 0.1138461, z: 0.4900002}
+  m_Center: {x: -0.0000000102055315, y: 0, z: 0.00052367616}
 --- !u!1 &3573841630592561378
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4979438068082728398}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0066, y: -0, z: 0.0243}
+  m_LocalPosition: {x: 0.007, y: 0.353, z: 0.028}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8093655013806348052}
@@ -308,8 +308,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.8584906, g: 0.7897316, b: 0.28751338, a: 1}
-  m_Intensity: 0.01
-  m_Range: 5
+  m_Intensity: 0.2
+  m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -382,13 +382,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7906436376634496277}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.70090926, y: 0, z: 0, w: 0.7132505}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 24.5, y: 24.5, z: 29.6}
   m_Children: []
   m_Father: {fileID: 8093655013806348052}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89, y: 0, z: 0}
 --- !u!23 &5724416715605884010
 MeshRenderer:
   m_ObjectHideFlags: 0

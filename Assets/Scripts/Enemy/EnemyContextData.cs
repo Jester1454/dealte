@@ -1,5 +1,6 @@
 ﻿using Enemy.EnemyBehaviours;
 using Enemy.EnemyBehaviours.SensorySystems;
+using RPGCharacterAnimsFREE;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,7 +14,8 @@ namespace Enemy
 		public SensorySystem SensorySystem { get; private set; }
 		public Rigidbody Rigidbody { get; private set; }
 		public Collider Collider { get; private set; }
-		public EnemyContextData(Animator animator, NavMeshAgent navMeshAgent, Transform transform, SensorySystem sensorySystem, Rigidbody rigidbody, Collider collider)
+		public AnimatorEvents AnimatorEvents { get; private set; }
+		public EnemyContextData(Animator animator, NavMeshAgent navMeshAgent, Transform transform, SensorySystem sensorySystem, Rigidbody rigidbody, Collider collider, AnimatorEvents animatorEvents)
 		{
 			Animator = animator;
 			NavMeshAgent = navMeshAgent;
@@ -21,6 +23,7 @@ namespace Enemy
 			SensorySystem = sensorySystem;
 			Rigidbody = rigidbody;
 			Collider = collider;
+			AnimatorEvents = animatorEvents;
 		}
 	}
 }

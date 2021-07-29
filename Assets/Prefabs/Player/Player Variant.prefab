@@ -96,8 +96,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13076009, y: 0.20203993, z: 0.4019147}
-  m_Center: {x: -0.0040607154, y: -0.03244739, z: 0.32394376}
+  m_Size: {x: 0.13076009, y: 0.20203993, z: 0.5313528}
+  m_Center: {x: -0.00406198, y: -0.032454398, z: 0.38866147}
 --- !u!114 &4375106992380736037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,14 +164,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022225514501108388}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 2.157, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1593029601933795834}
   m_Father: {fileID: 6706897239067255589}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &531314320566819344
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -299,7 +299,6 @@ MonoBehaviour:
   _animator: {fileID: 5001045682821785301}
   _characterController: {fileID: 920609973321501663}
   _lerpMultiplayer: 1.5
-  _runThreshold: 0.5
 --- !u!114 &6964517916834939805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,14 +603,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5570417731046090157}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.93, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7886688318436401774}
   m_Father: {fileID: 6706897239067255589}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &6590140623220993767
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,14 +666,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7267461700827272082}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.569, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3978198848337317333}
   m_Father: {fileID: 6706897239067255589}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1001 &1445054205329365828
 PrefabInstance:
   m_ObjectHideFlags: 0

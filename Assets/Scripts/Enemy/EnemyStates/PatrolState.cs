@@ -45,6 +45,11 @@ namespace Enemy.EnemyStates
 		{
 			base.OnEnter();
 			
+			if (_agent.isStopped)
+			{
+				_agent.isStopped = false;
+			}
+
 			_onEnterSpeed = _agent.speed;
 			_agent.speed = _patrolSpeed;
 			GotoNextPoint();

@@ -105,12 +105,9 @@ namespace Player
 				return;
 			
 			_currentBehaviour = PlayerBehaviour.Attack;
+
+			_characterMovement.Stop();
 			_attackBehaviour.Attack();
-			
-			if (!_characterMovement.IsRun)
-			{
-				_characterMovement.Stop();
-			}
 			
 			_attackBehaviour.OnFinish += OnFinishAttack;
 		}

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using DG.Tweening;
 using UnityEngine;
+using Utils;
 
 namespace Player.PickUp
 {
@@ -12,12 +14,12 @@ namespace Player.PickUp
 	{
 		[SerializeField] private GameObject _uiObject;
 		[SerializeField] private string _playerTag;
-		[SerializeField] private GameObject _pickObject;
-		[SerializeField] private GameObject _throwObject;
+		[SerializeField] private LightShowAnimation _light;
 		[SerializeField] private float _throwOffset;
+		[SerializeField] private float _animationDuration;
 		
 		private Rigidbody _rigidbody;
-		private GameObject _currentThrowObject;
+		private LightShowAnimation _currentLight;
 		
 		private bool _canPickUp = false;
 		public Transform Transform => transform;
@@ -55,14 +57,19 @@ namespace Player.PickUp
 			if (!_canPickUp)
 				return;
 			
-			Destroy(_currentThrowObject);
 			_uiObject.SetActive(false);
-			_pickObject.SetActive(true);
+			StartCoroutine(DestroyLight());
 			
 			_rigidbody.velocity = Vector3.zero;
 			_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-			_canPickUp = false;
-			
+			SetPickUpStatus(false);
+		}
+
+		private IEnumerator DestroyLight()
+		{
+			_currentLight.transform.SetParent(null);
+			yield return StartCoroutine(_currentLight.Hide(_animationDuration));
+			Destroy(_currentLight.gameObject);
 		}
 
 		public void SetPickUpStatus(bool value)
@@ -81,7 +88,7 @@ namespace Player.PickUp
 
 		private IEnumerator Throw()
 		{
-			var distance = 0f;
+			float distance;
 			do
 			{
 				var previousPosition = _rigidbody.position;
@@ -90,12 +97,16 @@ namespace Player.PickUp
 			} while (distance > Mathf.Epsilon);
 
 			_rigidbody.velocity = Vector3.zero;
+			_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 			yield return new WaitForFixedUpdate();
-			
 					
-			_pickObject.SetActive(false);
 			SetPickUpStatus(true);
-			_currentThrowObject = Instantiate(_throwObject, transform.position + new Vector3(0, _throwOffset, 0), Quaternion.Euler(90, 0, 0));
+			
+			transform.rotation = Quaternion.identity;
+			_currentLight = Instantiate(_light, transform.position, Quaternion.Euler(90, 0, 0), transform);
+			
+			StartCoroutine(_currentLight.Show(_animationDuration));
+			transform.DOMove(_currentLight.transform.position + new Vector3(0, _throwOffset, 0), _animationDuration, true);
 		}
 	}
 }

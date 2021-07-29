@@ -7,15 +7,12 @@ namespace Player.Movement
 		[SerializeField] private Animator _animator;
 		[SerializeField] private CharacterController _characterController;
 		[SerializeField] private float _lerpMultiplayer;
-		[SerializeField] private float _runThreshold = 0.7f; 
 		private float _velocityX;
 		private float _velocityZ;
 		
 		private static readonly int _movementXAnimatorKey = Animator.StringToHash("XMovement");
 		private static readonly int _movementZAnimatorKey = Animator.StringToHash("ZMovement");
 		private static readonly int _isRunAniamtorKey = Animator.StringToHash("IsRun");
-
-		public bool IsRun { get; private set; }
 
 		private void Awake()
 		{
@@ -33,9 +30,6 @@ namespace Player.Movement
 			
 			_animator.SetFloat(_movementXAnimatorKey, _velocityX);
 			_animator.SetFloat(_movementZAnimatorKey, _velocityZ);
-
-			IsRun = (_velocityX > _runThreshold || _velocityZ > _runThreshold);
-			_animator.SetBool(_isRunAniamtorKey, IsRun);
 		}
 
 		public void SetActiveStrafeMovement(bool value)
