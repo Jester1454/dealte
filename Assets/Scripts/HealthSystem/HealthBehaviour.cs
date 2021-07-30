@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Player.Behaviours.HealthSystem
@@ -14,11 +15,15 @@ namespace Player.Behaviours.HealthSystem
         [SerializeField] private Animator _animator;
         [SerializeField] private string _dieAnimationKey = "Die";
         [SerializeField] private string _takeDamageAnimationKey = "TakeDamage";
+        [SerializeField] private bool _invulnerability;
+        [SerializeField] private float _invulnerabilityDuration;
+        
         public Action OnTakeDamage;
         public Action OnDeath;
 
         private bool _isDead = false;
         private float _currentHealth;
+        private bool _isInvulnerability = false;
 
         public float CurrentHealth => _currentHealth;
         public float MaxHealth => _maxHealth;
@@ -30,7 +35,7 @@ namespace Player.Behaviours.HealthSystem
 
         public void Damage(float damage)
         {
-            if (_isDead) return;
+            if (_isDead || _isInvulnerability) return;
             
             _currentHealth -= damage;
             if (Math.Abs(damage) < Mathf.Epsilon)
@@ -55,8 +60,21 @@ namespace Player.Behaviours.HealthSystem
                     _animator.SetTrigger(Animator.StringToHash(_takeDamageAnimationKey));
                 }
                 
-                OnTakeDamage?.Invoke();         
+                OnTakeDamage?.Invoke();
+
+
+                if (_invulnerability)
+                {
+                    StartCoroutine(StartInvulnerability());
+                }
             }
+        }
+
+        private IEnumerator StartInvulnerability()
+        {
+            _isInvulnerability = true;
+            yield return new WaitForSeconds(_invulnerabilityDuration);
+            _isInvulnerability = false;
         }
     }
 }

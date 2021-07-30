@@ -9,7 +9,8 @@ namespace Animations
 		[SerializeField] private List<FlashLightAnimation> _animations;
 		[SerializeField] private HealthBehaviour _healthBehaviour;
 		[SerializeField] private float _duration;
-        
+		[SerializeField] private int _loopsCount = 1;
+		
 		private void OnEnable()
 		{
 			_healthBehaviour.OnTakeDamage += OnTakeDamage;
@@ -19,7 +20,7 @@ namespace Animations
 		{
 			foreach (var lightAnimation in _animations)
 			{
-				StartCoroutine(lightAnimation.Flash(_duration));
+				StartCoroutine(lightAnimation.Flash(_duration, _loopsCount));
 			}
 		}
 

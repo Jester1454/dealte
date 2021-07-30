@@ -10,33 +10,36 @@ namespace Animations
         [SerializeField] private Color _flashColor;
         private static readonly int _emissionColor = Shader.PropertyToID("_EmissionColor");
         
-        public IEnumerator Flash(float duration)
+        public IEnumerator Flash(float duration, int loops = 1)
         {
-            var speed = _targetIntensity / (duration / 2);
+            var speed = _targetIntensity / (duration / (loops + 1));
             var currentIntensity = 0f;
             _mesh.material.EnableKeyword("_EMISSION");
 
-            while (currentIntensity < _targetIntensity)
+            for (var i = 0; i < loops; i++)
             {
-                currentIntensity += Time.deltaTime * speed;
-                _mesh.material.SetColor(_emissionColor, _flashColor * currentIntensity);;
-				
-                yield return null;
-            }
-            
-            while (currentIntensity > 0)
-            {
-                currentIntensity -= Time.deltaTime * speed;
-
-                if (currentIntensity < 0)
+                while (currentIntensity < _targetIntensity)
                 {
-                    currentIntensity = 0;
-                }
-                _mesh.material.SetColor(_emissionColor, _flashColor * currentIntensity);;
+                    currentIntensity += Time.deltaTime * speed;
+                    _mesh.material.SetColor(_emissionColor, _flashColor * currentIntensity);;
 				
-                yield return null;
-            }
+                    yield return null;
+                }
             
+                while (currentIntensity > 0)
+                {
+                    currentIntensity -= Time.deltaTime * speed;
+
+                    if (currentIntensity < 0)
+                    {
+                        currentIntensity = 0;
+                    }
+                    _mesh.material.SetColor(_emissionColor, _flashColor * currentIntensity);;
+				
+                    yield return null;
+                }   
+            }
+
             _mesh.material.DisableKeyword("_EMISSION");
         }
     }

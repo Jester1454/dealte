@@ -121,6 +121,9 @@ namespace Player
 
 		private void Update()
 		{
+			
+			Shader.SetGlobalVector("_PositionMoving", transform.position);
+			
 			if (OnPause)
 				return;
 			

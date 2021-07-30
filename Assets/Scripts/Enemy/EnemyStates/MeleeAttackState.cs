@@ -19,12 +19,14 @@ namespace Enemy.EnemyStates
 		[SerializeField] private float _damage;
 		[SerializeField] private float _rotationSpeed;
 		[SerializeField] private float _delayBetweenAttack;
+		[SerializeField] private Vector3 _offsetRotation;
 		
 		public float Range => _range;
 		public List<AttackCollider> AttackColliders => _attackColliders;
 		public float Damage => _damage;
 		public float RotationSpeed => _rotationSpeed;
 		public float DelayBetweenAttack => _delayBetweenAttack;
+		public Vector3 OffsetRotation => _offsetRotation;
 	}
 	
 	public class MeleeAttackState : StateBase
@@ -40,6 +42,7 @@ namespace Enemy.EnemyStates
 		private bool _isAttack = false;
 		private readonly float _delayBetweenAttack;
 		private bool _requestExit;
+		private Vector3 _offsetRotation;
 		
 		private static readonly int _attack = Animator.StringToHash("IsAttack");
 
@@ -54,6 +57,7 @@ namespace Enemy.EnemyStates
 			_agent = data.NavMeshAgent;
 			_animatorEvents = data.AnimatorEvents;
 			_delayBetweenAttack = meleeData.DelayBetweenAttack;
+			_offsetRotation = meleeData.OffsetRotation;
 		}
 
 		private void OnDamage(IGettingDamage gettingDamage)
@@ -111,7 +115,7 @@ namespace Enemy.EnemyStates
 		{
 			var direction = (target.position - mono.transform.position).normalized;
 			var lookRotation = Quaternion.LookRotation(direction);
-			_transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.deltaTime * _rotationSpeed);
+			_transform.rotation = Quaternion.Slerp(_transform.rotation, Quaternion.Euler(lookRotation.eulerAngles + _offsetRotation), Time.deltaTime * _rotationSpeed);
 		}
 
 		private void Attack()

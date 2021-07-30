@@ -73,13 +73,14 @@ MonoBehaviour:
     _speed: 5
     _stoppingDistance: 2.59
   _meleeAttackStateData:
-    _range: 2.59
+    _range: 2.5
     _attackColliders:
     - {fileID: 4135862506460768990}
     - {fileID: 2408205191534088885}
     _damage: 1
     _rotationSpeed: 2
-    _delayBetweenAttack: 2
+    _delayBetweenAttack: 0.5
+    _offsetRotation: {x: 0, y: -20, z: 0}
   _sensorySystem: {fileID: 8812857828537656382}
   _healthBehaviour: {fileID: 2887820954826489983}
   _rigidbody: {fileID: 7971345314136637869}
