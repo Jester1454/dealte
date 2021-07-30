@@ -14,6 +14,11 @@ namespace Player.Behaviours.AttackSystem
 		[SerializeField] private AnimatorEvents _animatorEvents;
 		[SerializeField] private float _force;
 		
+		[Header("Camera Shaker params")] 
+		[SerializeField] protected float _shakeDuration;
+		[SerializeField] protected float _amplitude;
+		[SerializeField] protected float _frequency;
+
 		private static readonly int _throw = Animator.StringToHash("Throw");
 		private bool _isDisabled;
 		public Action OnFinishThrowing; 
@@ -57,6 +62,7 @@ namespace Player.Behaviours.AttackSystem
 				return;
 			
 			_animator.SetTrigger(_throw);	
+			CinemachineCameraShaker.Instance.ShakeCamera(_shakeDuration, _amplitude, _frequency);
 		}
 
 		public void Disable()

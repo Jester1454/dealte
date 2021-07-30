@@ -26,6 +26,7 @@ namespace Enemy.EnemyStates
 		private readonly float _patrolSpeed;
 		private readonly Transform[] _wayPoints;
 		private readonly NavMeshAgent _agent;
+		private float _previousSpeed;
 
 		private int _destPointIndex = 0;
 		private static readonly int _speed = Animator.StringToHash("Speed");
@@ -59,17 +60,25 @@ namespace Enemy.EnemyStates
 		{
 			if (_wayPoints.Length == 0)
 				return;
-
-			_agent.destination = _wayPoints[_destPointIndex].position;
+			
+			_agent.isStopped = false;
+			var nextPoint = _wayPoints[_destPointIndex].position;
+			
+			if (NavMesh.Raycast(_agent.transform.position, nextPoint, out var hit, NavMesh.AllAreas))
+			{
+				NavMesh.FindClosestEdge(nextPoint, out hit, NavMesh.AllAreas);
+			}
+			
+			var path = new NavMeshPath();
+			NavMesh.CalculatePath(_agent.transform.position, hit.position, NavMesh.AllAreas, path);
+			_agent.path = path;
+			
 			_destPointIndex = (_destPointIndex + 1) % _wayPoints.Length;
 		}
 
 		private IEnumerator Waiting()
 		{
-			//TODO turn to new direction
-			// Vector3 direction = _wayPoints[_destPointIndex].position - transform.position;
-			// var angle = Vector3.Angle(direction, transform.forward);
-
+			_agent.isStopped = true;
 			_isWaiting = true;
 			yield return new WaitForSeconds(Random.Range(_waitingTimeRange.x, _waitingTimeRange.y));
 			_isWaiting = false;
@@ -84,13 +93,16 @@ namespace Enemy.EnemyStates
 			{
 				mono.StartCoroutine(Waiting());
 			}
-			
-			_animator.SetFloat(_speed, _agent.velocity.magnitude);
+
+			_animator.SetFloat(_speed, Mathf.Lerp(_previousSpeed, _agent.velocity.magnitude, Time.deltaTime));
+			_previousSpeed = _agent.velocity.magnitude;
 		}
 
 		public override void OnExit()
 		{
 			base.OnExit();
+			
+			_agent.isStopped = false;
 			_agent.speed = _onEnterSpeed;
 		}
 	}

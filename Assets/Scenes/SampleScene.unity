@@ -109,7 +109,7 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.5
-    agentHeight: 2
+    agentHeight: 4
     agentSlope: 10
     agentClimb: 0.4
     ledgeDropHeight: 0
@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 62326120}
   - component: {fileID: 62326122}
   - component: {fileID: 62326121}
+  - component: {fileID: 62326123}
   m_Layer: 8
   m_Name: cm
   m_TagString: Untagged
@@ -557,6 +558,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &62326123
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62326119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 554b0ed52734c154eab51f6cedd3a7d7, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0.1
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &63069165 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7471d1372c37dd74ba9068974259f51c,
@@ -24807,7 +24825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724987887}
   m_LocalRotation: {x: -0, y: -0.2608226, z: -0, w: 0.96538675}
-  m_LocalPosition: {x: 56.32, y: 0, z: 44.94}
+  m_LocalPosition: {x: 54.8, y: 0, z: 42.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2988276}
@@ -36102,6 +36120,7 @@ GameObject:
   - component: {fileID: 1470598258}
   - component: {fileID: 1470598257}
   - component: {fileID: 1470598261}
+  - component: {fileID: 1470598262}
   m_Layer: 8
   m_Name: Main Camera (1)
   m_TagString: MainCamera
@@ -36239,6 +36258,22 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1470598262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470598256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c5bb76eee845d8479f398410939f6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IdleAmplitude: 0.1
+  IdleFrequency: 0
+  DefaultShakeAmplitude: 0.5
+  DefaultShakeFrequency: 10
 --- !u!1001 &1479029614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40723,6 +40758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1654232191}
   - component: {fileID: 1654232190}
+  - component: {fileID: 1654232192}
   m_Layer: 8
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -40780,6 +40816,21 @@ Transform:
   m_Father: {fileID: 1943460162}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &1654232192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654232189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c11265b855408d42af33d62691f5194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ChannelMask: -1
+  m_Gain: 1
+  m_Use2DDistance: 0
 --- !u!1001 &1658176394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50115,6 +50166,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510032853587685860, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _amplitude
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510032853587685860, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _frequency
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2510032853587685860, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _shakeDuration
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3126332814574662661, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}

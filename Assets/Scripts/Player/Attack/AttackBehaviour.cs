@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
 using Player.Behaviours.HealthSystem;
 using RPGCharacterAnimsFREE;
 using UnityEngine;
@@ -13,9 +12,17 @@ namespace Player.Behaviours.AttackSystem
 		[SerializeField] private AttackCollider[] _attackCollider;
 		[SerializeField] private Animator _animator;
 		[SerializeField] private AnimatorEvents _animatorEvents;
+		
+		[Header("VFX params")]
 		[SerializeField] private GameObject _vfxObject;
 		[SerializeField] private Vector3 _vfxPositionOffset;
 		[SerializeField] private Vector3 _vfxRotationOffset;
+		
+		[Header("Camera Shaker params")] 
+		[SerializeField] protected float _shakeDuration;
+		[SerializeField] protected float _amplitude;
+		[SerializeField] protected float _frequency;
+		
 		public Action OnFinish;
 		
 		private static readonly int _attack = Animator.StringToHash("Attack");
@@ -99,7 +106,7 @@ namespace Player.Behaviours.AttackSystem
 			_animator.SetTrigger(_attack);
 			_animator.applyRootMotion = true;
 			StartCoroutine(PlayVFX());
-
+			CinemachineCameraShaker.Instance.ShakeCamera(_shakeDuration, _amplitude, _frequency);
 			SetActiveAttack(true);
 		}
 

@@ -53,6 +53,7 @@ namespace Player.Movement
 		public void Stop()
 		{
 			_isStop = true;
+			_characterController.Move(Vector3.zero);
 			_previousSpeed = _currentSpeed;
 		}
 
