@@ -44,6 +44,7 @@ namespace Player.Behaviours.AttackSystem
 			{
 				throwingItem.GetComponent<IThrowingObject>().Throw(_force, transform.forward);
 			}
+			CinemachineCameraShaker.Instance.ShakeCamera(_shakeDuration, _amplitude, _frequency);
 		}
 
 		public void AddThrowingObject(IPickableObject pickableObject)
@@ -62,7 +63,6 @@ namespace Player.Behaviours.AttackSystem
 				return;
 			
 			_animator.SetTrigger(_throw);	
-			CinemachineCameraShaker.Instance.ShakeCamera(_shakeDuration, _amplitude, _frequency);
 		}
 
 		public void Disable()
