@@ -61,14 +61,14 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GrassHeight: 2.71
-    - _GrassWidth: 0.11
+    - _GrassHeight: 2.07
+    - _GrassWidth: 0.1
     - _MaxDist: 204.1
     - _Metallic: 0
     - _MinDist: 23.1
     - _OcclusionStrength: 1
     - _QueueOffset: 0
-    - _Rad: 0.596
+    - _Rad: 0.577
     - _Radius: 1.61
     - _RandomHeight: 5.17
     - _ReceiveShadows: 1

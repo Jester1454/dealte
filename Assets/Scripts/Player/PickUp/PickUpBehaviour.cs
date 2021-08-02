@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Player.Behaviours.AttackSystem;
 using UnityEngine;
@@ -11,7 +12,8 @@ namespace Player.PickUp
 		[SerializeField] private List<Transform> _pickUpContainters;
 		
 		private List<IPickableObject> _pickableObjects = new List<IPickableObject>();
-		
+		private bool _isDisable;
+
 		private void OnTriggerEnter(Collider other)
 		{
 			var pickableObject = other.GetComponent<IPickableObject>();
@@ -34,7 +36,7 @@ namespace Player.PickUp
 
 		public void PickUp()
 		{
-			if (_pickableObjects.Count == 0) 
+			if (_pickableObjects.Count == 0 || _isDisable) 
 				return;
 
 			var pickableObject = _pickableObjects.FirstOrDefault(pick => pick.IsActive);
@@ -53,6 +55,16 @@ namespace Player.PickUp
 			
 			_throwBehaviour.AddThrowingObject(pickableObject);
 			_pickableObjects.Remove(pickableObject);
+		}
+		
+		public void Disable()
+		{
+			_isDisable = true;
+		}
+		
+		public void Enable()
+		{
+			_isDisable = false;
 		}
 	}
 }

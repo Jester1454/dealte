@@ -29,7 +29,7 @@ namespace Player.Behaviours.AttackSystem
 		private static readonly int _attackTye = Animator.StringToHash("AttackType");
 		
 		private bool _isAttack = false;
-		private bool _isDisable = false;
+		private bool _isEnable = false;
 		
 		private IGettingDamage _thisGettingDamage;
 		private int _currentAttackType = 1;
@@ -98,7 +98,7 @@ namespace Player.Behaviours.AttackSystem
 
 		public void Attack()
 		{
-			if (_isAttack || _isDisable)
+			if (_isAttack || !_isEnable)
 			{
 				return;
 			}
@@ -121,9 +121,16 @@ namespace Player.Behaviours.AttackSystem
 			}
 		}
 
+		public void Enable()
+		{
+			_isEnable = true;
+		}
+
 		public void Disable()
 		{
-			_isDisable = true;
+			_isEnable = false;
 		}
+
+		public bool IsEnable => _isEnable;
 	}
 }

@@ -12,7 +12,7 @@ namespace Player
 		[SerializeField] private IKHands _hands;
 		
 		public Action OnDodgeRollFinish;
-		private bool _isDisable;
+		private bool _isEnable;
 		private static readonly int _dodgeRoll = Animator.StringToHash("DodgeRoll");
 
 		private void OnEnable()
@@ -29,8 +29,9 @@ namespace Player
 
 		public void MakeDodgeRoll()
 		{
-			if (_isDisable)
+			if (!_isEnable)
 				return;
+			
 			_hands.SetIKOff();
 			_animator.SetTrigger(_dodgeRoll);
 			_animator.applyRootMotion = true;
@@ -41,9 +42,16 @@ namespace Player
 			_animatorEvents.OnDodgeRollFinish -= DodgeRollFinish;
 		}
 
+		public void Enable()
+		{
+			_isEnable = true;
+		}
+
 		public void Disable()
 		{
-			_isDisable = true;
+			_isEnable = false;
 		}
+
+		public bool IsEnable => _isEnable;
 	}
 }

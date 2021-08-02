@@ -8,19 +8,23 @@ namespace Player
 {
 	public class CharacterBehaviour : MonoBehaviour
 	{
-		[SerializeField] private PlayerBehaviour _initBehaviour = PlayerBehaviour.Movement;
+		[SerializeField] private CharacterBehaviourState _initBehaviourState = CharacterBehaviourState.Movement;
 		[SerializeField] private CharacterMovement _characterMovement;
 		[SerializeField] private AttackBehaviour _attackBehaviour;
 		[SerializeField] private DodgeRollBehaviour _dodgeRollBehaviour;
 		[SerializeField] private HealthBehaviour _healthBehaviour;
 		[SerializeField] private ThrowBehaviour _throwBehaviour;
 		[SerializeField] private PickUpBehaviour _pickUpBehaviour;
+		[SerializeField] private WakeUpBehavior _wakeUpBehavior;
+		[SerializeField] private PickUpWeaponBehaviour _pickUpWeaponBehaviour;
 		
 		private PlayerControls _playerControls;
 		private Vector2 _cameraInput;
 		private Vector2 _moveInput;
-		private PlayerBehaviour _currentBehaviour;
-		
+		private CharacterBehaviourState _currentBehaviourState;
+
+		private static readonly int _positionMoving = Shader.PropertyToID("_PositionMoving");
+
 		public bool OnPause { get; set; } = false;
 
 		private void OnEnable()
@@ -31,13 +35,14 @@ namespace Player
 
 		private void OnDeath()
 		{
-			_currentBehaviour = PlayerBehaviour.Death;
+			_currentBehaviourState = CharacterBehaviourState.Death;
 			_characterMovement.Disable();
 			_attackBehaviour.Disable();
 			_dodgeRollBehaviour.Disable();
 			_throwBehaviour.Disable();
+			_pickUpBehaviour.Disable();
 		}
-
+		
 		private void Awake()
 		{
 			Init();
@@ -45,29 +50,86 @@ namespace Player
 
 		private void Init()
 		{
-			_currentBehaviour = _initBehaviour;
+			_currentBehaviourState = _initBehaviourState;
 			
 			_playerControls = new PlayerControls();
 			_playerControls.Gameplay.Attack.performed += context => Attack();
 			_playerControls.Gameplay.DodgeRoll.performed += context => DodgeRoll();
 			_playerControls.Gameplay.Cast.performed += context => Throw();
 			_playerControls.Gameplay.Interact.performed += context => Interact();
+
+			if (_currentBehaviourState == CharacterBehaviourState.Rest)
+			{
+				_wakeUpBehavior.Enable();
+				_characterMovement.SetActiveWalk(true);
+
+				_characterMovement.Disable();
+				_attackBehaviour.Disable();
+				_dodgeRollBehaviour.Disable();
+				_throwBehaviour.Disable();
+				_pickUpWeaponBehaviour.Disable();
+			}
+			else
+			{
+				_wakeUpBehavior.Disable();
+			}
+		}
+		
+		public void WakeUp()
+		{
+			_wakeUpBehavior.OnFinishWakeUp += OnFinishWakeUp;
+			_wakeUpBehavior.WakeUp();
+		}
+
+		private void OnFinishWakeUp()
+		{
+			_currentBehaviourState = CharacterBehaviourState.Movement;
+			
+			_wakeUpBehavior.OnFinishWakeUp -= OnFinishWakeUp;
+
+			_characterMovement.Enable();
+			_wakeUpBehavior.Disable();
+			_pickUpWeaponBehaviour.Enable();
 		}
 
 		private void Interact()
 		{
-			if (_currentBehaviour == PlayerBehaviour.Movement)
+			if (_currentBehaviourState == CharacterBehaviourState.Movement)
 			{
 				_pickUpBehaviour.PickUp();
+
+				if (_pickUpWeaponBehaviour.IsEnabled)
+				{
+					_pickUpWeaponBehaviour.OnFinishPickUpWeapon += FinishPickUpWeapon;
+					_pickUpWeaponBehaviour.PickUpWeapon();
+				}
 			}
+		}
+
+		private void FinishPickUpWeapon()
+		{
+			_currentBehaviourState = CharacterBehaviourState.Movement;
+			_characterMovement.SetActiveWalk(false);
+			
+			_pickUpWeaponBehaviour.OnFinishPickUpWeapon -= OnFinishWakeUp;
+			
+			_pickUpWeaponBehaviour.Disable();
+			
+			_attackBehaviour.Enable();
+			_dodgeRollBehaviour.Enable();
+			_throwBehaviour.Enable();
+			_pickUpBehaviour.Enable();
 		}
 
 		private void Throw()
 		{
-			if (_currentBehaviour != PlayerBehaviour.Movement || !_throwBehaviour.CanThrow())
+			if (!_throwBehaviour.IsEnable)
+				return;
+			
+			if (_currentBehaviourState != CharacterBehaviourState.Movement || !_throwBehaviour.CanThrow())
 				return;
 
-			_currentBehaviour = PlayerBehaviour.Throw;
+			_currentBehaviourState = CharacterBehaviourState.Throw;
 			
 			_characterMovement.Stop();
 			_throwBehaviour.Throw();
@@ -76,17 +138,20 @@ namespace Player
 
 		private void OnFinishThrowing()
 		{
-			_currentBehaviour = PlayerBehaviour.Movement;
+			_currentBehaviourState = CharacterBehaviourState.Movement;
 			_throwBehaviour.OnFinishThrowing -= OnFinishThrowing;
 			_characterMovement.Continue(false);
 		}
 
 		private void DodgeRoll()
 		{
-			if (_currentBehaviour == PlayerBehaviour.DodgeRoll)
+			if (!_dodgeRollBehaviour.IsEnable)
 				return;
 			
-			_currentBehaviour = PlayerBehaviour.DodgeRoll;
+			if (_currentBehaviourState == CharacterBehaviourState.DodgeRoll)
+				return;
+			
+			_currentBehaviourState = CharacterBehaviourState.DodgeRoll;
 			_dodgeRollBehaviour.MakeDodgeRoll();
 			_dodgeRollBehaviour.OnDodgeRollFinish += OnDodgeRollFinish;
 			_characterMovement.Stop();
@@ -95,16 +160,19 @@ namespace Player
 		private void OnDodgeRollFinish()
 		{
 			_dodgeRollBehaviour.OnDodgeRollFinish -= OnDodgeRollFinish;
-			_currentBehaviour = PlayerBehaviour.Movement;
+			_currentBehaviourState = CharacterBehaviourState.Movement;
 			_characterMovement.Continue(true);
 		}
 
 		private void Attack()
 		{
-			if (_currentBehaviour == PlayerBehaviour.DodgeRoll)
+			if (!_attackBehaviour.IsEnable)
 				return;
 			
-			_currentBehaviour = PlayerBehaviour.Attack;
+			if (_currentBehaviourState == CharacterBehaviourState.DodgeRoll)
+				return;
+			
+			_currentBehaviourState = CharacterBehaviourState.Attack;
 
 			_characterMovement.Stop();
 			_attackBehaviour.Attack();
@@ -114,16 +182,13 @@ namespace Player
 
 		private void OnFinishAttack()
 		{
-			_currentBehaviour = PlayerBehaviour.Movement;
+			_currentBehaviourState = CharacterBehaviourState.Movement;
 			_characterMovement.Continue(false);
 			_attackBehaviour.OnFinish -= OnFinishAttack;
 		}
 
 		private void Update()
 		{
-			
-			Shader.SetGlobalVector("_PositionMoving", transform.position);
-			
 			if (OnPause)
 				return;
 			
@@ -131,6 +196,8 @@ namespace Player
 			UpdateMovementInput();
 
 			OnMovementState();
+			
+			Shader.SetGlobalVector(_positionMoving, transform.position);
 		}
 
 		private void OnMovementState()
@@ -160,8 +227,9 @@ namespace Player
 		}
 	}
 
-	public enum PlayerBehaviour
+	public enum CharacterBehaviourState
 	{
+		Rest,
 		Movement,
 		Attack,
 		DodgeRoll,

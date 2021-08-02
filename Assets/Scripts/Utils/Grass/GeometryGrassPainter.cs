@@ -89,6 +89,9 @@ namespace Utils.Grass
 		void OnScene(SceneView scene)
 		{
 			// only allow painting while this object is selected
+			if (gameObject == null)
+				return;
+			
 			if ((Selection.Contains(gameObject)))
 			{
 				Event e = Event.current;

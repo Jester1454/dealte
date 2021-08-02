@@ -220,6 +220,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 2.3, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1236131630855601541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787002118026716693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb6c6b5df1f41db98e8219a31b96c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 5001045682821785301}
+  _animatorEvents: {fileID: 1311767742470368828}
 --- !u!114 &1311767742470368828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +351,26 @@ MonoBehaviour:
   _shakeDuration: 0.5
   _amplitude: 0.5
   _frequency: 4
+--- !u!114 &6637306531594853732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787002118026716693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6860fae061424b46bc2a3974d955fac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 6590140623220993767}
+  _hasWeapon: 0
+  _animator: {fileID: 5001045682821785301}
+  _weaponTag: PickableWeapon
+  _ikHands: {fileID: 7297505340969726710}
+  _animatorEvents: {fileID: 1311767742470368828}
+  _characterMovement: {fileID: 7864310142015151238}
+  _moveSpeed: 4
 --- !u!114 &6964517916834939805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,13 +383,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f89476c9cb4806bd03b69ac0525e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initBehaviour: 0
+  _initBehaviourState: 0
   _characterMovement: {fileID: 7864310142015151238}
   _attackBehaviour: {fileID: 7699140112683871278}
   _dodgeRollBehaviour: {fileID: 9012469090036572595}
   _healthBehaviour: {fileID: 3263359060465861016}
   _throwBehaviour: {fileID: 2510032853587685860}
   _pickUpBehaviour: {fileID: 2433092779071869788}
+  _wakeUpBehavior: {fileID: 1236131630855601541}
+  _pickUpWeaponBehaviour: {fileID: 6637306531594853732}
 --- !u!114 &7297505340969726710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,14 +447,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSettings:
-    Acceleration: 12
+    Acceleration: 25
     Decceleration: 450
     MaxHorizontalSpeed: 8
+    MaxWalkSpeed: 4
     IsometricMovement: 1
   _strafeMovementSettings:
     Acceleration: 25
     Decceleration: 25
     MaxHorizontalSpeed: 8
+    MaxWalkSpeed: 4
     IsometricMovement: 0
   _gravitySettings:
     Gravity: 20
@@ -462,21 +500,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 192636943620736534}
-  _targetIntensity: 5
-  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
---- !u!114 &8823617930369635237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478531243913567011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mesh: {fileID: 4693415449183331167}
   _targetIntensity: 5
   _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1 &2662582852354578967
@@ -745,6 +768,21 @@ Transform:
   m_Father: {fileID: 6706897239067255589}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &8823617930369635237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478531243913567011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesh: {fileID: 4693415449183331167}
+  _targetIntensity: 5
+  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1001 &1445054205329365828
 PrefabInstance:
   m_ObjectHideFlags: 0

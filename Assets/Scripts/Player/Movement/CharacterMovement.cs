@@ -30,13 +30,14 @@ namespace Player.Movement
 		
 		private Vector3 _forward;
 		private Vector3 _right;
+		private float _currentMaxSpeed;
 		
 		private void Awake()
 		{
-			Cursor.visible = false;
 			_characterController = GetComponent<CharacterController>();
 			_currentMovementSettings = _movementSettings;
-			
+
+			_currentMaxSpeed = _movementSettings.MaxHorizontalSpeed;
 			_forward = Camera.main.transform.forward;
 			_forward.y = 0;
 			_forward = _forward.normalized;
@@ -48,6 +49,11 @@ namespace Player.Movement
 			_animator.SetActiveStrafeMovement(value);
 			_currentMovementSettings = value ? _strafeMovementSettings : _movementSettings;
 			_rotationSettings.UseControlRotation = value;
+		}
+
+		public void SetActiveWalk(bool value)
+		{
+			_currentMaxSpeed = value ? _movementSettings.MaxWalkSpeed : _movementSettings.MaxHorizontalSpeed;
 		}
 
 		public void Stop()
@@ -165,7 +171,7 @@ namespace Player.Movement
 				movementInput.Normalize();
 			}
 
-			_targetHorizontalSpeed = _isStop ? 0f : movementInput.magnitude * _currentMovementSettings.MaxHorizontalSpeed;
+			_targetHorizontalSpeed = _isStop ? 0f : movementInput.magnitude * _currentMaxSpeed;
 			float acceleration = _hasMovementInput ? _currentMovementSettings.Acceleration : _currentMovementSettings.Decceleration;
 
 			_currentSpeed.x = Mathf.MoveTowards(_currentSpeed.x, _targetHorizontalSpeed, acceleration * Time.deltaTime);
@@ -210,6 +216,12 @@ namespace Player.Movement
 				Quaternion targetRotation = Quaternion.Euler(0.0f, _controlRotation.y, 0.0f);
 				transform.rotation = targetRotation;
 			}
+		}
+		
+		public void Enable()
+		{
+			_isStop = false;
+			_animator.Enable();
 		}
 
 		public void Disable()

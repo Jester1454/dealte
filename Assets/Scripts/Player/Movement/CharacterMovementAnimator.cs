@@ -12,11 +12,11 @@ namespace Player.Movement
 		
 		private static readonly int _movementXAnimatorKey = Animator.StringToHash("XMovement");
 		private static readonly int _movementZAnimatorKey = Animator.StringToHash("ZMovement");
+		private static readonly int _speedAnimatorKey = Animator.StringToHash("Speed");
 		private static readonly int _isRunAniamtorKey = Animator.StringToHash("IsRun");
 
 		private void Awake()
 		{
-			Cursor.visible = false;
 			_characterController = GetComponent<CharacterController>();
 		}
 		
@@ -30,6 +30,7 @@ namespace Player.Movement
 			
 			_animator.SetFloat(_movementXAnimatorKey, _velocityX);
 			_animator.SetFloat(_movementZAnimatorKey, _velocityZ);
+			_animator.SetFloat(_speedAnimatorKey, _characterController.velocity.magnitude);
 		}
 
 		public void SetActiveStrafeMovement(bool value)
@@ -40,6 +41,11 @@ namespace Player.Movement
 		public void Disable()
 		{
 			_animator.SetLayerWeight(0, 0f);
+		}
+
+		public void Enable()
+		{
+			_animator.SetLayerWeight(0, 1f);
 		}
 	}
 }

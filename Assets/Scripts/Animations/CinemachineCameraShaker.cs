@@ -79,6 +79,12 @@ public class CinemachineCameraShaker : MonoBehaviour
 	/// <param name="frequency">Frequency.</param>
 	protected virtual IEnumerator ShakeCameraCo(float duration, float amplitude, float frequency)
 	{
+		if (_virtualCamera == null)
+			yield break;		
+		
+		if (_perlin == null)
+			yield break;
+		
 		_perlin.m_AmplitudeGain = amplitude;
 		_perlin.m_FrequencyGain = frequency;
 		yield return new WaitForSeconds (duration);
@@ -90,6 +96,11 @@ public class CinemachineCameraShaker : MonoBehaviour
 	/// </summary>
 	public virtual void CameraReset()
 	{
+		if (_virtualCamera == null)
+			return;
+		if (_perlin == null)
+			return;
+		
 		_perlin.m_AmplitudeGain = IdleAmplitude;
 		_perlin.m_FrequencyGain = IdleFrequency;
 	}

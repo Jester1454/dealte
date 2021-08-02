@@ -21,6 +21,8 @@ namespace RPGCharacterAnimsFREE
         [NonSerialized] public Action OnDodgeRollFinish;
         [NonSerialized] public Action OnStartThrowing;
         [NonSerialized] public Action OnFinishThrowing;
+        [NonSerialized] public Action OnWakeUpFinish;
+        [NonSerialized] public Action OnPickUpWeaponFinish;
 
         public void StartAttack()
         {
@@ -75,6 +77,16 @@ namespace RPGCharacterAnimsFREE
         public void FinishThrowing()
         {
             OnFinishThrowing?.Invoke();
+        }
+
+        public void FinishWakeUp()
+        {
+            OnWakeUpFinish?.Invoke();
+        }
+
+        public void FinishWeaponPickUp()
+        {
+            OnPickUpWeaponFinish?.Invoke();
         }
     }
 }
