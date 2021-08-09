@@ -14,6 +14,7 @@ namespace Animations
 		private void OnEnable()
 		{
 			_healthBehaviour.OnTakeDamage += OnTakeDamage;
+			_healthBehaviour.OnDeath += OnTakeDamage;
 		}
 
 		private void OnTakeDamage()
@@ -27,6 +28,7 @@ namespace Animations
 		private void OnDisable()
 		{
 			_healthBehaviour.OnTakeDamage -= OnTakeDamage;
+			_healthBehaviour.OnDeath -= OnTakeDamage;
 		}
 	}
 }

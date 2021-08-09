@@ -68,10 +68,18 @@ namespace Player
 				_dodgeRollBehaviour.Disable();
 				_throwBehaviour.Disable();
 				_pickUpWeaponBehaviour.Disable();
+				_pickUpBehaviour.Disable();
 			}
 			else
 			{
 				_wakeUpBehavior.Disable();
+				_pickUpWeaponBehaviour.Disable();
+
+				_characterMovement.Enable();
+				_attackBehaviour.Enable();
+				_dodgeRollBehaviour.Enable();
+				_throwBehaviour.Enable();
+				_pickUpBehaviour.Enable();
 			}
 		}
 		

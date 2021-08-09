@@ -370,7 +370,8 @@ MonoBehaviour:
   _ikHands: {fileID: 7297505340969726710}
   _animatorEvents: {fileID: 1311767742470368828}
   _characterMovement: {fileID: 7864310142015151238}
-  _moveSpeed: 4
+  _moveSpeed: 5000
+  _distanceThreshold: 3
 --- !u!114 &6964517916834939805
 MonoBehaviour:
   m_ObjectHideFlags: 0

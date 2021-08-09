@@ -17,10 +17,12 @@ namespace Player.PickUp
 		[SerializeField] private AnimatorEvents _animatorEvents;
 		[SerializeField] private CharacterMovement _characterMovement;
 		[SerializeField] private float _moveSpeed;
+		[SerializeField] private float _distanceThreshold;
 		
 		private static readonly int _hasWeaponAnimatorKey = Animator.StringToHash("HasWeapon");
 		private static readonly int _upWeaponAnimationKey = Animator.StringToHash("PickUpWeapon");
-
+		
+		private CharacterController _characterController;
 		private GameObject _pickUpWeapon;
 		private bool _isEnabled;
 
@@ -29,6 +31,7 @@ namespace Player.PickUp
 
 		private void Awake()
 		{
+			_characterController = GetComponent<CharacterController>();
 			UpdateHasWeaponStatus();
 			_animatorEvents.OnPickUpWeaponFinish += FinishPickUp;
 		}
@@ -69,19 +72,22 @@ namespace Player.PickUp
 		{
 			var target = _pickUpWeapon.transform.GetChild(0);
 			var distance = 5f;
+			_characterController.detectCollisions = false;
 			
-			while (distance > 1.5f)
+			while (distance > _distanceThreshold)
 			{
 				distance = Vector2.Distance(new Vector2(_characterMovement.transform.position.x, _characterMovement.transform.position.z),
 					new Vector2(target.position.x, target.position.z));
 
 				var direction = (target.position - _characterMovement.transform.position).normalized * _moveSpeed;
 				_characterMovement.UpdateMovementInput(direction);
+
 				yield return null;
 			}
 			
-			_characterMovement.UpdateMovementInput((_pickUpWeapon.transform.position - _characterMovement.transform.position).normalized * _moveSpeed);
-
+			_characterMovement.UpdateMovementInput((target.transform.position - _characterMovement.transform.position).normalized * _moveSpeed);
+			
+			_characterController.detectCollisions = true;
 			_animator.SetTrigger(_upWeaponAnimationKey);
 		}
 

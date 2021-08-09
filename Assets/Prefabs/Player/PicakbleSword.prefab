@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393711656043519900}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.58657074, y: -2.2469535, z: -1.5148544}
+  m_LocalPosition: {x: -1.131, y: -2.2469535, z: -1.878}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7879063035502635127}
@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 7879063033853541979}
   - component: {fileID: 7879063033853541975}
   - component: {fileID: 7879063033853541974}
+  - component: {fileID: 723003602}
   m_Layer: 8
   m_Name: Sword
   m_TagString: Untagged
@@ -88,7 +89,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dadb34e4c3953f74b84ae9af236c8016, type: 2}
+  - {fileID: 2100000, guid: 9a30db136df764a4f8f6f2158355027d, type: 2}
   - {fileID: 2100000, guid: 9a30db136df764a4f8f6f2158355027d, type: 2}
   - {fileID: 2100000, guid: dadb34e4c3953f74b84ae9af236c8016, type: 2}
   - {fileID: 2100000, guid: 7bed89d4a52f1974088a5281e32eaa41, type: 2}
@@ -113,6 +114,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &723003602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7879063033853541978}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09061994, y: 0.10128941, z: 0.4470421}
+  m_Center: {x: 0.0003540728, y: 0.017927725, z: 0.21439779}
 --- !u!1 &7879063035502635125
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +172,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7879063035671686581
 GameObject:
