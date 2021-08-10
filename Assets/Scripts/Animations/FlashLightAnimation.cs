@@ -14,14 +14,23 @@ namespace Animations
         {
             var speed = _targetIntensity / (duration / (loops + 1));
             var currentIntensity = 0f;
-            _mesh.material.EnableKeyword("_EMISSION");
+            var materials = _mesh.materials;
+
+            foreach (var material in materials)
+            {
+                material.EnableKeyword("_EMISSION");
+            }
 
             for (var i = 0; i < loops; i++)
             {
                 while (currentIntensity < _targetIntensity)
                 {
                     currentIntensity += Time.deltaTime * speed;
-                    _mesh.material.SetColor(_emissionColor, _flashColor * currentIntensity);;
+                    
+                    foreach (var material in materials)
+                    {
+                        material.SetColor(_emissionColor, _flashColor * currentIntensity);
+                    }
 				
                     yield return null;
                 }
@@ -34,13 +43,20 @@ namespace Animations
                     {
                         currentIntensity = 0;
                     }
-                    _mesh.material.SetColor(_emissionColor, _flashColor * currentIntensity);;
+                    
+                    foreach (var material in materials)
+                    {
+                        material.SetColor(_emissionColor, _flashColor * currentIntensity);
+                    }
 				
                     yield return null;
                 }   
             }
 
-            _mesh.material.DisableKeyword("_EMISSION");
+            foreach (var material in materials)
+            {
+                material.DisableKeyword("_EMISSION");
+            }
         }
     }
 }

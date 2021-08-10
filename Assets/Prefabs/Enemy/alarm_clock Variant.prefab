@@ -40,7 +40,7 @@ Animator:
   m_GameObject: {fileID: 4275650799109312046}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d07af6916d494354e9f5ce8865f501f4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -118,6 +118,34 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &730657283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275650799109312046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b537194e9b67415b9c90f6057de9a503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1053064713424353873}
+  _patrolStateData:
+    _waitingTimeRange: {x: 0.1, y: 0.2}
+    _patrolSpeed: 2
+    _wayPoints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  _healthBehaviour: {fileID: 576325689202007445}
+  _rigidbody: {fileID: 4391229250034926970}
+  _collider: {fileID: 8035925037599528202}
 --- !u!114 &7005193905444578742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mesh: {fileID: 4847907163523757793}
   _targetIntensity: 5
-  _flashColor: {r: 0.468, g: 0, b: 0, a: 0}
+  _flashColor: {r: 0.468, g: 0, b: 0, a: 1}
 --- !u!1001 &4005741236849455999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148,17 +176,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ed672d6a2a0ba0a46a4c0dea2681267f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 43.3
+      value: -12.761913
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed672d6a2a0ba0a46a4c0dea2681267f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.8910418
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed672d6a2a0ba0a46a4c0dea2681267f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36
+      value: -22.037182
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed672d6a2a0ba0a46a4c0dea2681267f,
         type: 3}
@@ -198,7 +226,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ed672d6a2a0ba0a46a4c0dea2681267f,
         type: 3}
       propertyPath: m_Name
-      value: alarm_clock Variant
+      value: alarm_clock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed672d6a2a0ba0a46a4c0dea2681267f, type: 3}

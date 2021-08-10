@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: 8349542763059015795
     second: Armature|Walk
+  - first:
+      74: -982115091633673366
+    second: Armature|Death
   externalObjects:
   - first:
       type: UnityEngine:Material

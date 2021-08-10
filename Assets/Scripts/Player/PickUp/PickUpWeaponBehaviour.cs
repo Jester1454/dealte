@@ -27,6 +27,8 @@ namespace Player.PickUp
 		private bool _isEnabled;
 
 		public bool IsEnabled => _isEnabled;
+		public bool HasWeapon => _hasWeapon;
+
 		public Action OnFinishPickUpWeapon;
 
 		private void Awake()
