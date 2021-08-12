@@ -67,11 +67,14 @@ namespace Player.PickUp
 			
 			if (!_isEnabled)
 				return;
+			
 			StartCoroutine(WalkToPickUpTarget());
 		}
 
 		private IEnumerator WalkToPickUpTarget()
 		{
+			_hasWeapon = true;
+
 			var target = _pickUpWeapon.transform.GetChild(0);
 			var distance = 5f;
 			_characterController.detectCollisions = false;
@@ -95,7 +98,6 @@ namespace Player.PickUp
 
 		private void FinishPickUp()
 		{
-			_hasWeapon = true;
 			_pickUpWeapon.SetActive(false);
 
 			UpdateHasWeaponStatus();

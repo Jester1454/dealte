@@ -44,17 +44,28 @@ namespace Player.PickUp
 				return;
 
 			pickableObject.PickUp();
-			foreach (var containter in _pickUpContainters)
-			{
-				if (containter.childCount > 0) continue;
-				
-				pickableObject.Transform.SetParent(containter, true);
-				pickableObject.Transform.position = containter.position;
-				pickableObject.Transform.rotation = containter.rotation;
-			}
+
+			var container = _pickUpContainters.FirstOrDefault(cont => !CheckContainerFull(cont));
+			if (container == null)
+				return;
+			
+			pickableObject.Transform.SetParent(container, true);
+			pickableObject.Transform.position = container.position;
+			pickableObject.Transform.rotation = container.rotation;
 			
 			_throwBehaviour.AddThrowingObject(pickableObject);
 			_pickableObjects.Remove(pickableObject);
+		}
+		
+		private bool CheckContainerFull(Transform container)
+		{
+			foreach (Transform child in container)
+			{
+				if (child.gameObject.activeSelf)
+					return true;
+			}
+
+			return false;
 		}
 		
 		public void Disable()

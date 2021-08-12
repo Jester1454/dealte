@@ -26,10 +26,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.2
-  m_Height: 4
+  m_Radius: 1.35
+  m_Height: 0.8
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.39, z: 0}
 --- !u!95 &1053064713424353873
 Animator:
   serializedVersion: 3
@@ -49,6 +49,62 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &730657283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275650799109312046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b537194e9b67415b9c90f6057de9a503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1053064713424353873}
+  _patrolStateData:
+    _waitingTimeRange: {x: 0.1, y: 0.2}
+    _patrolSpeed: 2
+    _wayPoints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  _healthBehaviour: {fileID: 576325689202007445}
+  _rigidbody: {fileID: 4391229250034926970}
+  _collider: {fileID: 8035925037599528202}
+--- !u!114 &1771243379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275650799109312046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b537194e9b67415b9c90f6057de9a503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1053064713424353873}
+  _patrolStateData:
+    _waitingTimeRange: {x: 0.1, y: 0.2}
+    _patrolSpeed: 2
+    _wayPoints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  _healthBehaviour: {fileID: 576325689202007445}
+  _rigidbody: {fileID: 4391229250034926970}
+  _collider: {fileID: 8035925037599528202}
 --- !u!114 &576325689202007445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,34 +174,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &730657283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4275650799109312046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b537194e9b67415b9c90f6057de9a503, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1053064713424353873}
-  _patrolStateData:
-    _waitingTimeRange: {x: 0.1, y: 0.2}
-    _patrolSpeed: 2
-    _wayPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  _healthBehaviour: {fileID: 576325689202007445}
-  _rigidbody: {fileID: 4391229250034926970}
-  _collider: {fileID: 8035925037599528202}
 --- !u!114 &7005193905444578742
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -157,7 +157,7 @@ MonoBehaviour:
   _light: {fileID: 8319815524568082882, guid: 8a258b56b9cf1e8438d3057eaa88316d, type: 3}
   _throwOffset: 13
   _animationDuration: 0.5
-  _pickUpCollider: {fileID: 7201523688429265162}
+  _canPicUpOnAwake: 0
 --- !u!54 &6094845139192675295
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: X
+  m_Text: C
 --- !u!1 &4979438068082728398
 GameObject:
   m_ObjectHideFlags: 0

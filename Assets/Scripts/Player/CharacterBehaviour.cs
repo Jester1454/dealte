@@ -22,6 +22,7 @@ namespace Player
 		private Vector2 _cameraInput;
 		private Vector2 _moveInput;
 		private CharacterBehaviourState _currentBehaviourState;
+		private bool _stopMovementInput = false;
 
 		private static readonly int _positionMoving = Shader.PropertyToID("_PositionMoving");
 
@@ -108,6 +109,7 @@ namespace Player
 
 				if (_pickUpWeaponBehaviour.IsEnabled)
 				{
+					_stopMovementInput = true;
 					_pickUpWeaponBehaviour.OnFinishPickUpWeapon += FinishPickUpWeapon;
 					_pickUpWeaponBehaviour.PickUpWeapon();
 				}
@@ -118,6 +120,7 @@ namespace Player
 		{
 			_currentBehaviourState = CharacterBehaviourState.Movement;
 			_characterMovement.SetActiveWalk(false);
+			_stopMovementInput = false;
 			
 			_pickUpWeaponBehaviour.OnFinishPickUpWeapon -= OnFinishWakeUp;
 			
@@ -199,12 +202,15 @@ namespace Player
 		{
 			if (OnPause)
 				return;
-			
-			UpdateLookPositionInput();
-			UpdateMovementInput();
 
-			OnMovementState();
-			
+			if (!_stopMovementInput)
+			{
+				UpdateLookPositionInput();
+				UpdateMovementInput();
+
+				OnMovementState();	
+			}
+
 			Shader.SetGlobalVector(_positionMoving, transform.position);
 		}
 
