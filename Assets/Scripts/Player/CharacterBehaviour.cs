@@ -17,6 +17,7 @@ namespace Player
 		[SerializeField] private PickUpBehaviour _pickUpBehaviour;
 		[SerializeField] private WakeUpBehavior _wakeUpBehavior;
 		[SerializeField] private PickUpWeaponBehaviour _pickUpWeaponBehaviour;
+		[SerializeField] private SavePointBehaviour _savePointBehaviour;
 		
 		private PlayerControls _playerControls;
 		private Vector2 _cameraInput;
@@ -42,6 +43,7 @@ namespace Player
 			_dodgeRollBehaviour.Disable();
 			_throwBehaviour.Disable();
 			_pickUpBehaviour.Disable();
+			_savePointBehaviour.Disable();
 		}
 		
 		private void Awake()
@@ -70,6 +72,7 @@ namespace Player
 				_throwBehaviour.Disable();
 				_pickUpWeaponBehaviour.Disable();
 				_pickUpBehaviour.Disable();
+				_savePointBehaviour.Disable();
 			}
 			else
 			{
@@ -81,6 +84,7 @@ namespace Player
 				_dodgeRollBehaviour.Enable();
 				_throwBehaviour.Enable();
 				_pickUpBehaviour.Enable();
+				_savePointBehaviour.Enable();
 			}
 		}
 		
@@ -130,6 +134,7 @@ namespace Player
 			_dodgeRollBehaviour.Enable();
 			_throwBehaviour.Enable();
 			_pickUpBehaviour.Enable();
+			_savePointBehaviour.Enable();
 		}
 
 		private void Throw()

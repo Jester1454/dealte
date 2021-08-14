@@ -38,9 +38,15 @@ public class CinemachineCameraShaker : MonoBehaviour
 			Instance = this;
 			Destroy(Instance);
 		}
-		_virtualCamera = GameObject.FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
+
+		UpdateCamera(FindObjectOfType<Cinemachine.CinemachineVirtualCamera>());
+	}
+
+	public void UpdateCamera(Cinemachine.CinemachineVirtualCamera camera)
+	{
+		_virtualCamera = camera;
 		_perlin = _virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin> ();
-	}		
+	}
 
 	/// <summary>
 	/// On Start we reset our camera to apply our base amplitude and frequency

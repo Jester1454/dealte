@@ -86,6 +86,23 @@ MonoBehaviour:
   _rigidbody: {fileID: 7971345314136637869}
   _collider: {fileID: 6612165650625032509}
   _animatorEvents: {fileID: 986028271225742732}
+--- !u!114 &648646080536305945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334700522937984399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dadc6e8374d4854a3ab938aa9938b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBehaviour: {fileID: 2887820954826489983}
+  _savePointTag: LightSavePoint
+  _starDamageDelay: 1
+  _damageRate: 0.5
+  _damage: 0.1
 --- !u!114 &986028271225742732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +132,7 @@ MonoBehaviour:
   - {fileID: 5429343472134347076}
   _healthBehaviour: {fileID: 2887820954826489983}
   _duration: 0.5
+  _loopsCount: 1
 --- !u!114 &2887820954826489983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +149,8 @@ MonoBehaviour:
   _animator: {fileID: 6417317354536346959}
   _dieAnimationKey: Die
   _takeDamageAnimationKey: TakeDamage
+  _invulnerability: 0
+  _invulnerabilityDuration: 0
 --- !u!114 &5700852854580773331
 MonoBehaviour:
   m_ObjectHideFlags: 0

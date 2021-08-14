@@ -19,6 +19,7 @@ namespace Player.PickUp
 		[SerializeField] private float _throwOffset;
 		[SerializeField] private float _animationDuration;
 		[SerializeField] private bool _canPicUpOnAwake = false;
+		[SerializeField] private Collider _pickUpCollider;
 
 		private LightShowAnimation _currentLight;
 		private Rigidbody _rigidbody;
@@ -34,6 +35,10 @@ namespace Player.PickUp
 			if (_canPicUpOnAwake)
 			{
 				StartCoroutine(SetThrowState());
+			}
+			else
+			{
+				SetPickUpStatus(false);
 			}
 		}
 
@@ -93,6 +98,7 @@ namespace Player.PickUp
 		public void SetPickUpStatus(bool value)
 		{
 			_canPickUp = value;
+			_pickUpCollider.enabled = value;
 		}
 
 		public void Throw(float force, Vector3 direction)

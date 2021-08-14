@@ -13,7 +13,7 @@ namespace Player
 		private bool _isDisable = false;
 		
 		private static readonly int _wakeUp = Animator.StringToHash("WakeUp");
-		private static readonly int _haveWeapon = Animator.StringToHash("HaveWeapon");
+		private static readonly int _haveWeapon = Animator.StringToHash("HasWeapon");
 
 		public void WakeUp()
 		{

@@ -6,7 +6,7 @@ namespace Player.Behaviours.HealthSystem
 {
     public interface IGettingDamage
     {
-        void Damage(float damage);
+        void Damage(float damage, bool disableAnimation = false);
     }
 
     public class HealthBehaviour : MonoBehaviour, IGettingDamage
@@ -33,7 +33,7 @@ namespace Player.Behaviours.HealthSystem
             _currentHealth = _maxHealth;
         }
 
-        public void Damage(float damage)
+        public void Damage(float damage, bool disableAnimation = false)
         {
             if (_isDead || _isInvulnerability) return;
             
@@ -45,28 +45,49 @@ namespace Player.Behaviours.HealthSystem
             
             if (_currentHealth <= 0)
             {
-                if (!string.IsNullOrEmpty(_dieAnimationKey))
-                {
-                    _animator.SetTrigger(Animator.StringToHash(_dieAnimationKey));
-                }
-
-                OnDeath?.Invoke();
-                _isDead = true;
+                Death();
             }
             else
             {
-                if (!string.IsNullOrEmpty(_takeDamageAnimationKey))
-                {
-                    _animator.SetTrigger(Animator.StringToHash(_takeDamageAnimationKey));
-                }
+                Damage(disableAnimation);
+            }
+        }
+
+        private void Death()
+        {
+            if (!string.IsNullOrEmpty(_dieAnimationKey))
+            {
+                _animator.SetTrigger(Animator.StringToHash(_dieAnimationKey));
+            }
+
+            OnDeath?.Invoke();
+            _isDead = true;
+        }
+
+        private void Damage(bool disableAnimation)
+        {
+            if (!string.IsNullOrEmpty(_takeDamageAnimationKey) && !disableAnimation)
+            {
+                _animator.SetTrigger(Animator.StringToHash(_takeDamageAnimationKey));
+            }
                 
-                OnTakeDamage?.Invoke();
+            OnTakeDamage?.Invoke();
 
+            if (_invulnerability)
+            {
+                StartCoroutine(StartInvulnerability());
+            }
+        }
 
-                if (_invulnerability)
-                {
-                    StartCoroutine(StartInvulnerability());
-                }
+        public void Heal(float healValue)
+        {
+            if (healValue + _currentHealth > _maxHealth)
+            {
+                _currentHealth = _maxHealth;
+            }
+            else
+            {
+                _currentHealth += healValue;
             }
         }
 

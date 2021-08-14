@@ -1,11 +1,13 @@
-﻿using Player.PickUp;
+﻿using Cinemachine;
+using Player.PickUp;
+using UnityEngine;
 
-namespace UnityEngine.AI
+namespace UI
 {
 	public class ChangeCameraOnTrigger : MonoBehaviour
 	{
-		[SerializeField] private GameObject _newCam;
-		[SerializeField] private GameObject _oldCam;
+		[SerializeField] private CinemachineVirtualCamera _newCam;
+		[SerializeField] private CinemachineVirtualCamera _oldCam;
 		[SerializeField] private string _playerTag;
 		
 		private void OnTriggerEnter(Collider other)
@@ -17,8 +19,9 @@ namespace UnityEngine.AI
 				if (_newCam == null) return;
 				if (_oldCam == null) return;
 
-				_newCam.SetActive(true);
-				_oldCam.SetActive(false);
+				_newCam.gameObject.SetActive(true);
+				_oldCam.gameObject.SetActive(false);
+				CinemachineCameraShaker.Instance.UpdateCamera(_newCam);
 			}
 		}
 	}
