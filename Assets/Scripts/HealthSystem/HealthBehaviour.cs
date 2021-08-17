@@ -20,7 +20,8 @@ namespace Player.Behaviours.HealthSystem
         
         public Action OnTakeDamage;
         public Action OnDeath;
-
+        public Action OnHeal;
+        
         private bool _isDead = false;
         private float _currentHealth;
         private bool _isInvulnerability = false;
@@ -81,6 +82,9 @@ namespace Player.Behaviours.HealthSystem
 
         public void Heal(float healValue)
         {
+            if (Mathf.Approximately(_currentHealth, _maxHealth))
+                return;
+            
             if (healValue + _currentHealth > _maxHealth)
             {
                 _currentHealth = _maxHealth;
@@ -89,6 +93,7 @@ namespace Player.Behaviours.HealthSystem
             {
                 _currentHealth += healValue;
             }
+            OnHeal?.Invoke();
         }
 
         private IEnumerator StartInvulnerability()

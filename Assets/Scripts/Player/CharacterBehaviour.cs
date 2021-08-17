@@ -2,6 +2,7 @@
 using Player.Behaviours.HealthSystem;
 using Player.Movement;
 using Player.PickUp;
+using UI;
 using UnityEngine;
 
 namespace Player
@@ -85,11 +86,18 @@ namespace Player
 				_throwBehaviour.Enable();
 				_pickUpBehaviour.Enable();
 				_savePointBehaviour.Enable();
+				InitHealthBar();
 			}
+		}
+
+		private void InitHealthBar()
+		{
+			FindObjectOfType<HealthBar>().Init(_healthBehaviour);
 		}
 		
 		public void WakeUp()
 		{
+			InitHealthBar();
 			_wakeUpBehavior.OnFinishWakeUp += OnFinishWakeUp;
 			_wakeUpBehavior.WakeUp();
 		}

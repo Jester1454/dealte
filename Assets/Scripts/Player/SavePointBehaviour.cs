@@ -41,6 +41,7 @@ namespace Player
 			if (other.CompareTag(_savePointTag))
 			{
 				StopDamage();
+				StartHeal();
 			}
 		}
 

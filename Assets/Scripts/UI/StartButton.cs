@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Player;
 using UnityEngine.UI;
 
@@ -8,7 +8,7 @@ namespace UnityEngine.AI
 	public class StartButton : UnityEngine.MonoBehaviour
 	{
 		[SerializeField] private CharacterBehaviour _character;
-		[SerializeField] private GameObject _uiObject;
+		[SerializeField] private List<GameObject> _hideObjects;
 		[SerializeField] private WakeUpBehavior _wakeUpBehavior;
 		[SerializeField] private GameObject _onWakeUpObject;
 		
@@ -34,14 +34,16 @@ namespace UnityEngine.AI
 				_onWakeUpObject.SetActive(true);
 			}
 			_wakeUpBehavior.OnFinishWakeUp -= OnFinishWakeUp;
-
 		}
 
 		private void OnButtonClick()
 		{
 			Cursor.visible = false;
 			_character.WakeUp();
-			_uiObject.SetActive(false);
+			foreach (var hideObject in _hideObjects)
+			{
+				hideObject.SetActive(false);
+			}
 		}
 	}
 }
