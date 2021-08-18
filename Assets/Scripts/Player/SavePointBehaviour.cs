@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Player.Behaviours.HealthSystem;
+using Player.PickUp;
 using UnityEngine;
 
 namespace Player
@@ -25,7 +26,10 @@ namespace Player
 		{
 			if (_isDisable)
 				return;
-		
+
+			var pickable = other.gameObject.GetComponent<IPickableObject>();
+			if (pickable != null && !pickable.IsActive) return;
+
 			if (other.CompareTag(_savePointTag))
 			{
 				StopDamage();
@@ -38,6 +42,9 @@ namespace Player
 			if (_isDisable)
 				return;
 		
+			var pickable = other.gameObject.GetComponent<IPickableObject>();
+			if (pickable != null && !pickable.IsActive) return;
+			
 			if (other.CompareTag(_savePointTag))
 			{
 				StopDamage();
