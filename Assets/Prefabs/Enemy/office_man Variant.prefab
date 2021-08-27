@@ -191,6 +191,23 @@ MonoBehaviour:
     _debugSenseColor: {r: 1, g: 0, b: 0, a: 0.35686275}
   _scanInterval: 1.92
   _healthBehaviour: {fileID: 2887820954826489983}
+--- !u!114 &79471188766150791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334700522937984399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a35c4dfd504b39bde60bd03aa5e6c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visualEffect: {fileID: 6851509187530635286, guid: 8aa16ac7bb9043e489661c9a8303b756,
+    type: 3}
+  _duration: 5
+  _vfxVelocityPower: {x: 7, y: 7, z: 7}
+  _minimumVelocity: 1
 --- !u!136 &1602836318492251022
 CapsuleCollider:
   m_ObjectHideFlags: 0
