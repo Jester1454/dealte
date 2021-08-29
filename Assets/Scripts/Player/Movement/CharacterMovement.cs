@@ -200,7 +200,7 @@ namespace Player.Movement
 			return moveDir;
 		}
 
-		private void OrientToTargetRotation(Vector3 horizontalMovement)
+		public void OrientToTargetRotation(Vector3 horizontalMovement)
 		{
 			if (_rotationSettings.OrientRotationToMovement && horizontalMovement.sqrMagnitude > 0.0f)
 			{

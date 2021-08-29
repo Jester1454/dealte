@@ -19,6 +19,7 @@ namespace Player
 		[SerializeField] private WakeUpBehavior _wakeUpBehavior;
 		[SerializeField] private PickUpWeaponBehaviour _pickUpWeaponBehaviour;
 		[SerializeField] private SavePointBehaviour _savePointBehaviour;
+		[SerializeField] private AimBehaviour _aimBehaviour;
 		
 		private PlayerControls _playerControls;
 		private Vector2 _cameraInput;
@@ -28,6 +29,7 @@ namespace Player
 
 		private static readonly int _positionMoving = Shader.PropertyToID("_PositionMoving");
 
+		public PlayerControls PlayerControls => _playerControls;
 		public bool OnPause { get; set; } = false;
 
 		private void OnEnable()
@@ -45,6 +47,7 @@ namespace Player
 			_throwBehaviour.Disable();
 			_pickUpBehaviour.Disable();
 			_savePointBehaviour.Disable();
+			_aimBehaviour.Disable();
 		}
 		
 		private void Awake()
@@ -62,31 +65,41 @@ namespace Player
 			_playerControls.Gameplay.Cast.performed += context => Throw();
 			_playerControls.Gameplay.Interact.performed += context => Interact();
 
+			_playerControls.Gameplay.Aiming.started += context => SetActiveAimingState(true);
+			_playerControls.Gameplay.Aiming.canceled += context => SetActiveAimingState(false);
+
 			if (_currentBehaviourState == CharacterBehaviourState.Rest)
 			{
 				_wakeUpBehavior.Enable();
 				_characterMovement.SetActiveWalk(true);
-
-				_characterMovement.Disable();
-				_attackBehaviour.Disable();
-				_dodgeRollBehaviour.Disable();
-				_throwBehaviour.Disable();
-				_pickUpWeaponBehaviour.Disable();
-				_pickUpBehaviour.Disable();
-				_savePointBehaviour.Disable();
+				DisableWeaponBehaviours();
 			}
 			else
 			{
 				_wakeUpBehavior.Disable();
 				_pickUpWeaponBehaviour.Disable();
-
 				_characterMovement.Enable();
-				_attackBehaviour.Enable();
-				_dodgeRollBehaviour.Enable();
-				_throwBehaviour.Enable();
-				_pickUpBehaviour.Enable();
-				_savePointBehaviour.Enable();
-				InitHealthBar();
+				EnableWeaponBehaviours();
+			}
+		}
+
+		private void SetActiveAimingState(bool status)
+		{
+			if (!status && _currentBehaviourState == CharacterBehaviourState.Aiming)
+			{
+				_stopMovementInput = false;
+				_characterMovement.Continue(false);
+
+				_aimBehaviour.EndAiming();
+				_currentBehaviourState = CharacterBehaviourState.Movement;
+			}
+			else if (status && _currentBehaviourState == CharacterBehaviourState.Movement && _throwBehaviour.CanThrow())
+			{
+				_stopMovementInput = true;
+				_characterMovement.Stop();
+
+				_currentBehaviourState = CharacterBehaviourState.Aiming;
+				_aimBehaviour.StartAiming();
 			}
 		}
 
@@ -137,12 +150,7 @@ namespace Player
 			_pickUpWeaponBehaviour.OnFinishPickUpWeapon -= OnFinishWakeUp;
 			
 			_pickUpWeaponBehaviour.Disable();
-			
-			_attackBehaviour.Enable();
-			_dodgeRollBehaviour.Enable();
-			_throwBehaviour.Enable();
-			_pickUpBehaviour.Enable();
-			_savePointBehaviour.Enable();
+			EnableWeaponBehaviours();
 		}
 
 		private void Throw()
@@ -150,11 +158,14 @@ namespace Player
 			if (!_throwBehaviour.IsEnable)
 				return;
 			
-			if (_currentBehaviourState != CharacterBehaviourState.Movement || !_throwBehaviour.CanThrow())
+			if (_currentBehaviourState != CharacterBehaviourState.Aiming)
 				return;
-
-			_currentBehaviourState = CharacterBehaviourState.Throw;
 			
+			if (!_throwBehaviour.CanThrow())
+				return;
+			
+			SetActiveAimingState(false);
+			_currentBehaviourState = CharacterBehaviourState.Throw;
 			_characterMovement.Stop();
 			_throwBehaviour.Throw();
 			_throwBehaviour.OnFinishThrowing += OnFinishThrowing;
@@ -175,6 +186,7 @@ namespace Player
 			if (_currentBehaviourState == CharacterBehaviourState.DodgeRoll)
 				return;
 			
+			SetActiveAimingState(false);
 			_currentBehaviourState = CharacterBehaviourState.DodgeRoll;
 			_dodgeRollBehaviour.MakeDodgeRoll();
 			_dodgeRollBehaviour.OnDodgeRollFinish += OnDodgeRollFinish;
@@ -196,6 +208,7 @@ namespace Player
 			if (_currentBehaviourState == CharacterBehaviourState.DodgeRoll)
 				return;
 			
+			SetActiveAimingState(false);
 			_currentBehaviourState = CharacterBehaviourState.Attack;
 
 			_characterMovement.Stop();
@@ -224,6 +237,14 @@ namespace Player
 				OnMovementState();	
 			}
 
+			if (_currentBehaviourState == CharacterBehaviourState.Aiming)
+			{
+				UpdateLookPositionInput();
+				UpdateMovementInput();
+
+				_aimBehaviour.UpdateAimingProcess();
+			}
+			
 			Shader.SetGlobalVector(_positionMoving, transform.position);
 		}
 
@@ -252,6 +273,29 @@ namespace Player
 		{
 			_playerControls.Disable();
 		}
+		
+		private void EnableWeaponBehaviours()
+		{
+			_attackBehaviour.Enable();
+			_dodgeRollBehaviour.Enable();
+			_throwBehaviour.Enable();
+			_pickUpBehaviour.Enable();
+			_savePointBehaviour.Enable();
+			_aimBehaviour.Enable();
+			InitHealthBar();
+		}
+
+		private void DisableWeaponBehaviours()
+		{
+			_characterMovement.Disable();
+			_attackBehaviour.Disable();
+			_dodgeRollBehaviour.Disable();
+			_throwBehaviour.Disable();
+			_pickUpWeaponBehaviour.Disable();
+			_pickUpBehaviour.Disable();
+			_savePointBehaviour.Disable();
+			_aimBehaviour.Disable();
+		}
 	}
 
 	public enum CharacterBehaviourState
@@ -261,6 +305,7 @@ namespace Player
 		Attack,
 		DodgeRoll,
 		Death,
-		Throw
+		Throw,
+		Aiming
 	}
 }

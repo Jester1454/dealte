@@ -1,4 +1,5 @@
 ﻿using System;
+using Player.Behaviours.HealthSystem;
 using UnityEngine;
 
 namespace Enemy.EnemyBehaviours.SensorySystems
@@ -11,7 +12,7 @@ namespace Enemy.EnemyBehaviours.SensorySystems
 		[SerializeField] private float _angle;
 		[SerializeField] private LayerMask _obstacleLayers;
 		[SerializeField] private LayerMask _visibilityLayers;
-
+		
 		[SerializeField] private Color _debugSenseColor;
 
 		public float Distance => _distance;

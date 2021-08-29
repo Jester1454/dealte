@@ -29,5 +29,11 @@ namespace Player.Behaviours.AttackSystem
 				OnDamage?.Invoke(takingDamage);
 			}
 		}
+
+		private void OnDrawGizmos()
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawRay(transform.position, -transform.right * 5f);
+		}
 	}
 }

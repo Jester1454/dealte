@@ -65,6 +65,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Aiming"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f5884c2-2825-4da1-87da-4dcbf2512a78"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AimInput"",
+                    ""type"": ""Value"",
+                    ""id"": ""a14d6e70-f560-42ae-b464-141a3c73b94f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -93,7 +109,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""3b53ca2e-c3c5-4d67-8ad3-222c95007846"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
@@ -104,7 +120,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""b798bbae-3057-4d67-8088-def26010e675"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
@@ -115,7 +131,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""3a07e74f-536d-4690-87ec-ba80b75079be"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
@@ -126,7 +142,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""b66283a3-79a7-4143-be8b-c243d9c070ca"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
@@ -170,7 +186,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b68b73c0-428d-4e0a-bfb3-d872c465ef0b"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
@@ -181,7 +197,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""992aa9a6-ff0a-4c5f-974d-b5be1d92aa89"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -203,7 +219,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4b613c75-5993-4c9d-9f95-18d4f248322b"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -214,7 +230,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""959e9968-aff3-47af-8e55-56fb716ecf1f"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
@@ -225,7 +241,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e903c879-1575-4541-b2af-2ecdf1badb10"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -236,11 +252,55 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e9e61574-b8e0-417a-801a-2b7b6dc8be69"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5c76326-3276-4060-b20c-a0649cd4b811"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55d92c3e-7582-4890-b84b-3f9380595c10"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb8c0940-2ac5-4263-b578-70f0fd634f02"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""AimInput"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ecc1118-cfff-406f-94ba-18cda3f7b34e"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AimInput"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -285,6 +345,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_DodgeRoll = m_Gameplay.FindAction("DodgeRoll", throwIfNotFound: true);
         m_Gameplay_Cast = m_Gameplay.FindAction("Cast", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_Aiming = m_Gameplay.FindAction("Aiming", throwIfNotFound: true);
+        m_Gameplay_AimInput = m_Gameplay.FindAction("AimInput", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -340,6 +402,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_DodgeRoll;
     private readonly InputAction m_Gameplay_Cast;
     private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_Aiming;
+    private readonly InputAction m_Gameplay_AimInput;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -350,6 +414,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @DodgeRoll => m_Wrapper.m_Gameplay_DodgeRoll;
         public InputAction @Cast => m_Wrapper.m_Gameplay_Cast;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        public InputAction @Aiming => m_Wrapper.m_Gameplay_Aiming;
+        public InputAction @AimInput => m_Wrapper.m_Gameplay_AimInput;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -377,6 +443,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Aiming.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAiming;
+                @Aiming.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAiming;
+                @Aiming.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAiming;
+                @AimInput.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimInput;
+                @AimInput.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimInput;
+                @AimInput.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimInput;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -399,6 +471,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Aiming.started += instance.OnAiming;
+                @Aiming.performed += instance.OnAiming;
+                @Aiming.canceled += instance.OnAiming;
+                @AimInput.started += instance.OnAimInput;
+                @AimInput.performed += instance.OnAimInput;
+                @AimInput.canceled += instance.OnAimInput;
             }
         }
     }
@@ -429,5 +507,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnDodgeRoll(InputAction.CallbackContext context);
         void OnCast(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnAiming(InputAction.CallbackContext context);
+        void OnAimInput(InputAction.CallbackContext context);
     }
 }

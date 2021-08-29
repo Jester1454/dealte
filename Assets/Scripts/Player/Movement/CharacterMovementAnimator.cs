@@ -13,7 +13,6 @@ namespace Player.Movement
 		private static readonly int _movementXAnimatorKey = Animator.StringToHash("XMovement");
 		private static readonly int _movementZAnimatorKey = Animator.StringToHash("ZMovement");
 		private static readonly int _speedAnimatorKey = Animator.StringToHash("Speed");
-		private static readonly int _isRunAniamtorKey = Animator.StringToHash("IsRun");
 
 		private void Awake()
 		{
@@ -22,15 +21,20 @@ namespace Player.Movement
 		
 		public void UpdateAnimatorState()
 		{
-			var newVelocityX = Vector3.Dot(_characterController.velocity.normalized, transform.right);
-			var newVelocityZ = Vector3.Dot(_characterController.velocity.normalized, transform.forward);
+			UpdateAnimatorState(_characterController.velocity);
+		}
+
+		public void UpdateAnimatorState(Vector3 velocity)
+		{
+			var newVelocityX = Vector3.Dot(velocity.normalized, transform.right);
+			var newVelocityZ = Vector3.Dot(velocity.normalized, transform.forward);
 
 			_velocityX = Mathf.Lerp(_velocityX, newVelocityX, Time.deltaTime * _lerpMultiplayer);
 			_velocityZ = Mathf.Lerp(_velocityZ, newVelocityZ, Time.deltaTime * _lerpMultiplayer);
 			
 			_animator.SetFloat(_movementXAnimatorKey, _velocityX);
 			_animator.SetFloat(_movementZAnimatorKey, _velocityZ);
-			_animator.SetFloat(_speedAnimatorKey, _characterController.velocity.magnitude);
+			_animator.SetFloat(_speedAnimatorKey, velocity.magnitude);
 		}
 
 		public void SetActiveStrafeMovement(bool value)

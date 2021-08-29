@@ -143,7 +143,7 @@ MonoBehaviour:
   _playerTag: Player
   _light: {fileID: 8319815524568082882, guid: 8a258b56b9cf1e8438d3057eaa88316d, type: 3}
   _throwOffset: 13
-  _animationDuration: 0.5
+  _animationDuration: 0.4
   _canPicUpOnAwake: 0
   _pickUpCollider: {fileID: 7796017180574478109}
 --- !u!54 &6094845139192675295

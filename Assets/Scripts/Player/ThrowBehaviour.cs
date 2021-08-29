@@ -82,5 +82,12 @@ namespace Player.Behaviours.AttackSystem
 			_animatorEvents.OnFinishThrowing -= OnFinishThrowing;
 			_animatorEvents.OnStartThrowing -= OnStartThrowing;
 		}
+
+		private void OnDrawGizmos()
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawRay(transform.position, transform.forward);
+			Gizmos.DrawSphere(transform.forward, 1f);
+		}
 	}
 }
