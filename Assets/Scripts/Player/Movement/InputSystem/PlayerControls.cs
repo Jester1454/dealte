@@ -73,14 +73,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""AimInput"",
-                    ""type"": ""Value"",
-                    ""id"": ""a14d6e70-f560-42ae-b464-141a3c73b94f"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -281,28 +273,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fb8c0940-2ac5-4263-b578-70f0fd634f02"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""AimInput"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2ecc1118-cfff-406f-94ba-18cda3f7b34e"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""AimInput"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -346,7 +316,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Cast = m_Gameplay.FindAction("Cast", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Aiming = m_Gameplay.FindAction("Aiming", throwIfNotFound: true);
-        m_Gameplay_AimInput = m_Gameplay.FindAction("AimInput", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -403,7 +372,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Cast;
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Aiming;
-    private readonly InputAction m_Gameplay_AimInput;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -415,7 +383,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Cast => m_Wrapper.m_Gameplay_Cast;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputAction @Aiming => m_Wrapper.m_Gameplay_Aiming;
-        public InputAction @AimInput => m_Wrapper.m_Gameplay_AimInput;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -446,9 +413,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Aiming.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAiming;
                 @Aiming.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAiming;
                 @Aiming.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAiming;
-                @AimInput.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimInput;
-                @AimInput.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimInput;
-                @AimInput.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimInput;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -474,9 +438,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Aiming.started += instance.OnAiming;
                 @Aiming.performed += instance.OnAiming;
                 @Aiming.canceled += instance.OnAiming;
-                @AimInput.started += instance.OnAimInput;
-                @AimInput.performed += instance.OnAimInput;
-                @AimInput.canceled += instance.OnAimInput;
             }
         }
     }
@@ -508,6 +469,5 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnCast(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnAiming(InputAction.CallbackContext context);
-        void OnAimInput(InputAction.CallbackContext context);
     }
 }

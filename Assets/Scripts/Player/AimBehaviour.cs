@@ -1,4 +1,5 @@
-﻿using Player.Movement;
+﻿using System;
+using Player.Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -56,7 +57,7 @@ namespace Player
 			Destroy(_currentVfx);
 		}
 		
-		public void UpdateAimingProcess()
+		private void UpdateAimingProcess()
 		{
 			var aimInput = _lastAimInput;
 
@@ -99,6 +100,13 @@ namespace Player
 			
 			_movementAnimator.UpdateAnimatorState(aimInput);
 			_lastAimInput = aimInput;
+		}
+
+		private void Update()
+		{
+			if (!_isAiming)
+				return;
+			UpdateAimingProcess();
 		}
 	}
 }

@@ -60,14 +60,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "AimInput",
-                    "type": "Value",
-                    "id": "a14d6e70-f560-42ae-b464-141a3c73b94f",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -266,28 +258,6 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "Aiming",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fb8c0940-2ac5-4263-b578-70f0fd634f02",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardAndMouse",
-                    "action": "AimInput",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2ecc1118-cfff-406f-94ba-18cda3f7b34e",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "AimInput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

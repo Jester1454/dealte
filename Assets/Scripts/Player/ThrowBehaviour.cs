@@ -20,7 +20,6 @@ namespace Player.Behaviours.AttackSystem
 		[SerializeField] protected float _frequency;
 
 		private static readonly int _throw = Animator.StringToHash("Throw");
-		private bool _isEnable;
 		public Action OnFinishThrowing; 
 		
 		private void OnEnable()
@@ -59,23 +58,11 @@ namespace Player.Behaviours.AttackSystem
 		
 		public void Throw()
 		{
-			if (!_isEnable || _throwingObjects.Count == 0)
+			if (_throwingObjects.Count == 0)
 				return;
 			
 			_animator.SetTrigger(_throw);	
 		}
-
-		public void Enable()
-		{
-			_isEnable = true;
-		}
-
-		public void Disable()
-		{
-			_isEnable = false;
-		}
-
-		public bool IsEnable => _isEnable;
 
 		private void OnDisable()
 		{
