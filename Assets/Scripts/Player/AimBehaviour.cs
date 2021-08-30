@@ -1,5 +1,4 @@
-﻿using System;
-using Player.Movement;
+﻿using Player.Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -56,7 +55,7 @@ namespace Player
 			_animator.SetBool(_aimingAnimationKey, _isAiming);
 			Destroy(_currentVfx);
 		}
-		
+
 		private void UpdateAimingProcess()
 		{
 			var aimInput = _lastAimInput;
@@ -80,11 +79,12 @@ namespace Player
 
 		private void UpdateAimingProcess(Vector2 aimInput)
 		{
-			if (!_isAiming)
-				return;
-
 			if (!_isEnable)
 				return;
+			
+			if (!_isAiming)
+				return;
+			
 			if (Mathf.Approximately(aimInput.magnitude, 0))
 				return;
 

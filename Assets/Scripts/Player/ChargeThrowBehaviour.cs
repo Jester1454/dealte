@@ -16,7 +16,8 @@ namespace Player.Behaviours.AttackSystem
 		private float _currentOffset;
 		private bool _isCharge;
 		private bool _isEnable;
-
+		private GameObject _currentTarget;
+		
 		public bool CanThrow => _throwBehaviour.CanThrow();
 		public bool IsEnable => _isEnable;
 
@@ -40,18 +41,18 @@ namespace Player.Behaviours.AttackSystem
 				return;
 			
 			_isCharge = true;
-			_target.SetActive(true);
+			_currentTarget = Instantiate(_target);
 			_currentOffset = _distanceLimit.x;
 		}
 
 		public void FinishCharge(bool isCancel)
 		{
 			_isCharge = false;
-			_target.SetActive(false);
+			Destroy(_currentTarget);
 
 			if (!isCancel)
 			{
-				_throwBehaviour.Throw();
+				_throwBehaviour.Throw(_currentTarget.transform.position);
 			}
 		}
 
@@ -65,13 +66,13 @@ namespace Player.Behaviours.AttackSystem
 			    Vector3.Distance(transform.position, targetPosition) > _distanceLimit.x)
 			{
 				_currentOffset = newtOffset;
-				_target.transform.position = targetPosition;
+				_currentTarget.transform.position = targetPosition;
 			}
 			else
 			{
 				targetPosition = transform.position + transform.forward * _currentOffset;
 				targetPosition.y = _heightOffset;
-				_target.transform.position = targetPosition;
+				_currentTarget.transform.position = targetPosition;
 			}
 		}
 		

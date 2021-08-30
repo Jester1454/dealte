@@ -12,7 +12,7 @@ namespace Player.Behaviours.AttackSystem
 		[SerializeField] private Animator _animator;
 		[SerializeField] private List<Transform> _throwingObjects;
 		[SerializeField] private AnimatorEvents _animatorEvents;
-		[SerializeField] private float _force;
+		[SerializeField] private float _speed;
 		
 		[Header("Camera Shaker params")] 
 		[SerializeField] protected float _shakeDuration;
@@ -20,7 +20,8 @@ namespace Player.Behaviours.AttackSystem
 		[SerializeField] protected float _frequency;
 
 		private static readonly int _throw = Animator.StringToHash("Throw");
-		public Action OnFinishThrowing; 
+		public Action OnFinishThrowing;
+		private Vector3 _target;
 		
 		private void OnEnable()
 		{
@@ -41,7 +42,7 @@ namespace Player.Behaviours.AttackSystem
 
 			if (throwingItem != null)
 			{
-				throwingItem.GetComponent<IThrowingObject>().Throw(_force, transform.forward);
+				throwingItem.GetComponent<IThrowingObject>().Throw(_target, _speed);
 			}
 			CinemachineCameraShaker.Instance.ShakeCamera(_shakeDuration, _amplitude, _frequency);
 		}
@@ -56,11 +57,11 @@ namespace Player.Behaviours.AttackSystem
 			return _throwingObjects.Count > 0;
 		}
 		
-		public void Throw()
+		public void Throw(Vector3 target)
 		{
 			if (_throwingObjects.Count == 0)
 				return;
-			
+			_target = target;
 			_animator.SetTrigger(_throw);	
 		}
 

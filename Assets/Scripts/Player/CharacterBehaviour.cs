@@ -26,7 +26,6 @@ namespace Player
 		private Vector2 _moveInput;
 		private CharacterBehaviourState _currentBehaviourState;
 		private bool _stopMovementInput = false;
-		
 		private static readonly int _positionMoving = Shader.PropertyToID("_PositionMoving");
 
 		public PlayerControls PlayerControls => _playerControls;

@@ -7,7 +7,7 @@ namespace Player.PickUp
 {
 	public interface IThrowingObject
 	{
-		void Throw(float force, Vector3 direction);
+		void Throw(Vector3 target, float speed);
 	}
 	
 	public class PickableKey : MonoBehaviour, IPickableObject, IThrowingObject
@@ -19,7 +19,7 @@ namespace Player.PickUp
 		[SerializeField] private float _animationDuration;
 		[SerializeField] private bool _canPicUpOnAwake = false;
 		[SerializeField] private Collider _pickUpCollider;
-
+		
 		private LightShowAnimation _currentLight;
 		private Rigidbody _rigidbody;
 		
@@ -100,27 +100,27 @@ namespace Player.PickUp
 			_pickUpCollider.enabled = value;
 		}
 
-		public void Throw(float force, Vector3 direction)
+		public void Throw(Vector3 target, float speed)
 		{
 			if (_canPickUp)
 				return;
 			
-			_rigidbody.transform.SetParent(null);
-			_rigidbody.constraints = RigidbodyConstraints.None;
-			_rigidbody.AddForce(direction * force, ForceMode.Impulse);
-
-			StartCoroutine(Throw());
+			StartCoroutine(ThrowCoroutine(target, speed));
 		}
 
-		private IEnumerator Throw()
+		private IEnumerator ThrowCoroutine(Vector3 target, float speed)
 		{
+			_rigidbody.transform.SetParent(null);
+			_rigidbody.constraints = RigidbodyConstraints.None;
+			transform.rotation = Quaternion.identity;
+
 			float distance;
 			do
 			{
-				var previousPosition = _rigidbody.position;
+				_rigidbody.MovePosition(Vector3.Lerp(_rigidbody.position, target, speed * Time.deltaTime));
 				yield return new WaitForFixedUpdate();
-				distance = Vector3.Distance(previousPosition, _rigidbody.position);
-			} while (distance > Mathf.Epsilon);
+				distance = Vector3.Distance(target, _rigidbody.position);
+			} while (distance > 1);
 
 			yield return StartCoroutine(SetThrowState());
 		}

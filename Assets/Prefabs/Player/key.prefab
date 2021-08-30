@@ -146,6 +146,7 @@ MonoBehaviour:
   _animationDuration: 0.4
   _canPicUpOnAwake: 0
   _pickUpCollider: {fileID: 7796017180574478109}
+  _throwSpeed: 15
 --- !u!54 &6094845139192675295
 Rigidbody:
   m_ObjectHideFlags: 0
