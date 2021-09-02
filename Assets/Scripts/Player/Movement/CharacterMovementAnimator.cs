@@ -39,7 +39,7 @@ namespace Player.Movement
 
 		public void SetActiveStrafeMovement(bool value)
 		{
-			_animator.SetLayerWeight(_animator.GetLayerIndex("StrafeLayer"), value ? 1 : 0);
+			// _animator.SetLayerWeight(_animator.GetLayerIndex("StrafeLayer"), value ? 1 : 0);
 		}
 
 		public void Disable()

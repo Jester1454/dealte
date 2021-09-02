@@ -57,6 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -85,6 +86,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8513355780567556460
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -301,7 +303,6 @@ MonoBehaviour:
   _rotationIndication: {fileID: 4284222647829129648, guid: 19056e4b952181944be04399964c369a,
     type: 3}
   _rotationOffset: {x: 0, y: 0, z: 0}
-  _movementAnimator: {fileID: 6019996985025573915}
   _characterBehaviour: {fileID: 6964517916834939805}
   _layer:
     serializedVersion: 2
@@ -380,6 +381,11 @@ MonoBehaviour:
   _target: {fileID: 189193498990436947, guid: 850c9ec7f77ea6d418b5c140d7c05ae9, type: 3}
   _heightOffset: 0.5
   _chargeSpeed: 10
+  _obstaclesLayerMask:
+    serializedVersion: 2
+    m_Bits: 1536
+  _offset: 0.01
+  _targetSpeed: 5
 --- !u!114 &6019996985025573915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,9 +523,9 @@ MonoBehaviour:
   _strafeMovementSettings:
     Acceleration: 25
     Decceleration: 25
-    MaxHorizontalSpeed: 8
+    MaxHorizontalSpeed: 3
     MaxWalkSpeed: 4
-    IsometricMovement: 0
+    IsometricMovement: 1
   _gravitySettings:
     Gravity: 20
     GroundedGravity: 5
@@ -562,21 +568,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 192636943620736534}
-  _targetIntensity: 5
-  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
---- !u!114 &8823617930369635237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478531243913567011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mesh: {fileID: 4693415449183331167}
   _targetIntensity: 5
   _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1 &2662582852354578967
@@ -626,6 +617,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -845,6 +837,21 @@ Transform:
   m_Father: {fileID: 6706897239067255589}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &8823617930369635237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478531243913567011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesh: {fileID: 4693415449183331167}
+  _targetIntensity: 5
+  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1001 &1445054205329365828
 PrefabInstance:
   m_ObjectHideFlags: 0

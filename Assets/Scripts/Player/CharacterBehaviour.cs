@@ -63,11 +63,9 @@ namespace Player
 			_playerControls.Gameplay.DodgeRoll.performed += context => DodgeRoll();
 			_playerControls.Gameplay.Interact.performed += context => Interact();
 
-			_playerControls.Gameplay.Aiming.started += context => SetActiveAimingState(true);
-			_playerControls.Gameplay.Aiming.canceled += context => SetActiveAimingState(false);
-			_playerControls.Gameplay.Cast.performed += context => ChargeThrow();
-			_playerControls.Gameplay.Cast.canceled += context => Throw();
-			
+			_playerControls.Gameplay.Aiming.started += context => StartAiming();
+			_playerControls.Gameplay.Aiming.canceled += context => FinishAiming();
+
 			if (_currentBehaviourState == CharacterBehaviourState.Rest)
 			{
 				_wakeUpBehavior.Enable();
@@ -83,61 +81,63 @@ namespace Player
 			}
 		}
 
-		private void SetActiveAimingState(bool status)
+		private void StartAiming()
 		{
-			if (!status && _currentBehaviourState == CharacterBehaviourState.Aiming)
+			if (!_throwBehaviour.IsEnable)
+				return;
+
+			if (!_throwBehaviour.CanThrow)
+				return;
+
+			if (_currentBehaviourState != CharacterBehaviourState.Movement)
+				return;
+			
+			_characterMovement.SetActiveStrafeMovement(true);
+
+			_currentBehaviourState = CharacterBehaviourState.Aiming;
+			_aimBehaviour.StartAiming();
+			ChargeThrow();
+		}
+
+		private void FinishAiming()
+		{
+			if (_currentBehaviourState == CharacterBehaviourState.Aiming)
 			{
-				_stopMovementInput = false;
-				_characterMovement.Continue(false);
+				_characterMovement.SetActiveStrafeMovement(false);
 
 				_aimBehaviour.EndAiming();
-				_throwBehaviour.FinishCharge(true);
-
-				_currentBehaviourState = CharacterBehaviourState.Movement;
+				Throw();
 			}
-			else if (status && _currentBehaviourState == CharacterBehaviourState.Movement && _throwBehaviour.CanThrow)
-			{
-				_stopMovementInput = true;
-				_characterMovement.Stop();
+		}
 
-				_currentBehaviourState = CharacterBehaviourState.Aiming;
-				_aimBehaviour.StartAiming();
-			}
+		private void CancelAiming()
+		{
+			if (_currentBehaviourState != CharacterBehaviourState.Aiming)
+				return;
+			
+			_characterMovement.SetActiveStrafeMovement(false);
+
+			_aimBehaviour.EndAiming();
+			_throwBehaviour.FinishCharge(true);
 		}
 		
 		private void ChargeThrow()
 		{
-			if (!_throwBehaviour.IsEnable)
-				return;
-			
-			if (_currentBehaviourState != CharacterBehaviourState.Aiming)
-				return;
-			
-			if (!_throwBehaviour.CanThrow)
-				return;
-			
-			_characterMovement.Stop();
 			_throwBehaviour.StartThrowCharge();
 			_throwBehaviour.OnFinishThrowing += OnFinishThrowing;
 		}
 
 		private void Throw()
 		{
-			if (_currentBehaviourState == CharacterBehaviourState.Throw)
+			if (_currentBehaviourState != CharacterBehaviourState.Aiming)
 				return;
+
+			_characterMovement.SetActiveStrafeMovement(false);
+			_characterMovement.Stop();
+			_stopMovementInput = true;
 			
-			if (!_throwBehaviour.IsEnable || _currentBehaviourState != CharacterBehaviourState.Aiming || !_throwBehaviour.CanThrow)
-			{
-				_throwBehaviour.FinishCharge(true);
-			}
-			else
-			{
-				SetActiveAimingState(false);
-				_currentBehaviourState = CharacterBehaviourState.Throw;
-				_stopMovementInput = true;
-				_characterMovement.Stop();
-				_throwBehaviour.FinishCharge(false);
-			}
+			_currentBehaviourState = CharacterBehaviourState.Throw;
+			_throwBehaviour.FinishCharge(false);
 		}
 
 		private void OnFinishThrowing()
@@ -207,7 +207,10 @@ namespace Player
 			if (_currentBehaviourState == CharacterBehaviourState.DodgeRoll)
 				return;
 			
-			SetActiveAimingState(false);
+			if (_currentBehaviourState == CharacterBehaviourState.Throw)
+				return;
+			
+			CancelAiming();
 			_currentBehaviourState = CharacterBehaviourState.DodgeRoll;
 			_dodgeRollBehaviour.MakeDodgeRoll();
 			_dodgeRollBehaviour.OnDodgeRollFinish += OnDodgeRollFinish;
@@ -229,7 +232,10 @@ namespace Player
 			if (_currentBehaviourState == CharacterBehaviourState.DodgeRoll)
 				return;
 			
-			SetActiveAimingState(false);
+			if (_currentBehaviourState == CharacterBehaviourState.Throw)
+				return;
+			
+			CancelAiming();
 			_currentBehaviourState = CharacterBehaviourState.Attack;
 
 			_characterMovement.Stop();

@@ -1,5 +1,4 @@
-﻿using Player.Movement;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player
@@ -10,7 +9,6 @@ namespace Player
 		[SerializeField] private float _rotationSpeed;
 		[SerializeField] private GameObject _rotationIndication;
 		[SerializeField] private Vector3 _rotationOffset;
-		[SerializeField] private CharacterMovementAnimator _movementAnimator;
 		[SerializeField] private CharacterBehaviour _characterBehaviour;
 		[SerializeField] private LayerMask _layer;
 		
@@ -71,7 +69,7 @@ namespace Player
 			}
 			else //TODO idk, switch on gamepad again not working
 			{
-				aimInput = Gamepad.current.leftStick.ReadValue();
+				aimInput = Gamepad.current.rightStick.ReadValue();
 			}
 			
 			UpdateAimingProcess(aimInput);
@@ -84,9 +82,13 @@ namespace Player
 			
 			if (!_isAiming)
 				return;
-			
+
 			if (Mathf.Approximately(aimInput.magnitude, 0))
+			{
+				_currentVfx.transform.position = transform.position;
+				_currentVfx.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + _rotationOffset);
 				return;
+			}
 
 			var targetRotation = Quaternion.LookRotation(new Vector3(aimInput.x, 0, aimInput.y), Vector3.up);
 
@@ -98,7 +100,6 @@ namespace Player
 			if (_lastAimInput == aimInput)
 				return;
 			
-			_movementAnimator.UpdateAnimatorState(aimInput);
 			_lastAimInput = aimInput;
 		}
 

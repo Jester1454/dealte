@@ -37,7 +37,7 @@ namespace Player.Movement
 			_characterController = GetComponent<CharacterController>();
 			_currentMovementSettings = _movementSettings;
 
-			_currentMaxSpeed = _movementSettings.MaxHorizontalSpeed;
+			_currentMaxSpeed = _currentMovementSettings.MaxHorizontalSpeed;
 			_forward = Camera.main.transform.forward;
 			_forward.y = 0;
 			_forward = _forward.normalized;
@@ -48,7 +48,7 @@ namespace Player.Movement
 		{
 			_animator.SetActiveStrafeMovement(value);
 			_currentMovementSettings = value ? _strafeMovementSettings : _movementSettings;
-			_rotationSettings.UseControlRotation = value;
+			_currentMaxSpeed = _currentMovementSettings.MaxHorizontalSpeed;
 		}
 
 		public void SetActiveWalk(bool value)

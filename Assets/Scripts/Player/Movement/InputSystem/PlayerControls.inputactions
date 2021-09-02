@@ -38,14 +38,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Cast",
-                    "type": "Button",
-                    "id": "2c60ed8a-012d-444b-8371-89636432efe4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "6d6300ab-3f07-4199-adfa-55f91ca9bf3c",
@@ -192,28 +184,6 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "DodgeRoll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4b613c75-5993-4c9d-9f95-18d4f248322b",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Cast",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "959e9968-aff3-47af-8e55-56fb716ecf1f",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardAndMouse",
-                    "action": "Cast",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

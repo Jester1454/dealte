@@ -10,6 +10,9 @@ namespace Player.Behaviours.AttackSystem
 		[SerializeField] private GameObject _target;
 		[SerializeField] private float _heightOffset;
 		[SerializeField] private float _chargeSpeed;
+		[SerializeField] private LayerMask _obstaclesLayerMask;
+		[SerializeField] private float _offset = 0.5f;
+		[SerializeField] private float _targetSpeed;
 		
 		public Action OnFinishThrowing; 
 		private float _chargeTime;
@@ -17,7 +20,7 @@ namespace Player.Behaviours.AttackSystem
 		private bool _isCharge;
 		private bool _isEnable;
 		private GameObject _currentTarget;
-		
+
 		public bool CanThrow => _throwBehaviour.CanThrow();
 		public bool IsEnable => _isEnable;
 
@@ -66,14 +69,29 @@ namespace Player.Behaviours.AttackSystem
 			    Vector3.Distance(transform.position, targetPosition) > _distanceLimit.x)
 			{
 				_currentOffset = newtOffset;
-				_currentTarget.transform.position = targetPosition;
 			}
 			else
 			{
 				targetPosition = transform.position + transform.forward * _currentOffset;
 				targetPosition.y = _heightOffset;
-				_currentTarget.transform.position = targetPosition;
 			}
+			
+			_currentTarget.transform.position = Vector3.Lerp(_currentTarget.transform.position, CheckObstacles(targetPosition), Time.deltaTime * _targetSpeed);
+		}
+
+		private Vector3 CheckObstacles(Vector3 position)
+		{
+			var origin = transform.position + transform.forward * 1.5f;
+			origin = new Vector3(origin.x, _heightOffset, origin.z);
+			Debug.DrawLine(origin, position, Color.cyan);
+			
+			if (Physics.Raycast(origin, transform.forward, out var hitInfo, _distanceLimit.y, _obstaclesLayerMask))
+			{
+				var newPosition = transform.position + transform.forward.normalized * ((hitInfo.point - origin).magnitude - _offset);
+				return new Vector3(newPosition.x, _heightOffset, newPosition.z);
+			}
+
+			return position;
 		}
 		
 		private void Update()

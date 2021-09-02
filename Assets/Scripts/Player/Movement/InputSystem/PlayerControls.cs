@@ -51,14 +51,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Cast"",
-                    ""type"": ""Button"",
-                    ""id"": ""2c60ed8a-012d-444b-8371-89636432efe4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""6d6300ab-3f07-4199-adfa-55f91ca9bf3c"",
@@ -210,28 +202,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4b613c75-5993-4c9d-9f95-18d4f248322b"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Cast"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""959e9968-aff3-47af-8e55-56fb716ecf1f"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""Cast"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e903c879-1575-4541-b2af-2ecdf1badb10"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
@@ -313,7 +283,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Camera = m_Gameplay.FindAction("Camera", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_DodgeRoll = m_Gameplay.FindAction("DodgeRoll", throwIfNotFound: true);
-        m_Gameplay_Cast = m_Gameplay.FindAction("Cast", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Aiming = m_Gameplay.FindAction("Aiming", throwIfNotFound: true);
     }
@@ -369,7 +338,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Camera;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_DodgeRoll;
-    private readonly InputAction m_Gameplay_Cast;
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Aiming;
     public struct GameplayActions
@@ -380,7 +348,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Camera => m_Wrapper.m_Gameplay_Camera;
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @DodgeRoll => m_Wrapper.m_Gameplay_DodgeRoll;
-        public InputAction @Cast => m_Wrapper.m_Gameplay_Cast;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputAction @Aiming => m_Wrapper.m_Gameplay_Aiming;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
@@ -404,9 +371,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @DodgeRoll.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodgeRoll;
                 @DodgeRoll.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodgeRoll;
                 @DodgeRoll.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodgeRoll;
-                @Cast.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCast;
-                @Cast.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCast;
-                @Cast.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCast;
                 @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
@@ -429,9 +393,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @DodgeRoll.started += instance.OnDodgeRoll;
                 @DodgeRoll.performed += instance.OnDodgeRoll;
                 @DodgeRoll.canceled += instance.OnDodgeRoll;
-                @Cast.started += instance.OnCast;
-                @Cast.performed += instance.OnCast;
-                @Cast.canceled += instance.OnCast;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -466,7 +427,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDodgeRoll(InputAction.CallbackContext context);
-        void OnCast(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnAiming(InputAction.CallbackContext context);
     }
