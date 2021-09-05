@@ -46,6 +46,7 @@ namespace Player.Behaviours.AttackSystem
 			_isCharge = true;
 			_currentTarget = Instantiate(_target);
 			_currentOffset = _distanceLimit.x;
+			_currentTarget.transform.position = transform.position + transform.forward * _currentOffset;
 		}
 
 		public void FinishCharge(bool isCancel)
