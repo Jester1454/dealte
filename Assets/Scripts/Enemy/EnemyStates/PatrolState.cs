@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using FSM;
+using NodeCanvas.Tasks.Actions;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -18,7 +19,7 @@ namespace Enemy.EnemyStates
 		public float PatrolSpeed => _patrolSpeed;
 		public Transform[] WayPoints => _wayPoints;
 	}
-	
+
 	public class PatrolState : StateBase
 	{
 		private readonly Animator _animator;
