@@ -49,9 +49,13 @@ namespace Enemy.EnemyStates
 		{
 			if (agent == null)
 				return;
-			
-			agent.isStopped = true;
-			agent.ResetPath();
+
+			if (agent.isOnNavMesh)
+			{
+				agent.isStopped = true;
+				agent.ResetPath();				
+			}
+
 			agent.speed = _onEnterSpeed;
 			agent.stoppingDistance = _onEnterStoppingDistance;
 			_animator.value.SetFloat(_speedAnimatorKey, 0);

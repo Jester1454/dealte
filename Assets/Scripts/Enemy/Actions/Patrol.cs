@@ -33,7 +33,6 @@ namespace Enemy.EnemyStates
 				return;
 			}
 
-
 			_onEnterSpeed = agent.speed;
 			agent.speed = _patrolSpeed.value;
 			GotoNextPoint();
@@ -78,7 +77,10 @@ namespace Enemy.EnemyStates
 
 		protected override void OnStop()
 		{
-			agent.speed = _onEnterSpeed;
+			if (agent != null)
+			{
+				agent.speed = _onEnterSpeed;
+			}
 		}
 	}
 }

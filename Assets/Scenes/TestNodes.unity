@@ -2627,17 +2627,17 @@ PrefabInstance:
     - target: {fileID: 8221842793335651446, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
       propertyPath: _boundGraphSource._zoomFactor
-      value: 0.86879855
+      value: 0.5276747
       objectReference: {fileID: 0}
     - target: {fileID: 8221842793335651446, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
       propertyPath: _boundGraphSource._translation.x
-      value: -375
+      value: 218
       objectReference: {fileID: 0}
     - target: {fileID: 8221842793335651446, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
       propertyPath: _boundGraphSource._translation.y
-      value: -174
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8221842793335651447, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
