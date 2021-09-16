@@ -151,7 +151,11 @@ namespace Player
 		
 		private void InitHealthBar()
 		{
-			FindObjectOfType<HealthBar>().Init(_healthBehaviour);
+			var healthBar = FindObjectOfType<HealthBar>();
+			if (healthBar != null)
+			{
+				healthBar.Init(_healthBehaviour);
+			}
 		}
 		
 		public void WakeUp()
