@@ -38190,6 +38190,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8221842793335651446, guid: 92fb4c686d39bea43901551efe124623,
+        type: 3}
+      propertyPath: _boundGraphSource._zoomFactor
+      value: 0.68640536
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221842793335651446, guid: 92fb4c686d39bea43901551efe124623,
+        type: 3}
+      propertyPath: _boundGraphSource._translation.x
+      value: 202
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221842793335651446, guid: 92fb4c686d39bea43901551efe124623,
+        type: 3}
+      propertyPath: _boundGraphSource._translation.y
+      value: -18
+      objectReference: {fileID: 0}
     - target: {fileID: 8221842793335651447, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
       propertyPath: _serializedBlackboard
