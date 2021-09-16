@@ -16,7 +16,7 @@ namespace Enemy.EnemyStates
 		public float StoppingDistance => _stoppingDistance;
 	}
 	
-	public class ChaseTargetState : StateBase
+	public class ChaseTargetState1 : StateBase
 	{
 		private readonly Animator _animator;
 		private readonly float _speed;
@@ -28,7 +28,7 @@ namespace Enemy.EnemyStates
 		private float _onEnterStoppingDistance;
 		private static readonly int _speedAnimatorKey = Animator.StringToHash("Speed");
 
-		public ChaseTargetState(bool needsExitTime, EnemyContextData data, ChaseTargetStateData state) : base(needsExitTime)
+		public ChaseTargetState1(bool needsExitTime, EnemyContextData data, ChaseTargetStateData state) : base(needsExitTime)
 		{
 			_speed = state.Speed;
 			_stoppingDistance = state.StoppingDistance;

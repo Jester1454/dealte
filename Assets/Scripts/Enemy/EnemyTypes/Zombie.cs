@@ -31,10 +31,10 @@ namespace Enemy
 			var enemyContextData = new EnemyContextData(_animator, _navMeshAgent, transform, _sensorySystem, _rigidbody, _collider, _animatorEvents);
 			
 			_stateMachine = new StateMachine(this);	
-			_stateMachine.AddState("Patrol", new PatrolState(false, enemyContextData, _patrolStateData));
-			_stateMachine.AddState("ChaseTarget", new ChaseTargetState(false, enemyContextData, _chasePlayerData));
-			_stateMachine.AddState("Die", new DeathState(false, enemyContextData));
-			_stateMachine.AddState("Attack", new MeleeAttackState(true, _meleeAttackStateData, enemyContextData));
+			_stateMachine.AddState("Patrol", new PatrolState1(false, enemyContextData, _patrolStateData));
+			_stateMachine.AddState("ChaseTarget", new ChaseTargetState1(false, enemyContextData, _chasePlayerData));
+			_stateMachine.AddState("Die", new DeathState1(false, enemyContextData));
+			_stateMachine.AddState("Attack", new MeleeAttackState1(true, _meleeAttackStateData, enemyContextData));
 			
 			_stateMachine.AddTransition(new Transition("Patrol", "ChaseTarget", transition => _sensorySystem.VisibleTarget));
 			_stateMachine.AddTransition(new Transition("ChaseTarget", "Patrol", transition => !_sensorySystem.VisibleTarget));

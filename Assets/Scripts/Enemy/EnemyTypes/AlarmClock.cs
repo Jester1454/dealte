@@ -27,8 +27,8 @@ namespace Enemy
 			var enemyContextData = new EnemyContextData(_animator, _navMeshAgent, transform, null, _rigidbody, _collider, null);
 			
 			_stateMachine = new StateMachine(this);	
-			_stateMachine.AddState("Patrol", new PatrolState(false, enemyContextData, _patrolStateData));
-			_stateMachine.AddState("Die", new DeathState(false, enemyContextData));
+			_stateMachine.AddState("Patrol", new PatrolState1(false, enemyContextData, _patrolStateData));
+			_stateMachine.AddState("Die", new DeathState1(false, enemyContextData));
 			
 			_stateMachine.AddTransitionFromAny(new Transition("Any", "Die", transition => _healthBehaviour.CurrentHealth <= 0, true));
 		}

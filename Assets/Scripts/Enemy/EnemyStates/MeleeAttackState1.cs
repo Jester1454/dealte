@@ -29,7 +29,7 @@ namespace Enemy.EnemyStates
 		public Vector3 OffsetRotation => _offsetRotation;
 	}
 	
-	public class MeleeAttackState : StateBase
+	public class MeleeAttackState1 : StateBase
 	{
 		private readonly Animator _animator;
 		private List<AttackCollider> _attackColliders;
@@ -46,7 +46,7 @@ namespace Enemy.EnemyStates
 		
 		private static readonly int _attack = Animator.StringToHash("IsAttack");
 
-		public MeleeAttackState(bool needsExitTime, MeleeAttackStateData meleeData, EnemyContextData data) : base(needsExitTime)
+		public MeleeAttackState1(bool needsExitTime, MeleeAttackStateData meleeData, EnemyContextData data) : base(needsExitTime)
 		{
 			_animator = data.Animator;
 			_attackColliders = meleeData.AttackColliders;

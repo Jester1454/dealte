@@ -20,7 +20,7 @@ namespace Enemy.EnemyStates
 		public Transform[] WayPoints => _wayPoints;
 	}
 
-	public class PatrolState : StateBase
+	public class PatrolState1 : StateBase
 	{
 		private readonly Animator _animator;
 		private readonly Vector2 _waitingTimeRange;
@@ -34,7 +34,7 @@ namespace Enemy.EnemyStates
 		private bool _isWaiting;
 		private float _onEnterSpeed;
 		
-		public PatrolState(bool needsExitTime, EnemyContextData data, PatrolStateData patrolStateData) : base(needsExitTime)
+		public PatrolState1(bool needsExitTime, EnemyContextData data, PatrolStateData patrolStateData) : base(needsExitTime)
 		{
 			_animator = data.Animator;
 			_waitingTimeRange = patrolStateData.WaitingTimeRange;

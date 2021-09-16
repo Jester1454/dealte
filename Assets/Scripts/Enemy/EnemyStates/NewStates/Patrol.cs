@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 namespace Enemy.EnemyStates
 {
-	public class NewPatrolState : ActionTask<NavMeshAgent>
+	public class Patrol : ActionTask<NavMeshAgent>
 	{
 		[RequiredField] public BBParameter<Animator> _animator;
 		[RequiredField] public BBParameter<List<Transform>> _wayPoints;
@@ -78,12 +78,7 @@ namespace Enemy.EnemyStates
 
 		protected override void OnStop()
 		{
-			if (agent != null && agent.gameObject.activeSelf)
-			{
-				agent.isStopped = false;
-				agent.speed = _onEnterSpeed;
-				agent.ResetPath();	
-			}
+			agent.speed = _onEnterSpeed;
 		}
 	}
 }

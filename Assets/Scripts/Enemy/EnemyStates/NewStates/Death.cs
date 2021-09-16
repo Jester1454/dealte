@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Enemy.EnemyStates
 {
-	public class Death : ActionTask
+	public class Death : ActionTask<GraphOwner>
 	{
 		[RequiredField] public BBParameter<Animator> _animator;
 		[RequiredField] public BBParameter<Rigidbody> _rigidbody;
@@ -16,11 +16,16 @@ namespace Enemy.EnemyStates
 
 		protected override void OnExecute()
 		{
+			if (_agent.value.isOnNavMesh)
+			{
+				_agent.value.isStopped = true;
+				_agent.value.enabled = false;
+			}
+
 			_rigidbody.value.detectCollisions = false;
 			_collider.value.enabled = false;
-			_agent.value.isStopped = true;
-			_agent.value.enabled = false;
 			_animator.value.SetTrigger(_die);
+			agent.StopBehaviour();
 		}
 	}
 }

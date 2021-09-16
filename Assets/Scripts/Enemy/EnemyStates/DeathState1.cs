@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 namespace Enemy.EnemyStates
 {
-	public class DeathState : StateBase
+	public class DeathState1 : StateBase
 	{
 		private readonly Animator _animator;
 		private readonly Rigidbody _rigidbody;
@@ -13,7 +13,7 @@ namespace Enemy.EnemyStates
 		
 		private static readonly int _die = Animator.StringToHash("Die");
 
-		public DeathState(bool needsExitTime, EnemyContextData data) : base(needsExitTime)
+		public DeathState1(bool needsExitTime, EnemyContextData data) : base(needsExitTime)
 		{
 			_animator = data.Animator;
 			_rigidbody = data.Rigidbody;
