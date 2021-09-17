@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 8221842793335651433}
   - component: {fileID: 8221842793335651432}
   - component: {fileID: 8221842793335651437}
+  - component: {fileID: 1387877110}
   m_Layer: 0
   m_Name: Office Zombie
   m_TagString: Untagged
@@ -429,8 +430,8 @@ MonoBehaviour:
     _version: 3.21
     _category: 
     _comments: 
-    _translation: {x: 384, y: 236}
-    _zoomFactor: 0.38045087
+    _translation: {x: 202, y: -18}
+    _zoomFactor: 0.68640536
   _firstActivation: 0
   _enableAction: 0
   _disableAction: 0
@@ -546,6 +547,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff1122b9b053c743b4d7a51caac3cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1387877110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391273224220465383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dadc6e8374d4854a3ab938aa9938b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBehaviour: {fileID: 8221842793335651435}
+  _savePointTag: LightSavePoint
+  _starDamageDelay: 0
+  _damageRate: 0.5
+  _damage: 0.1
 --- !u!1 &479091854704361245
 GameObject:
   m_ObjectHideFlags: 0

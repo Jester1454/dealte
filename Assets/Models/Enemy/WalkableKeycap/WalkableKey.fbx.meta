@@ -1,56 +1,21 @@
 fileFormatVersion: 2
-guid: 794421d5d97b0d846ae0f642391b11be
+guid: ca1893164c3eb86489bec9cf871b8d57
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: Rig
-    100002: RigHead
-    100004: RigLLeg1
-    100006: RigLLeg2
-    100008: RigLLegAnkle
-    100010: RigLLegFoot1
-    100012: RigLLegPlatform
-    100014: RigNeck
-    100016: RigPelvis
-    100018: RigRibcage
-    100020: RigRLeg1
-    100022: RigRLeg2
-    100024: RigRLegAnkle
-    100026: RigRLegFoot1
-    100028: RigRLegPlatform
-    100030: RigSpine
-    100032: RigTail1
-    100034: RigTail2
-    100036: Toon Chick
-    100038: //RootNode
-    400000: Rig
-    400002: RigHead
-    400004: RigLLeg1
-    400006: RigLLeg2
-    400008: RigLLegAnkle
-    400010: RigLLegFoot1
-    400012: RigLLegPlatform
-    400014: RigNeck
-    400016: RigPelvis
-    400018: RigRibcage
-    400020: RigRLeg1
-    400022: RigRLeg2
-    400024: RigRLegAnkle
-    400026: RigRLegFoot1
-    400028: RigRLegPlatform
-    400030: RigSpine
-    400032: RigTail1
-    400034: RigTail2
-    400036: Toon Chick
-    400038: //RootNode
-    2100000: 'Material #2'
-    4300000: Toon Chick
-    7400000: Take 001
-    9500000: //RootNode
-    13700000: Toon Chick
-  externalObjects: {}
+  serializedVersion: 20200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Keycap
+    second: {fileID: 2100000, guid: 0e2f25e3618e93247b17240e1837ee0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Legs
+    second: {fileID: 2100000, guid: 5ae1d1967ffdde34e8cf481134f86ef1, type: 2}
   materials:
-    importMaterials: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -76,38 +41,51 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
-    normalCalculationMode: 4
+    tangentImportMode: 0
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 0
+    normalSmoothingSource: 3
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -117,14 +95,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

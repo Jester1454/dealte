@@ -1,4 +1,5 @@
-﻿using Player.Behaviours.HealthSystem;
+﻿using System;
+using Player.Behaviours.HealthSystem;
 using UnityEngine;
 
 namespace Enemy.EnemyBehaviours.SensorySystems
@@ -19,7 +20,18 @@ namespace Enemy.EnemyBehaviours.SensorySystems
 
 		private void OnEnable()
 		{
-			_healthBehaviour.OnTakeDamage += OnTakeDamage;
+			if (_healthBehaviour != null)
+			{
+				_healthBehaviour.OnTakeDamage += OnTakeDamage;
+			}
+		}
+
+		private void OnDisable()
+		{
+			if (_healthBehaviour != null)
+			{
+				_healthBehaviour.OnTakeDamage -= OnTakeDamage;
+			}
 		}
 
 		private void OnTakeDamage()

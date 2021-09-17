@@ -529,7 +529,6 @@ GameObject:
   - component: {fileID: 4248274029209670409}
   - component: {fileID: 7438334615983846163}
   - component: {fileID: 3769466082467767139}
-  - component: {fileID: 6614242286179615850}
   - component: {fileID: 6644225044854025212}
   - component: {fileID: 5812517000353703152}
   - component: {fileID: 1659476943628210239}
@@ -609,26 +608,6 @@ CapsuleCollider:
   m_Height: 0.8
   m_Direction: 1
   m_Center: {x: 0, y: 1.39, z: 0}
---- !u!114 &6614242286179615850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6961628168957524039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b537194e9b67415b9c90f6057de9a503, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 7501473364424682849}
-  _patrolStateData:
-    _waitingTimeRange: {x: 0.1, y: 0.2}
-    _patrolSpeed: 2
-    _wayPoints: []
-  _healthBehaviour: {fileID: 6644225044854025212}
-  _rigidbody: {fileID: 7438334615983846163}
-  _collider: {fileID: 3769466082467767139}
 --- !u!114 &6644225044854025212
 MonoBehaviour:
   m_ObjectHideFlags: 0
