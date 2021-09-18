@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Enemy.EnemyBehaviours.SensorySystems;
 using NodeCanvas.Framework;
+using ParadoxNotion;
 using ParadoxNotion.Design;
 using Player.Behaviours.AttackSystem;
 using Player.Behaviours.HealthSystem;
@@ -18,19 +19,19 @@ namespace Enemy.EnemyStates
 		[RequiredField] public BBParameter<SensorySystem> _sensorySystem;
 		[RequiredField] public BBParameter<NavMeshAgent> _agent;
 		[RequiredField] public BBParameter<AnimatorEvents> _animatorEvents;
+		[RequiredField] public BBParameter<string> _attackAnimatorKey;
 		public BBParameter<float> _damage;
 		public BBParameter<float> _rotationSpeed;
 		public BBParameter<float> _delayBetweenAttack;
+		public BBParameter<float> _beforeBetweenAttack;
 		public BBParameter<Vector3> _offsetRotation;
-
-		private static readonly int _attack = Animator.StringToHash("IsAttack");
 
 		private void OnDamage(IGettingDamage gettingDamage)
 		{
 			gettingDamage.Damage(_damage.value);
 		}
 
-		private void SetActiveAttack(bool value)
+		private void SetActiveAttackCollider(bool value)
 		{
 			foreach (var attackCollider in _attackColliders.value)
 			{
@@ -40,25 +41,35 @@ namespace Enemy.EnemyStates
 
 		protected override void OnExecute()
 		{
+			StartCoroutine(AttackBeforeDelay());
+		}
+
+		private IEnumerator AttackBeforeDelay()
+		{
+			yield return new WaitForSeconds(_beforeBetweenAttack.value);
 			Attack();
 		}
 
-		private void OnFinishAttack()
+		private void StopCurrentAttack()
 		{
-			_animator.value.SetBool(_attack, false);
+			_animator.value.ResetTrigger(_attackAnimatorKey.value);
 
 			foreach (var attackCollider in _attackColliders.value)
 			{
 				attackCollider.OnDamage -= OnDamage;
 			}
 
-			SetActiveAttack(false);
+			SetActiveAttackCollider(false);
 			_animatorEvents.value.OnFinishAttack -= OnFinishAttack;
-		
-			StartCoroutine(AttackDelay());
 		}
 
-		private IEnumerator AttackDelay()
+		private void OnFinishAttack()
+		{
+			StopCurrentAttack();
+			StartCoroutine(AttackEndDelay());
+		}
+
+		private IEnumerator AttackEndDelay()
 		{
 			yield return new WaitForSeconds(_delayBetweenAttack.value);
 			EndAction(true);
@@ -85,15 +96,18 @@ namespace Enemy.EnemyStates
 				attackCollider.OnDamage += OnDamage;
 			}
 
-			_agent.value.isStopped = true;
+			if (_agent.value.isOnNavMesh)
+			{
+				_agent.value.isStopped = true;
+			}
+			SetActiveAttackCollider(true);
 
-			_animator.value.SetBool(_attack, true);
-			SetActiveAttack(true);
+			_animator.value.SetTrigger(_attackAnimatorKey.value);
 		}
 
 		protected override void OnStop()
 		{
-			SetActiveAttack(false);
+			StopCurrentAttack();
 		}
 	}
 }

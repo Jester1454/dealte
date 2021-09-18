@@ -36,6 +36,7 @@ namespace Player.Behaviours.HealthSystem
 
         public void Damage(float damage, bool disableAnimation = false)
         {
+            UnityEngine.Debug.LogError("damage");
             if (_isDead || _isInvulnerability) return;
             
             _currentHealth -= damage;

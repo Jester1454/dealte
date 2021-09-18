@@ -40,6 +40,11 @@ namespace Enemy.EnemyStates
 
 		private void GotoNextPoint() 
 		{
+			if (!agent.isOnNavMesh)
+			{
+				EndAction(false);	
+			}
+			
 			agent.isStopped = false;
 			var nextPoint = _wayPoints.value[_destPointIndex].position;
 			

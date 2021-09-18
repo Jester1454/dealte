@@ -14,9 +14,13 @@ namespace Player.Animations
         [Range(0, 1)] public float leftHandRotationWeight;
         private Transform blendToTransform;
 		private Coroutine co;
-
+		private float _currentLeftHandPositionWeight;
+		private float _currentLeftHandRotationWeight;
+		
         private void Awake()
         {
+	        _currentLeftHandPositionWeight = leftHandPositionWeight;
+	        _currentLeftHandRotationWeight = leftHandRotationWeight;
             animator = GetComponent<Animator>();
         }
 
@@ -81,8 +85,8 @@ namespace Player.Animations
 			if (canBeUsed)
 			{
 				StopAllCoroutines();
-				leftHandPositionWeight = 1;
-				leftHandRotationWeight = 1;
+				leftHandPositionWeight = _currentLeftHandPositionWeight;
+				leftHandRotationWeight = _currentLeftHandRotationWeight;
 			}
 		}
     }
