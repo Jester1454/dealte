@@ -178,16 +178,13 @@ namespace Player
 
 		private void Interact()
 		{
-			if (_currentBehaviourState == CharacterBehaviourState.Movement)
-			{
-				_pickUpBehaviour.PickUp();
+			_pickUpBehaviour.PickUp();
 
-				if (_pickUpWeaponBehaviour.IsEnabled)
-				{
-					_stopMovementInput = true;
-					_pickUpWeaponBehaviour.OnFinishPickUpWeapon += FinishPickUpWeapon;
-					_pickUpWeaponBehaviour.PickUpWeapon();
-				}
+			if (_pickUpWeaponBehaviour.IsEnabled)
+			{
+				_stopMovementInput = true;
+				_pickUpWeaponBehaviour.OnFinishPickUpWeapon += FinishPickUpWeapon;
+				_pickUpWeaponBehaviour.PickUpWeapon();
 			}
 		}
 
@@ -213,7 +210,9 @@ namespace Player
 			
 			if (_currentBehaviourState == CharacterBehaviourState.Throw)
 				return;
-			
+			if (_currentBehaviourState == CharacterBehaviourState.Attack)
+				return;
+
 			CancelAiming();
 			_currentBehaviourState = CharacterBehaviourState.DodgeRoll;
 			_dodgeRollBehaviour.MakeDodgeRoll();

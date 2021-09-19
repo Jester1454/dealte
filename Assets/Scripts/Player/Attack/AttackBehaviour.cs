@@ -36,7 +36,6 @@ namespace Player.Behaviours.AttackSystem
 		
 		private void OnEnable()
 		{
-			_animatorEvents.OnFinishAttack += OnFinishAttack;
 			_animatorEvents.OnHit += OnHit;
 			_thisGettingDamage = GetComponent<IGettingDamage>();
 			foreach (var attackCollider in _attackCollider)
@@ -48,19 +47,6 @@ namespace Player.Behaviours.AttackSystem
 		private void OnHit()
 		{
 			SetActiveAttack(false);
-		}
-
-		private void OnDamage(IGettingDamage gettingDamage)
-		{
-			if (_isAttack && gettingDamage != _thisGettingDamage)
-			{
-				gettingDamage.Damage(_damage);
-			}
-		}
-
-		private void OnFinishAttack()
-		{
-			_animator.applyRootMotion = false;
 			
 			_currentAttackType++;
 			if (_currentAttackType > 3)
@@ -69,6 +55,14 @@ namespace Player.Behaviours.AttackSystem
 			}
 			
 			OnFinish?.Invoke();
+		}
+
+		private void OnDamage(IGettingDamage gettingDamage)
+		{
+			if (_isAttack && gettingDamage != _thisGettingDamage)
+			{
+				gettingDamage.Damage(_damage);
+			}
 		}
 
 		private void SetActiveAttack(bool value)
@@ -104,7 +98,6 @@ namespace Player.Behaviours.AttackSystem
 			}
 			_animator.SetInteger(_attackTye, _currentAttackType);
 			_animator.SetTrigger(_attack);
-			_animator.applyRootMotion = true;
 			StartCoroutine(PlayVFX());
 			CinemachineCameraShaker.Instance.ShakeCamera(_shakeDuration, _amplitude, _frequency);
 			SetActiveAttack(true);
@@ -112,7 +105,6 @@ namespace Player.Behaviours.AttackSystem
 
 		private void OnDisable()
 		{
-			_animatorEvents.OnFinishAttack -= OnFinishAttack;
 			_animatorEvents.OnHit -= OnHit;
 
 			foreach (var attackCollider in _attackCollider)
