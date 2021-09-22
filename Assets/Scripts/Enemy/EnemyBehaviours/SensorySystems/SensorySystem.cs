@@ -66,7 +66,7 @@ namespace Enemy.EnemyBehaviours.SensorySystems
 
 		private GameObject Scan(VisionSystem visionSystem, bool inSight = false)
 		{
-			Physics.OverlapSphereNonAlloc(transform.position, visionSystem.Distance, _colliders, visionSystem.VisibilityLayers, QueryTriggerInteraction.Collide);
+			Physics.OverlapSphereNonAlloc(transform.position, visionSystem.Distance, _colliders, visionSystem.VisibilityLayers);
 
 			foreach (var otherCollider in _colliders)
 			{
@@ -85,7 +85,7 @@ namespace Enemy.EnemyBehaviours.SensorySystems
 
 		private void OnValidate()
 		{
-			_visionDebugMesh = _visionSystem.CreateVisibilityMesh();
+			_visionDebugMesh = _visionSystem.CreateSegmentMesh();
 		}
 
 		private void OnDrawGizmos()

@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Player.Behaviours.HealthSystem;
 using RPGCharacterAnimsFREE;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Player.Behaviours.AttackSystem
 {
 	public class AttackBehaviour : MonoBehaviour
 	{
+		[SerializeField] private Transform _attachSword;
 		[SerializeField] private float _damage;
-		[SerializeField] private AttackCollider[] _attackCollider;
 		[SerializeField] private Animator _animator;
 		[SerializeField] private AnimatorEvents _animatorEvents;
+		[SerializeField] private SegmentHitBox _hitBox;
 		
 		[Header("VFX params")]
 		[SerializeField] private GameObject _vfxObject;
@@ -26,30 +30,30 @@ namespace Player.Behaviours.AttackSystem
 		public Action OnFinish;
 		
 		private static readonly int _attack = Animator.StringToHash("Attack");
-		private static readonly int _attackTye = Animator.StringToHash("AttackType");
+		private static readonly int _attackType = Animator.StringToHash("AttackType");
 		
 		private bool _isAttack = false;
 		private bool _isEnable = false;
-		
+		private bool _hitBoxEnable = false;
 		private IGettingDamage _thisGettingDamage;
 		private int _currentAttackType = 1;
-		
+		private Mesh _visionDebugMesh;
+		private List<IGettingDamage> _filterObject = new List<IGettingDamage>();
+	
 		private void OnEnable()
 		{
 			_animatorEvents.OnHit += OnHit;
+			_animatorEvents.OnStartAttack += OnEventStartAttack;
 			_thisGettingDamage = GetComponent<IGettingDamage>();
-			foreach (var attackCollider in _attackCollider)
-			{
-				attackCollider.OnDamage += OnDamage;
-			}
 		}
 
 		private void OnHit()
 		{
-			SetActiveAttack(false);
+			_isAttack = false;
+			_hitBoxEnable = false;
 			
 			_currentAttackType++;
-			if (_currentAttackType > 3)
+			if (_currentAttackType > 2)
 			{
 				_currentAttackType = 1;
 			}
@@ -57,21 +61,27 @@ namespace Player.Behaviours.AttackSystem
 			OnFinish?.Invoke();
 		}
 
-		private void OnDamage(IGettingDamage gettingDamage)
+		private void Damage(GameObject hitObject)
 		{
-			if (_isAttack && gettingDamage != _thisGettingDamage)
+			var gettingDamage = hitObject.GetComponent<IGettingDamage>();
+			
+			if (gettingDamage != null && _isAttack && gettingDamage != _thisGettingDamage && !_filterObject.Contains(gettingDamage))
 			{
 				gettingDamage.Damage(_damage);
+				_filterObject.Add(gettingDamage);
 			}
 		}
 
-		private void SetActiveAttack(bool value)
+		private void FixedUpdate()
 		{
-			foreach (var attackCollider in _attackCollider)
+			if (!_hitBoxEnable) return;
+
+			var inHitBox = _hitBox.GetHits(transform.position, transform.forward);
+
+			foreach (var hit in inHitBox)
 			{
-				attackCollider.SetActive(value);
+				Damage(hit);
 			}
-			_isAttack = value;
 		}
 
 		private IEnumerator PlayVFX()
@@ -96,21 +106,23 @@ namespace Player.Behaviours.AttackSystem
 			{
 				return;
 			}
-			_animator.SetInteger(_attackTye, _currentAttackType);
+			
+			_filterObject.Clear();
+			_animator.SetInteger(_attackType, _currentAttackType);
 			_animator.SetTrigger(_attack);
 			StartCoroutine(PlayVFX());
 			CinemachineCameraShaker.Instance.ShakeCamera(_shakeDuration, _amplitude, _frequency);
-			SetActiveAttack(true);
+			_isAttack = true;
+		}
+
+		private void OnEventStartAttack()
+		{
+			_hitBoxEnable = true;
 		}
 
 		private void OnDisable()
 		{
 			_animatorEvents.OnHit -= OnHit;
-
-			foreach (var attackCollider in _attackCollider)
-			{
-				attackCollider.OnDamage -= OnDamage;
-			}
 		}
 
 		public void Enable()
@@ -124,5 +136,23 @@ namespace Player.Behaviours.AttackSystem
 		}
 
 		public bool IsEnable => _isEnable;
+		
+		private void OnValidate()
+		{
+			_visionDebugMesh = _hitBox.CreateSegmentMesh();
+		}
+
+		private void OnDrawGizmos()
+		{
+			Gizmos.color = Color.cyan;
+			Gizmos.DrawWireSphere(_attachSword.TransformPoint(Vector3.zero), 0.5f);
+			Gizmos.DrawLine(transform.position, _attachSword.TransformPoint(Vector3.zero));
+
+			if (_hitBox != null)
+			{
+				Gizmos.color = Color.red;
+				Gizmos.DrawWireMesh(_visionDebugMesh, transform.position, transform.rotation);
+			}
+		}
 	}
 }

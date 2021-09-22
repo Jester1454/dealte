@@ -5,7 +5,7 @@ namespace Animations
 {
     public class FlashLightAnimation : MonoBehaviour
     {
-        [SerializeField] private SkinnedMeshRenderer _mesh;
+        [SerializeField] private Renderer _mesh;
         [SerializeField] private float _targetIntensity;
         [SerializeField] private Color _flashColor;
         private static readonly int _emissionColor = Shader.PropertyToID("_EmissionColor");
