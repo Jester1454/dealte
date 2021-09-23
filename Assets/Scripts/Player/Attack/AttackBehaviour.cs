@@ -11,16 +11,9 @@ namespace Player.Behaviours.AttackSystem
 {
 	public class AttackBehaviour : MonoBehaviour
 	{
-		[SerializeField] private Transform _attachSword;
-		[SerializeField] private float _damage;
 		[SerializeField] private Animator _animator;
 		[SerializeField] private AnimatorEvents _animatorEvents;
-		[SerializeField] private SegmentHitBox _hitBox;
-		
-		[Header("VFX params")]
-		[SerializeField] private GameObject _vfxObject;
-		[SerializeField] private Vector3 _vfxPositionOffset;
-		[SerializeField] private Vector3 _vfxRotationOffset;
+		[SerializeField] private List<AttackData> _attacksData;
 		
 		[Header("Camera Shaker params")] 
 		[SerializeField] protected float _shakeDuration;
@@ -29,17 +22,15 @@ namespace Player.Behaviours.AttackSystem
 		
 		public Action OnFinish;
 		
-		private static readonly int _attack = Animator.StringToHash("Attack");
-		private static readonly int _attackType = Animator.StringToHash("AttackType");
-		
 		private bool _isAttack = false;
 		private bool _isEnable = false;
 		private bool _hitBoxEnable = false;
 		private IGettingDamage _thisGettingDamage;
-		private int _currentAttackType = 1;
-		private Mesh _visionDebugMesh;
-		private List<IGettingDamage> _filterObject = new List<IGettingDamage>();
-	
+		private readonly List<IGettingDamage> _filterObject = new List<IGettingDamage>();
+		private int _currentAttack = 0;
+		private AttackData _currentAttackData;
+		private bool _playNextAttack = false;
+		
 		private void OnEnable()
 		{
 			_animatorEvents.OnHit += OnHit;
@@ -49,16 +40,18 @@ namespace Player.Behaviours.AttackSystem
 
 		private void OnHit()
 		{
-			_isAttack = false;
-			_hitBoxEnable = false;
-			
-			_currentAttackType++;
-			if (_currentAttackType > 2)
+			if (_playNextAttack && _currentAttack + 1 < _attacksData.Count)
 			{
-				_currentAttackType = 1;
+				UpdateCurrentAttack();
+				StarAttack();
 			}
-			
-			OnFinish?.Invoke();
+			else
+			{
+				_playNextAttack = false;
+				_isAttack = false;
+				_hitBoxEnable = false;
+				OnFinish?.Invoke();	
+			}
 		}
 
 		private void Damage(GameObject hitObject)
@@ -67,7 +60,7 @@ namespace Player.Behaviours.AttackSystem
 			
 			if (gettingDamage != null && _isAttack && gettingDamage != _thisGettingDamage && !_filterObject.Contains(gettingDamage))
 			{
-				gettingDamage.Damage(_damage);
+				gettingDamage.Damage(_currentAttackData.Damage);
 				_filterObject.Add(gettingDamage);
 			}
 		}
@@ -76,7 +69,7 @@ namespace Player.Behaviours.AttackSystem
 		{
 			if (!_hitBoxEnable) return;
 
-			var inHitBox = _hitBox.GetHits(transform.position, transform.forward);
+			var inHitBox = _currentAttackData.HitBox.GetHits(transform.position, transform.forward);
 
 			foreach (var hit in inHitBox)
 			{
@@ -86,14 +79,16 @@ namespace Player.Behaviours.AttackSystem
 
 		private IEnumerator PlayVFX()
 		{
-			var vfxObject = Instantiate(_vfxObject, _vfxPositionOffset, Quaternion.Euler(_vfxRotationOffset), transform);
+			if (_currentAttackData.VfxObject == null) yield break;
+
+			var vfxObject = Instantiate(_currentAttackData.VfxObject, _currentAttackData.VfxPositionOffset, Quaternion.Euler(_currentAttackData.VfxRotationOffset), transform);
 			var duration = vfxObject.GetComponentInChildren<ParticleSystem>().main.duration;
 
 			while (duration > 0)
 			{
 				duration -= Time.deltaTime;
-				vfxObject.transform.position = transform.position + _vfxPositionOffset;
-				vfxObject.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + _vfxRotationOffset);
+				vfxObject.transform.position = transform.position + _currentAttackData.VfxPositionOffset;
+				vfxObject.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + _currentAttackData.VfxRotationOffset);
 				yield return null;
 			}
 			
@@ -102,17 +97,40 @@ namespace Player.Behaviours.AttackSystem
 
 		public void Attack()
 		{
-			if (_isAttack || !_isEnable)
+			if (!_isEnable)
 			{
 				return;
 			}
 			
+			if (_isAttack)
+			{
+				_playNextAttack = true;
+				return;
+			}
+
+			_playNextAttack = false;
+			_currentAttack = 0;
+			_currentAttackData = _attacksData[_currentAttack];
+			StarAttack();
+		}
+
+		private void StarAttack()
+		{
 			_filterObject.Clear();
-			_animator.SetInteger(_attackType, _currentAttackType);
-			_animator.SetTrigger(_attack);
+			_animator.SetTrigger(_currentAttackData.AnimatorKey);
 			StartCoroutine(PlayVFX());
 			CinemachineCameraShaker.Instance.ShakeCamera(_shakeDuration, _amplitude, _frequency);
 			_isAttack = true;
+		}
+
+		private void UpdateCurrentAttack()
+		{
+			_currentAttack++;
+			_currentAttackData = _attacksData[_currentAttack];
+			if (_currentAttack >= _attacksData.Count)
+			{
+				_currentAttack = 0;
+			}
 		}
 
 		private void OnEventStartAttack()
@@ -137,22 +155,38 @@ namespace Player.Behaviours.AttackSystem
 
 		public bool IsEnable => _isEnable;
 		
-		private void OnValidate()
-		{
-			_visionDebugMesh = _hitBox.CreateSegmentMesh();
-		}
+		// private void OnValidate()
+		// {
+		// 	_visionDebugMesh = _hitBox.CreateSegmentMesh();
+		// }
+		//
+		// private void OnDrawGizmos()
+		// {
+		// 	if (_hitBox != null)
+		// 	{
+		// 		Gizmos.color = Color.red;
+		// 		Gizmos.DrawWireMesh(_visionDebugMesh, transform.position, transform.rotation);
+		// 	}
+		// }
+	}
+	
+	[Serializable]
+	public struct AttackData
+	{
+		[SerializeField] private float _damage;
+		[SerializeField] private SegmentHitBox _hitBox;
+		[SerializeField] private string _animatorKey;
+		
+		[Header("VFX params")]
+		[SerializeField] private GameObject _vfxObject;
+		[SerializeField] private Vector3 _vfxPositionOffset;
+		[SerializeField] private Vector3 _vfxRotationOffset;
 
-		private void OnDrawGizmos()
-		{
-			Gizmos.color = Color.cyan;
-			Gizmos.DrawWireSphere(_attachSword.TransformPoint(Vector3.zero), 0.5f);
-			Gizmos.DrawLine(transform.position, _attachSword.TransformPoint(Vector3.zero));
-
-			if (_hitBox != null)
-			{
-				Gizmos.color = Color.red;
-				Gizmos.DrawWireMesh(_visionDebugMesh, transform.position, transform.rotation);
-			}
-		}
+		public Vector3 VfxRotationOffset => _vfxRotationOffset;
+		public Vector3 VfxPositionOffset => _vfxPositionOffset;
+		public GameObject VfxObject => _vfxObject;
+		public string AnimatorKey => _animatorKey;
+		public SegmentHitBox HitBox => _hitBox;
+		public float Damage => _damage;
 	}
 }

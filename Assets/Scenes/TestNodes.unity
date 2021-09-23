@@ -946,28 +946,133 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
-      propertyPath: _hitBox
+      propertyPath: _hitBox._range
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[0]._damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[1]._damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[2]._damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[0]._vfxObject
       value: 
-      objectReference: {fileID: 5729232679039750602, guid: de667f16695cbd348b08a452b2fcca09,
+      objectReference: {fileID: 2938086252598602903, guid: 8ad8eb6d6bf60f74098aad05b4e778a4,
         type: 3}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
-      propertyPath: _hitBox1._angle
+      propertyPath: _attacksData.Array.data[1]._vfxObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[0]._animatorKey
+      value: Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[1]._animatorKey
+      value: ComboAttack1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[2]._animatorKey
+      value: ComboAttack2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[0]._hitBox._angle
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
-      propertyPath: _hitBox1._range
-      value: 7
+      propertyPath: _attacksData.Array.data[0]._hitBox._range
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
-      propertyPath: _attackCollider.Array.data[0]
-      value: 
+      propertyPath: _attacksData.Array.data[1]._hitBox._angle
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
-      propertyPath: _hitBox1._visibilityLayers.m_Bits
+      propertyPath: _attacksData.Array.data[1]._hitBox._range
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[2]._hitBox._angle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[2]._hitBox._range
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[0]._vfxRotationOffset.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[0]._vfxRotationOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[0]._vfxRotationOffset.z
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[1]._vfxRotationOffset.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[1]._vfxRotationOffset.z
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[2]._vfxRotationOffset.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[2]._vfxRotationOffset.z
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[0]._hitBox._visibilityLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[1]._hitBox._visibilityLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[2]._hitBox._visibilityLayers.m_Bits
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7864310142015151238, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
@@ -1074,30 +1179,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.63210577
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Size.x
-      value: 0.13076
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Size.y
-      value: 2.8734772
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Size.z
-      value: 0.41922507
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Center.x
-      value: -0.004059332
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Center.y
-      value: -0.011966812
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Center.z
-      value: 0.33259946
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0933388a09c6e214e967e2a3a1a7bbd3, type: 3}
@@ -5281,10 +5362,6 @@ PrefabInstance:
       propertyPath: _damage
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1387877110, guid: 92fb4c686d39bea43901551efe124623, type: 3}
-      propertyPath: _damageRate
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 391273224220465383, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
       propertyPath: m_Name
@@ -5298,7 +5375,7 @@ PrefabInstance:
     - target: {fileID: 391273224220465383, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 920838710810823593, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
@@ -6394,16 +6471,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.07211572
-      objectReference: {fileID: 0}
-    - target: {fileID: 8221842793335651432, guid: 92fb4c686d39bea43901551efe124623,
-        type: 3}
-      propertyPath: _visionSystem._obstacleLayers.m_Bits
-      value: 1537
-      objectReference: {fileID: 0}
-    - target: {fileID: 8221842793335651435, guid: 92fb4c686d39bea43901551efe124623,
-        type: 3}
-      propertyPath: _maxHealth
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8221842793335651438, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}

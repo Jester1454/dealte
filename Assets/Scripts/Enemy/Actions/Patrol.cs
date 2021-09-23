@@ -55,7 +55,10 @@ namespace Enemy.EnemyStates
 			
 			var path = new NavMeshPath();
 			NavMesh.CalculatePath(agent.transform.position, hit.position, NavMesh.AllAreas, path);
-			agent.path = path;
+			if (agent.isOnNavMesh)
+			{
+				agent.path = path;
+			}
 			
 			_destPointIndex = (_destPointIndex + 1) % _wayPoints.value.Count;
 		}

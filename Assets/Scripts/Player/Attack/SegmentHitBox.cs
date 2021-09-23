@@ -58,7 +58,7 @@ namespace Player.Behaviours.AttackSystem
 		
 		public Mesh CreateSegmentMesh()
 		{
-			return GeometryUtils.CreateSegmentMesh(_range, 5f, _angle);
+			return GeometryUtils.CreateSegmentMesh(_range, 1f, _angle);
 		}
 		
 		public void DebugDraw(Vector3 position, Vector3 direction)

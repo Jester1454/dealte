@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dd9836812f6ac418ec92344a3b672b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 1
+  _maxHealth: 5
   _animator: {fileID: 6396774571256961063}
   _dieAnimationKey: Die
   _takeDamageAnimationKey: TakeDamage
@@ -510,7 +510,7 @@ MonoBehaviour:
     _angle: 90
     _obstacleLayers:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 1537
     _visibilityLayers:
       serializedVersion: 2
       m_Bits: 256
@@ -544,7 +544,7 @@ MonoBehaviour:
   _healthBehaviour: {fileID: 8221842793335651435}
   _savePointTag: LightSavePoint
   _starDamageDelay: 0
-  _damageRate: 0.5
+  _damageRate: 1
   _damage: 0.1
 --- !u!1 &479091854704361245
 GameObject:
