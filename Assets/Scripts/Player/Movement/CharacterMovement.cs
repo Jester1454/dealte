@@ -202,6 +202,8 @@ namespace Player.Movement
 
 		public void OrientToTargetRotation(Vector3 horizontalMovement)
 		{
+			if (_isStop) return;
+			
 			if (_rotationSettings.OrientRotationToMovement && horizontalMovement.sqrMagnitude > 0.0f)
 			{
 				float rotationSpeed = Mathf.Lerp(

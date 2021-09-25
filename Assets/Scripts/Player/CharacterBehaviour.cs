@@ -11,7 +11,7 @@ namespace Player
 	{
 		[SerializeField] private CharacterBehaviourState _initBehaviourState = CharacterBehaviourState.Movement;
 		[SerializeField] private CharacterMovement _characterMovement;
-		[SerializeField] private AttackBehaviour _attackBehaviour;
+		[SerializeField] private ComboAttackBehaviour _comboAttackBehaviour;
 		[SerializeField] private DodgeRollBehaviour _dodgeRollBehaviour;
 		[SerializeField] private HealthBehaviour _healthBehaviour;
 		[SerializeField] private ChargeThrowBehaviour _throwBehaviour;
@@ -41,7 +41,7 @@ namespace Player
 		{
 			_currentBehaviourState = CharacterBehaviourState.Death;
 			_characterMovement.Disable();
-			_attackBehaviour.Disable();
+			_comboAttackBehaviour.Disable();
 			_dodgeRollBehaviour.Disable();
 			_throwBehaviour.Disable();
 			_pickUpBehaviour.Disable();
@@ -229,7 +229,7 @@ namespace Player
 
 		private void Attack()
 		{
-			if (!_attackBehaviour.IsEnable)
+			if (!_comboAttackBehaviour.IsEnable)
 				return;
 			
 			if (_currentBehaviourState == CharacterBehaviourState.DodgeRoll)
@@ -242,16 +242,16 @@ namespace Player
 			_currentBehaviourState = CharacterBehaviourState.Attack;
 
 			_characterMovement.Stop();
-			_attackBehaviour.Attack();
+			_comboAttackBehaviour.Attack();
 			
-			_attackBehaviour.OnFinish += OnFinishAttack;
+			_comboAttackBehaviour.OnFinish += OnFinishAttack;
 		}
 
 		private void OnFinishAttack()
 		{
 			_currentBehaviourState = CharacterBehaviourState.Movement;
 			_characterMovement.Continue(false);
-			_attackBehaviour.OnFinish -= OnFinishAttack;
+			_comboAttackBehaviour.OnFinish -= OnFinishAttack;
 		}
 
 		private void Update()
@@ -298,7 +298,7 @@ namespace Player
 		
 		private void EnableWeaponBehaviours()
 		{
-			_attackBehaviour.Enable();
+			_comboAttackBehaviour.Enable();
 			_dodgeRollBehaviour.Enable();
 			_throwBehaviour.Enable();
 			_pickUpBehaviour.Enable();
@@ -310,7 +310,7 @@ namespace Player
 		private void DisableWeaponBehaviours()
 		{
 			_characterMovement.Disable();
-			_attackBehaviour.Disable();
+			_comboAttackBehaviour.Disable();
 			_dodgeRollBehaviour.Disable();
 			_throwBehaviour.Disable();
 			_pickUpWeaponBehaviour.Disable();

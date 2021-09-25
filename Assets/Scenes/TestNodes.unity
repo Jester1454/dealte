@@ -884,6 +884,11 @@ PrefabInstance:
       propertyPath: _initBehaviourState
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6964517916834939805, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _comboAttackBehaviour
+      value: 
+      objectReference: {fileID: 1976359614}
     - target: {fileID: 7011440882950496148, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -971,10 +976,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
+      propertyPath: _attacksData.Array.data[3]._damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
       propertyPath: _attacksData.Array.data[0]._vfxObject
       value: 
-      objectReference: {fileID: 2938086252598602903, guid: 8ad8eb6d6bf60f74098aad05b4e778a4,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: _attacksData.Array.data[1]._vfxObject
@@ -993,6 +1002,11 @@ PrefabInstance:
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: _attacksData.Array.data[2]._animatorKey
+      value: ComboAttack2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[3]._animatorKey
       value: ComboAttack2
       objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
@@ -1027,6 +1041,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
+      propertyPath: _attacksData.Array.data[3]._hitBox._angle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[3]._hitBox._range
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
       propertyPath: _attacksData.Array.data[0]._vfxRotationOffset.x
       value: 90
       objectReference: {fileID: 0}
@@ -1048,7 +1072,7 @@ PrefabInstance:
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: _attacksData.Array.data[1]._vfxRotationOffset.z
-      value: -50
+      value: 131.42
       objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
@@ -1058,6 +1082,16 @@ PrefabInstance:
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: _attacksData.Array.data[2]._vfxRotationOffset.z
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[3]._vfxRotationOffset.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[3]._vfxRotationOffset.z
       value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
@@ -1073,6 +1107,11 @@ PrefabInstance:
     - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: _attacksData.Array.data[2]._hitBox._visibilityLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _attacksData.Array.data[3]._hitBox._visibilityLayers.m_Bits
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7864310142015151238, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
@@ -4760,6 +4799,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1976359614 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7699140112683871278, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+    type: 3}
+  m_PrefabInstance: {fileID: 199260730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5e07e6d8a9c7248b52eb5755c45f3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1990273210
 GameObject:
   m_ObjectHideFlags: 0
