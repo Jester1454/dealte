@@ -74,8 +74,7 @@ namespace Player.Behaviours.AttackSystem
 		private void OnDrawGizmos()
 		{
 			Gizmos.color = Color.red;
-			Gizmos.DrawRay(transform.position, transform.forward);
-			Gizmos.DrawSphere(transform.forward, 1f);
+			Gizmos.DrawRay(transform.position, transform.forward * 5f);
 		}
 	}
 }

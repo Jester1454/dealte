@@ -92,7 +92,7 @@ namespace Player
 
 			var targetRotation = Quaternion.LookRotation(new Vector3(aimInput.x, 0, aimInput.y), Vector3.up);
 
-			var newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+			var newRotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
 			transform.rotation = newRotation;
 			_currentVfx.transform.position = transform.position;
 			_currentVfx.transform.rotation = Quaternion.Euler(newRotation.eulerAngles + _rotationOffset);

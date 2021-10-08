@@ -13,11 +13,12 @@ namespace Player.Behaviours.AttackSystem
 		private readonly List<IGettingDamage> _filterObject = new List<IGettingDamage>();
 		private bool _hitBoxEnable;
 		private bool _isProcessAttack;
+		private bool _isFinishAttack;
 		private readonly IGettingDamage _thisGettingDamage;
 		private readonly AnimatorEvents _animatorEvents;
 		public AttackData AttackData => _attackData;
-		
 		public bool IsProcessAttack => _isProcessAttack;
+		public bool IsFinishAttack => _isFinishAttack; 
 		
 		public AttackBehaviour(MonoBehaviour mono, AttackData attackData, IGettingDamage thisGettingDamage, AnimatorEvents animatorEvents)
 		{
@@ -32,10 +33,18 @@ namespace Player.Behaviours.AttackSystem
 		{
 			_animatorEvents.OnHit += OnHit;
 			_animatorEvents.OnStartAttack += OnEventStartAttack;
+			_animatorEvents.OnFinishAttack += OnFinishAttack;
 			_isProcessAttack = true;
+			_isFinishAttack = false;
 			_filterObject.Clear();
+			_mono.StopCoroutine(PlayVFX(transform));
 			_mono.StartCoroutine(PlayVFX(transform));
 			CinemachineCameraShaker.Instance.ShakeCamera(_attackData.ShakeDuration, _attackData.Amplitude, _attackData.Frequency);
+		}
+
+		private void OnFinishAttack()
+		{
+			_isFinishAttack = true;
 		}
 
 		private void OnHit()
@@ -44,6 +53,7 @@ namespace Player.Behaviours.AttackSystem
 			_hitBoxEnable = false;
 			_animatorEvents.OnHit -= OnHit;
 			_animatorEvents.OnStartAttack -= OnEventStartAttack;
+			_animatorEvents.OnFinishAttack -= OnFinishAttack;
 		}
 
 		private void OnEventStartAttack()
@@ -78,8 +88,12 @@ namespace Player.Behaviours.AttackSystem
 		{
 			if (_attackData.VfxObject == null) yield break;
 
-			var vfxObject = GameObject.Instantiate(_attackData.VfxObject, _attackData.VfxPositionOffset, Quaternion.Euler(_attackData.VfxRotationOffset), transform);
-			var duration = vfxObject.GetComponentInChildren<ParticleSystem>().main.duration;
+			yield return new WaitForSeconds(_attackData.VfxPlayDelay);
+
+			var vfxObject = GameObject.Instantiate(_attackData.VfxObject, _attackData.VfxPositionOffset, Quaternion.Euler(transform.rotation.eulerAngles + _attackData.VfxRotationOffset), transform);
+			var particleSystem = vfxObject.GetComponentInChildren<ParticleSystem>();
+			
+			var duration = particleSystem != null ? particleSystem.main.duration : _attackData.VfxDuration;
 
 			while (duration > 0)
 			{

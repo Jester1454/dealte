@@ -88,6 +88,9 @@ namespace Player.Behaviours.AttackSystem
 			
 			if (Physics.Raycast(origin, transform.forward, out var hitInfo, _distanceLimit.y, _obstaclesLayerMask))
 			{
+				if (hitInfo.transform.CompareTag(tag))
+					return position;
+				
 				var newPosition = transform.position + transform.forward.normalized * ((hitInfo.point - origin).magnitude - _offset);
 				return new Vector3(newPosition.x, transform.position.y + _heightOffset, newPosition.z);
 			}

@@ -477,10 +477,13 @@ MonoBehaviour:
     _vfxObject: {fileID: 2938086252598602903, guid: 8ad8eb6d6bf60f74098aad05b4e778a4,
       type: 3}
     _vfxPositionOffset: {x: 0, y: 0, z: 0}
-    _vfxRotationOffset: {x: 90, y: 0, z: -50}
+    _vfxRotationOffset: {x: -270, y: 0, z: -50}
+    _vfxDuration: 0
+    _vfxPlayDelay: 0
     _shakeDuration: 0.4
     _amplitude: 0.1
     _frequency: 5
+    _debugColor: {r: 1, g: 0, b: 0, a: 1}
   - _damage: 2
     _hitBox:
       _range: 8
@@ -493,10 +496,13 @@ MonoBehaviour:
     _vfxObject: {fileID: 2938086252598602903, guid: 8ad8eb6d6bf60f74098aad05b4e778a4,
       type: 3}
     _vfxPositionOffset: {x: 0, y: 0, z: 0}
-    _vfxRotationOffset: {x: 270, y: 0, z: 131.42}
+    _vfxRotationOffset: {x: -90, y: 0, z: 131.42}
+    _vfxDuration: 0
+    _vfxPlayDelay: 0
     _shakeDuration: 0.4
     _amplitude: 0.1
     _frequency: 5
+    _debugColor: {r: 1, g: 0, b: 0.99997807, a: 1}
   - _damage: 3
     _hitBox:
       _range: 8
@@ -506,12 +512,16 @@ MonoBehaviour:
       _angle: 30
     _animatorKey: ComboAttack2
     _idleDuration: 1.2
-    _vfxObject: {fileID: 0}
-    _vfxPositionOffset: {x: 0, y: 0, z: 0}
-    _vfxRotationOffset: {x: 270, y: 0, z: -50}
+    _vfxObject: {fileID: 6137934648165198116, guid: ae744bb182234a04d84b0abdc0511276,
+      type: 3}
+    _vfxPositionOffset: {x: 0, y: 2.5, z: 0}
+    _vfxRotationOffset: {x: 0, y: 180, z: 0}
+    _vfxDuration: 1
+    _vfxPlayDelay: 0.5
     _shakeDuration: 0.4
     _amplitude: 0.1
     _frequency: 5
+    _debugColor: {r: 0, g: 0.060203552, b: 1, a: 1}
 --- !u!114 &7864310142015151238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +588,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 192636943620736534}
+  _targetIntensity: 5
+  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
+--- !u!114 &8823617930369635237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478531243913567011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesh: {fileID: 4693415449183331167}
   _targetIntensity: 5
   _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1 &2662582852354578967
@@ -847,21 +872,6 @@ Transform:
   m_Father: {fileID: 6706897239067255589}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &8823617930369635237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478531243913567011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mesh: {fileID: 4693415449183331167}
-  _targetIntensity: 5
-  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1001 &1445054205329365828
 PrefabInstance:
   m_ObjectHideFlags: 0
