@@ -350,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distanceLimit: {x: 5, y: 25}
   _throwBehaviour: {fileID: 2510032853587685860}
-  _target: {fileID: 189193498990436947, guid: 850c9ec7f77ea6d418b5c140d7c05ae9, type: 3}
+  _target: {fileID: 150090, guid: c6032280fb9eba04392874025050a4d3, type: 3}
   _heightOffset: 0.5
   _chargeSpeed: 15
   _obstaclesLayerMask:
