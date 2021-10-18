@@ -17,7 +17,7 @@ namespace Player.PickUp
 		{
 			var pickableObject = other.GetComponent<IPickableObject>();
 
-			if (pickableObject != null)
+			if (pickableObject != null && !_pickableObjects.Contains(pickableObject))
 			{
 				_pickableObjects.Add(pickableObject);
 			}

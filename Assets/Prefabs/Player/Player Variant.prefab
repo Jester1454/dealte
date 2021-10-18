@@ -348,11 +348,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7df59d854c4275b43bdaf7dd9682ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceLimit: {x: 5, y: 15}
+  _distanceLimit: {x: 5, y: 25}
   _throwBehaviour: {fileID: 2510032853587685860}
   _target: {fileID: 189193498990436947, guid: 850c9ec7f77ea6d418b5c140d7c05ae9, type: 3}
   _heightOffset: 0.5
-  _chargeSpeed: 10
+  _chargeSpeed: 15
   _obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 1536
@@ -588,21 +588,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 192636943620736534}
-  _targetIntensity: 5
-  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
---- !u!114 &8823617930369635237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478531243913567011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mesh: {fileID: 4693415449183331167}
   _targetIntensity: 5
   _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1 &2662582852354578967
@@ -872,6 +857,21 @@ Transform:
   m_Father: {fileID: 6706897239067255589}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &8823617930369635237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478531243913567011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesh: {fileID: 4693415449183331167}
+  _targetIntensity: 5
+  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1001 &1445054205329365828
 PrefabInstance:
   m_ObjectHideFlags: 0
