@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Player.Behaviours.HealthSystem;
 using RPGCharacterAnimsFREE;
@@ -18,7 +19,8 @@ namespace Player.Behaviours.AttackSystem
 		private readonly AnimatorEvents _animatorEvents;
 		public AttackData AttackData => _attackData;
 		public bool IsProcessAttack => _isProcessAttack;
-		public bool IsFinishAttack => _isFinishAttack; 
+		public bool IsFinishAttack => _isFinishAttack;
+		public Action OnFinish;
 		
 		public AttackBehaviour(MonoBehaviour mono, AttackData attackData, IGettingDamage thisGettingDamage, AnimatorEvents animatorEvents)
 		{
@@ -26,16 +28,15 @@ namespace Player.Behaviours.AttackSystem
 			_attackData = attackData;
 			_thisGettingDamage = thisGettingDamage;
 			_animatorEvents = animatorEvents;
-
+			_animatorEvents.OnFinishAttack += OnFinishAttack;
 		}
 		
 		public void Start(Transform transform)
 		{
-			_animatorEvents.OnHit += OnHit;
-			_animatorEvents.OnStartAttack += OnEventStartAttack;
-			_animatorEvents.OnFinishAttack += OnFinishAttack;
 			_isProcessAttack = true;
 			_isFinishAttack = false;
+			_animatorEvents.OnHit += OnHit;
+			_animatorEvents.OnStartAttack += OnEventStartAttack;
 			_filterObject.Clear();
 			_mono.StopCoroutine(PlayVFX(transform));
 			_mono.StartCoroutine(PlayVFX(transform));
@@ -53,7 +54,7 @@ namespace Player.Behaviours.AttackSystem
 			_hitBoxEnable = false;
 			_animatorEvents.OnHit -= OnHit;
 			_animatorEvents.OnStartAttack -= OnEventStartAttack;
-			_animatorEvents.OnFinishAttack -= OnFinishAttack;
+			OnFinish?.Invoke();
 		}
 
 		private void OnEventStartAttack()

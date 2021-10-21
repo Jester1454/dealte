@@ -21,7 +21,7 @@ namespace Player.Behaviours.AttackSystem
 
 		public Action OnFinish;
 		private bool _transactionToNextAttack = false;
-		private bool _isFinish = false;
+		private bool _isFinish = true;
 		
 		private void OnEnable()
 		{
@@ -45,22 +45,16 @@ namespace Player.Behaviours.AttackSystem
 			CurrentAttackBehaviour.OnUpdate(transform);
 		}
 
-		private void Update()
+		private void OnAttackFinish()
 		{
-			if (!_isEnable) return;
-			if (_isFinish) return;
-			if (_currentAttackBehaviourIndex == -1) return;
-
-			if (!CurrentAttackBehaviour.IsProcessAttack)
+			CurrentAttackBehaviour.OnFinish -= OnAttackFinish;
+			if (_transactionToNextAttack)
 			{
-				if (_transactionToNextAttack)
-				{
-					TransactionToNextAttack();
-				}
-				else
-				{
-					OnAttacksFinish();
-				}
+				TransactionToNextAttack();
+			}
+			else
+			{
+				OnCurrentAttacksFinish();
 			}
 		}
 
@@ -68,17 +62,18 @@ namespace Player.Behaviours.AttackSystem
 		{
 			_currentAttackBehaviourIndex++;
 			CurrentAttackBehaviour.Start(transform);
+			CurrentAttackBehaviour.OnFinish += OnAttackFinish;
 			_transactionToNextAttack = false;
 		}
 
-		private void OnAttacksFinish()
+		private void OnCurrentAttacksFinish()
 		{
 			_isFinish = true;
+			_transactionToNextAttack = false;
 			_animator.applyRootMotion = false;
 			OnFinish?.Invoke();
 			StartCoroutine(IdleTimer(CurrentAttackBehaviour.AttackData.IdleDuration));
 			_currentAttackBehaviourIndex = -1;
-			_transactionToNextAttack = false;
 		}
 
 		private IEnumerator IdleTimer(float duration)
@@ -95,7 +90,7 @@ namespace Player.Behaviours.AttackSystem
 			if (!_isEnable) return;
 			_animator.applyRootMotion = true;
 
-			if (_currentAttackBehaviourIndex == -1)
+			if (_isFinish)
 			{
 				StarNewAttackChain();
 				return;
@@ -121,6 +116,7 @@ namespace Player.Behaviours.AttackSystem
 			_currentAttackBehaviourIndex = 0;
 			_animator.SetTrigger(CurrentAttackBehaviour.AttackData.AnimatorKey);
 			CurrentAttackBehaviour.Start(transform);
+			CurrentAttackBehaviour.OnFinish += OnAttackFinish;
 			_isFinish = false;
 		}
 

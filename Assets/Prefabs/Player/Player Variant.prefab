@@ -519,7 +519,7 @@ MonoBehaviour:
   _movementSettings:
     Acceleration: 25
     Decceleration: 1168.57
-    MaxHorizontalSpeed: 8
+    MaxHorizontalSpeed: 9
     MaxWalkSpeed: 4
     IsometricMovement: 1
   _strafeMovementSettings:
@@ -537,8 +537,8 @@ MonoBehaviour:
     MaxPitchAngle: 75
     _useControlRotation: 0
     _orientRotationToMovement: 1
-    MinRotationSpeed: 480
-    MaxRotationSpeed: 960
+    MinRotationSpeed: 48000
+    MaxRotationSpeed: 96000
   _cameraFollowTarget: {fileID: 0}
   _controlRotationSensitivity: 0
   _animator: {fileID: 6019996985025573915}
@@ -557,6 +557,7 @@ MonoBehaviour:
   _animator: {fileID: 5001045682821785301}
   _animatorEvents: {fileID: 1311767742470368828}
   _hands: {fileID: 7297505340969726710}
+  _characterBehaviour: {fileID: 6964517916834939805}
 --- !u!114 &2274915878254113148
 MonoBehaviour:
   m_ObjectHideFlags: 0
