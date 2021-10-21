@@ -46,10 +46,18 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Aiming",
+                    "name": "Aim",
                     "type": "Button",
                     "id": "8f5884c2-2825-4da1-87da-4dcbf2512a78",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Aiming",
+                    "type": "Value",
+                    "id": "ae9c980b-168f-4d33-85df-1347e0efce61",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 }
@@ -216,7 +224,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Aiming",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -226,6 +234,28 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fb10322-0e4f-4055-866c-6cea0d7ab70d",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
+                    "groups": "Gamepad",
+                    "action": "Aiming",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8083fbc-956b-4cd8-9c46-88ece5d028a1",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=0.1,y=0.1)",
                     "groups": "KeyboardAndMouse",
                     "action": "Aiming",
                     "isComposite": false,

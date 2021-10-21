@@ -62,6 +62,10 @@ namespace Player.Behaviours.AttackSystem
 			if (_throwingObjects.Count == 0)
 				return;
 			_target = target;
+
+			var direction = target - transform.position;
+			direction.y = 0;
+			transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 			_animator.SetTrigger(_throw);	
 		}
 

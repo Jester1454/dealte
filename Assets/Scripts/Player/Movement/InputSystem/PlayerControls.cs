@@ -59,10 +59,18 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Aiming"",
+                    ""name"": ""Aim"",
                     ""type"": ""Button"",
                     ""id"": ""8f5884c2-2825-4da1-87da-4dcbf2512a78"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Aiming"",
+                    ""type"": ""Value"",
+                    ""id"": ""ae9c980b-168f-4d33-85df-1347e0efce61"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -229,7 +237,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Aiming"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -239,6 +247,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5fb10322-0e4f-4055-866c-6cea0d7ab70d"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8083fbc-956b-4cd8-9c46-88ece5d028a1"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=0.1,y=0.1)"",
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Aiming"",
                     ""isComposite"": false,
@@ -284,6 +314,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_DodgeRoll = m_Gameplay.FindAction("DodgeRoll", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
         m_Gameplay_Aiming = m_Gameplay.FindAction("Aiming", throwIfNotFound: true);
     }
 
@@ -339,6 +370,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_DodgeRoll;
     private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_Aim;
     private readonly InputAction m_Gameplay_Aiming;
     public struct GameplayActions
     {
@@ -349,6 +381,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @DodgeRoll => m_Wrapper.m_Gameplay_DodgeRoll;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         public InputAction @Aiming => m_Wrapper.m_Gameplay_Aiming;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -374,6 +407,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Aim.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
                 @Aiming.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAiming;
                 @Aiming.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAiming;
                 @Aiming.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAiming;
@@ -396,6 +432,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
                 @Aiming.started += instance.OnAiming;
                 @Aiming.performed += instance.OnAiming;
                 @Aiming.canceled += instance.OnAiming;
@@ -428,6 +467,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnDodgeRoll(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
         void OnAiming(InputAction.CallbackContext context);
     }
 }
