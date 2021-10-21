@@ -340,6 +340,7 @@ MonoBehaviour:
   _characterBehaviour: {fileID: 6964517916834939805}
   _animator: {fileID: 5001045682821785301}
   _rotationSpeed: 5000
+  _movementAnimator: {fileID: 6019996985025573915}
 --- !u!114 &6019996985025573915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,13 +519,13 @@ MonoBehaviour:
   _movementSettings:
     Acceleration: 25
     Decceleration: 1168.57
-    MaxHorizontalSpeed: 3
-    MaxWalkSpeed: 1
+    MaxHorizontalSpeed: 8
+    MaxWalkSpeed: 4
     IsometricMovement: 1
   _strafeMovementSettings:
     Acceleration: 25
     Decceleration: 25
-    MaxHorizontalSpeed: 1
+    MaxHorizontalSpeed: 3
     MaxWalkSpeed: 1
     IsometricMovement: 1
   _gravitySettings:
@@ -1973,7 +1974,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: d3034b4dcf577f94ebf83c04eacd01ef,
         type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6060806385407736488, guid: d3034b4dcf577f94ebf83c04eacd01ef,
         type: 3}

@@ -1,4 +1,5 @@
 ﻿using System;
+using Player.Movement;
 using UnityEngine;
 
 namespace Player.Behaviours.AttackSystem
@@ -16,6 +17,7 @@ namespace Player.Behaviours.AttackSystem
 		[SerializeField] private CharacterBehaviour _characterBehaviour;
 		[SerializeField] private Animator _animator;
 		[SerializeField] private float _rotationSpeed;
+		[SerializeField] private CharacterMovementAnimator _movementAnimator;
 
 		private static readonly int _aimingAnimationKey = Animator.StringToHash("IsAiming");
 		public Action OnFinishThrowing; 
@@ -126,8 +128,13 @@ namespace Player.Behaviours.AttackSystem
 				return;
 
 			var targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-			var newRotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-			transform.rotation = newRotation;
+			transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+			
+			if (_lastAimInput == direction)
+				return;
+			
+			_movementAnimator.UpdateAnimatorState(direction);
+			_lastAimInput = direction;
 		}
 		
 		private void Update()

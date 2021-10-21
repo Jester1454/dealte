@@ -921,11 +921,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.03781762
       objectReference: {fileID: 0}
-    - target: {fileID: 4241550088291532372, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
-        type: 3}
-      propertyPath: _movementAnimator
-      value: 
-      objectReference: {fileID: 2106726535}
     - target: {fileID: 4600284776668968813, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1015,11 +1010,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.02290639
-      objectReference: {fileID: 0}
-    - target: {fileID: 5001045682821785301, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5054342143237437907, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
@@ -51564,18 +51554,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1214918330}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2106726535 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6019996985025573915, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
-    type: 3}
-  m_PrefabInstance: {fileID: 199260730}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63e5543a766a49088842bafe51a16f10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2123488370
 GameObject:
   m_ObjectHideFlags: 0

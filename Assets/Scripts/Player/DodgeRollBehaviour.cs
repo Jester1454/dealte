@@ -23,6 +23,7 @@ namespace Player
 		private void DodgeRollFinish()
 		{
 			_hands.SetIKOn();
+			_animator.applyRootMotion = false;
 			OnDodgeRollFinish?.Invoke();
 		}
 
@@ -33,6 +34,7 @@ namespace Player
 			
 			_hands.SetIKOff();
 			_animator.SetTrigger(_dodgeRoll);
+			_animator.applyRootMotion = true;
 		}
 
 		private void OnDisable()

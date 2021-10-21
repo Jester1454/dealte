@@ -74,6 +74,7 @@ namespace Player.Behaviours.AttackSystem
 		private void OnAttacksFinish()
 		{
 			_isFinish = true;
+			_animator.applyRootMotion = false;
 			OnFinish?.Invoke();
 			StartCoroutine(IdleTimer(CurrentAttackBehaviour.AttackData.IdleDuration));
 			_currentAttackBehaviourIndex = -1;
@@ -92,7 +93,8 @@ namespace Player.Behaviours.AttackSystem
 		public void Attack()
 		{
 			if (!_isEnable) return;
-			
+			_animator.applyRootMotion = true;
+
 			if (_currentAttackBehaviourIndex == -1)
 			{
 				StarNewAttackChain();

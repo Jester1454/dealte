@@ -703,7 +703,7 @@ PrefabInstance:
     - target: {fileID: 5001045682821785301, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5054342143237437907, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
@@ -1000,11 +1000,6 @@ PrefabInstance:
       propertyPath: _cameraFollowTarget
       value: 
       objectReference: {fileID: 1683848283}
-    - target: {fileID: 7864310142015151238, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
-        type: 3}
-      propertyPath: _movementSettings.Decceleration
-      value: 1168.57
-      objectReference: {fileID: 0}
     - target: {fileID: 7874785333446993244, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: m_LocalRotation.w
