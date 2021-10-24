@@ -240,6 +240,7 @@ MonoBehaviour:
   _healRate: 1.5
   _heal: 0.1
   _starHealDelay: 1
+  _dissolveAnimation: {fileID: 8135483971159695822}
 --- !u!114 &2299823340731966099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,9 +369,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55fad5e13231a6b44b919b8b67565135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shakeDuration: 0.5
-  _amplitude: 0.5
-  _frequency: 4
+  _shakeDamageDatas:
+  - _damageType: 0
+    _shakeDuration: 0.5
+    _amplitude: 0.5
+    _frequency: 4
+  - _damageType: 1
+    _shakeDuration: 0.5
+    _amplitude: 0.1
+    _frequency: 100
 --- !u!114 &6637306531594853732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +549,26 @@ MonoBehaviour:
   _cameraFollowTarget: {fileID: 0}
   _controlRotationSensitivity: 0
   _animator: {fileID: 6019996985025573915}
+--- !u!114 &8135483971159695822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787002118026716693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb24e119a44ced82b6a6bbadd8068e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dissolveMaterial: {fileID: 2100000, guid: 725ac0e0d2bb2f749a47cd64fc2844c6, type: 2}
+  _rendererList:
+  - {fileID: 192636943620736534}
+  - {fileID: 4693415449183331167}
+  _dissolveColor: {r: 1, g: 0.00000024835268, b: 0, a: 1}
+  _dissolveIntensity: 10
+  _dissolveChangeColor: 0.4
+  _dissolveLimit: {x: 0, y: 0.8}
 --- !u!114 &9012469090036572595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2375,6 +2402,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1445054205329365828}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5294708893459349245 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6734931530170869177, guid: d3034b4dcf577f94ebf83c04eacd01ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1445054205329365828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1787002118026716693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3034b4dcf577f94ebf83c04eacd01ef,
@@ -2396,12 +2429,6 @@ GameObject:
 --- !u!137 &192636943620736534 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1630794972795428178, guid: d3034b4dcf577f94ebf83c04eacd01ef,
-    type: 3}
-  m_PrefabInstance: {fileID: 1445054205329365828}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5294708893459349245 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6734931530170869177, guid: d3034b4dcf577f94ebf83c04eacd01ef,
     type: 3}
   m_PrefabInstance: {fileID: 1445054205329365828}
   m_PrefabAsset: {fileID: 0}

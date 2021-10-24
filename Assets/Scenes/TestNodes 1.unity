@@ -1040,6 +1040,36 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 8135483971159695822, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _dissolveColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135483971159695822, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _dissolveColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135483971159695822, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _dissolveColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135483971159695822, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _dissolveLimit.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135483971159695822, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _dissolveIntensity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135483971159695822, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
+        type: 3}
+      propertyPath: _dissolveChangeColor
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8653189942900221313, guid: 0933388a09c6e214e967e2a3a1a7bbd3,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -2950,7 +2980,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30364
+  m_Name: pb_Mesh70932
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3583,6 +3613,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 704666513602704851, guid: 92fb4c686d39bea43901551efe124623,
+        type: 3}
+      propertyPath: _dissolveIntensity
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 920838710810823593, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}

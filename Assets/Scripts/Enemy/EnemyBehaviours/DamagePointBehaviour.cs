@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Animations;
 using Player.Behaviours.HealthSystem;
 using UnityEngine;
 
@@ -11,7 +12,8 @@ namespace Enemy
 		[SerializeField] private float _starDamageDelay = 1f;
 		[SerializeField] private float _damageRate = 0.5f;
 		[SerializeField] private float _damage = 0.1f;
-		
+		[SerializeField] private DissolveAnimation _dissolveAnimation;
+
 		private bool _isTakingDamage;
 		private Coroutine _damageCoroutine;
 
@@ -55,16 +57,26 @@ namespace Enemy
 			{
 				StopCoroutine(_damageCoroutine);
 			}
+			
+			if (_dissolveAnimation != null)
+			{
+				_dissolveAnimation.FinishAnimation();
+			}
 		}
 		
 		private IEnumerator Damage()
 		{
 			yield return new WaitForSeconds(_starDamageDelay);
 			
+			if (_dissolveAnimation != null)
+			{
+				_dissolveAnimation.StartAnimation();
+			}
+			
 			var rate = new WaitForSeconds(_damageRate);
 			while (_isTakingDamage)
 			{
-				_healthBehaviour.Damage(_damage, true);
+				_healthBehaviour.Damage(_damage, DamageType.Light, true);
 				yield return rate;
 			}
 		}

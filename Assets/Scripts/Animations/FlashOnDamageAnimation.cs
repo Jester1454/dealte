@@ -14,10 +14,11 @@ namespace Animations
 		private void OnEnable()
 		{
 			_healthBehaviour.OnTakeDamage += OnTakeDamage;
-			_healthBehaviour.OnDeath += OnTakeDamage;
+			_healthBehaviour.OnDeath += OnDeath;
 		}
 
-		private void OnTakeDamage()
+		[ContextMenu("Play")]
+		private void PlayAnimation()
 		{
 			foreach (var lightAnimation in _animations)
 			{
@@ -25,10 +26,23 @@ namespace Animations
 			}
 		}
 
+		private void OnTakeDamage(DamageType damageType)
+		{
+			if (damageType == DamageType.Melee)
+			{
+				PlayAnimation();
+			}
+		}
+
+		private void OnDeath()
+		{
+			PlayAnimation();
+		}
+
 		private void OnDisable()
 		{
 			_healthBehaviour.OnTakeDamage -= OnTakeDamage;
-			_healthBehaviour.OnDeath -= OnTakeDamage;
+			_healthBehaviour.OnDeath -= OnDeath;
 		}
 	}
 }

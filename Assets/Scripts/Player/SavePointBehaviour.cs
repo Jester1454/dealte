@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Animations;
 using Player.Behaviours.HealthSystem;
 using Player.PickUp;
 using UnityEngine;
@@ -15,7 +16,8 @@ namespace Player
 		[SerializeField] private float _healRate = 0.5f;
 		[SerializeField] private float _heal = 0.1f;
 		[SerializeField] private float _starHealDelay = 1f;
-		
+		[SerializeField] private DissolveAnimation _dissolveAnimation;
+
 		private bool _isDisable = true;
 		private bool _isTakingDamage;
 		private bool _isHeal;
@@ -80,6 +82,11 @@ namespace Player
 			{
 				StopCoroutine(_damageCoroutine);
 			}
+
+			if (_dissolveAnimation != null)
+			{
+				_dissolveAnimation.FinishAnimation();
+			}
 		}
 		
 		private void StopHeal()
@@ -104,10 +111,15 @@ namespace Player
 		{
 			yield return new WaitForSeconds(_starDamageDelay);
 			var rate = new WaitForSeconds(_damageRate);
-
+			
+			if (_dissolveAnimation != null)
+			{
+				_dissolveAnimation.StartAnimation();
+			}
+			
 			while (_isTakingDamage)
 			{
-				_healthBehaviour.Damage(_damage, true);
+				_healthBehaviour.Damage(_damage, DamageType.Light, true);
 				yield return rate;
 			}
 		}
@@ -132,7 +144,6 @@ namespace Player
 		public void Enable()
 		{
 			_isDisable = false;
-			StartDamage();
 		}
 	}
 }

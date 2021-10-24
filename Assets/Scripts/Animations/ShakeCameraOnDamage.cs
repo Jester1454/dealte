@@ -1,12 +1,12 @@
-﻿using Player.Behaviours.HealthSystem;
+﻿using System;
+using System.Collections.Generic;
+using Player.Behaviours.HealthSystem;
 using UnityEngine;
 
 [RequireComponent(typeof(HealthBehaviour))]
 public class ShakeCameraOnDamage : MonoBehaviour
 {
-	[SerializeField] protected float _shakeDuration;
-	[SerializeField] protected float _amplitude;
-	[SerializeField] protected float _frequency;
+	[SerializeField] private List<ShakeDamageData> _shakeDamageDatas;
 	
 	private HealthBehaviour _healthBehaviour;
 
@@ -16,13 +16,28 @@ public class ShakeCameraOnDamage : MonoBehaviour
 		_healthBehaviour.OnTakeDamage += OnTakeDamage;
 	}
 
-	private void OnTakeDamage()
+	private void OnTakeDamage(DamageType damageType)
 	{
-		CinemachineCameraShaker.Instance.ShakeCamera(_shakeDuration, _amplitude, _frequency);
+		var data = _shakeDamageDatas.Find(x => x.DamageType == damageType);
+		CinemachineCameraShaker.Instance.ShakeCamera(data.ShakeDuration, data.Amplitude, data.Frequency);
 	}
 
 	private void OnDisable()
 	{
 		_healthBehaviour.OnTakeDamage -= OnTakeDamage;
 	}
+}
+
+[Serializable]
+public struct ShakeDamageData
+{
+	[SerializeField] private DamageType _damageType;
+	[SerializeField] private float _shakeDuration;
+	[SerializeField] private float _amplitude;
+	[SerializeField] private float _frequency;
+
+	public DamageType DamageType => _damageType;
+	public float ShakeDuration => _shakeDuration;
+	public float Amplitude => _amplitude;
+	public float Frequency => _frequency;
 }

@@ -28,7 +28,7 @@ namespace Enemy.EnemyStates
 
 		private void OnDamage(IGettingDamage gettingDamage)
 		{
-			gettingDamage.Damage(_damage.value);
+			gettingDamage.Damage(_damage.value, DamageType.Melee);
 		}
 
 		private void SetActiveAttackCollider(bool value)

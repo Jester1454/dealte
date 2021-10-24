@@ -34,7 +34,7 @@ namespace Enemy.EnemyBehaviours.SensorySystems
 			}
 		}
 
-		private void OnTakeDamage()
+		private void OnTakeDamage(DamageType damageType)
 		{
 			Scan(true);
 		}

@@ -37,7 +37,7 @@ namespace UI
             _healthBar.DOFillAmount(GetFillAmount(), _animationDuration);
         }
 
-        private void OnTakeDamage()
+        private void OnTakeDamage(DamageType damageType)
         {
             _healthBar.fillAmount = GetFillAmount();
             _damageBar.DOFade(0, _animationDuration).onComplete += () =>

@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 8221842793335651432}
   - component: {fileID: 8221842793335651437}
   - component: {fileID: 1387877110}
+  - component: {fileID: 704666513602704851}
   m_Layer: 0
   m_Name: Office Zombie
   m_TagString: Untagged
@@ -546,6 +547,27 @@ MonoBehaviour:
   _starDamageDelay: 0
   _damageRate: 1
   _damage: 0.1
+  _dissolveAnimation: {fileID: 704666513602704851}
+--- !u!114 &704666513602704851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391273224220465383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb24e119a44ced82b6a6bbadd8068e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dissolveMaterial: {fileID: 2100000, guid: 725ac0e0d2bb2f749a47cd64fc2844c6, type: 2}
+  _rendererList:
+  - {fileID: 2237939775597426916}
+  - {fileID: 8686000408734881484}
+  _dissolveColor: {r: 0.91324806, g: 1, b: 0, a: 1}
+  _dissolveIntensity: 10
+  _dissolveChangeColor: 1
+  _dissolveLimit: {x: 0.4, y: 0.8}
 --- !u!1 &479091854704361245
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ namespace Player.Behaviours.HealthSystem
 {
     public interface IGettingDamage
     {
-        void Damage(float damage, bool disableAnimation = false);
+        void Damage(float damage, DamageType damageType, bool disableAnimation = false);
     }
 
     public class HealthBehaviour : MonoBehaviour, IGettingDamage
@@ -18,7 +18,7 @@ namespace Player.Behaviours.HealthSystem
         [SerializeField] private bool _invulnerability;
         [SerializeField] private float _invulnerabilityDuration;
         
-        public Action OnTakeDamage;
+        public Action<DamageType> OnTakeDamage;
         public Action OnDeath;
         public Action OnHeal;
         
@@ -34,7 +34,7 @@ namespace Player.Behaviours.HealthSystem
             _currentHealth = _maxHealth;
         }
 
-        public void Damage(float damage, bool disableAnimation = false)
+        public void Damage(float damage, DamageType damageType, bool disableAnimation = false)
         {
             if (_isDead || _isInvulnerability) return;
             
@@ -50,7 +50,7 @@ namespace Player.Behaviours.HealthSystem
             }
             else
             {
-                Damage(disableAnimation);
+                Damage(disableAnimation, damageType);
             }
         }
 
@@ -65,14 +65,14 @@ namespace Player.Behaviours.HealthSystem
             _isDead = true;
         }
 
-        private void Damage(bool disableAnimation)
+        private void Damage(bool disableAnimation, DamageType damageType)
         {
             if (!string.IsNullOrEmpty(_takeDamageAnimationKey) && !disableAnimation)
             {
                 _animator.SetTrigger(Animator.StringToHash(_takeDamageAnimationKey));
             }
                 
-            OnTakeDamage?.Invoke();
+            OnTakeDamage?.Invoke(damageType);
 
             if (_invulnerability)
             {
@@ -102,5 +102,11 @@ namespace Player.Behaviours.HealthSystem
             yield return new WaitForSeconds(_invulnerabilityDuration);
             _isInvulnerability = false;
         }
+    }
+
+    public enum DamageType
+    {
+        Melee,
+        Light
     }
 }

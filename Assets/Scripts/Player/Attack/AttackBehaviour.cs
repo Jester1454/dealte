@@ -80,7 +80,7 @@ namespace Player.Behaviours.AttackSystem
 			
 			if (gettingDamage != null && gettingDamage != _thisGettingDamage && !_filterObject.Contains(gettingDamage))
 			{
-				gettingDamage.Damage(_attackData.Damage);
+				gettingDamage.Damage(_attackData.Damage, DamageType.Melee);
 				_filterObject.Add(gettingDamage);
 			}
 		}

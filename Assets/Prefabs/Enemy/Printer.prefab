@@ -1823,6 +1823,7 @@ GameObject:
   - component: {fileID: 7632480665651800618}
   - component: {fileID: 7632480665651800612}
   - component: {fileID: 7632480665651800615}
+  - component: {fileID: 1096553737296675206}
   m_Layer: 0
   m_Name: Printer
   m_TagString: Untagged
@@ -1931,6 +1932,7 @@ MonoBehaviour:
   _starDamageDelay: 1
   _damageRate: 1
   _damage: 0.1
+  _dissolveAnimation: {fileID: 1096553737296675206}
 --- !u!114 &7632480665651800616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2109,6 +2111,25 @@ MonoBehaviour:
   _updateMode: 0
   _graph: {fileID: 0}
   _blackboard: {fileID: 7632480665651800612}
+--- !u!114 &1096553737296675206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632480665651800614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb24e119a44ced82b6a6bbadd8068e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dissolveMaterial: {fileID: 2100000, guid: 725ac0e0d2bb2f749a47cd64fc2844c6, type: 2}
+  _rendererList:
+  - {fileID: 4079591664516733371}
+  _dissolveColor: {r: 0.91324806, g: 1, b: 0, a: 1}
+  _dissolveIntensity: 5
+  _dissolveChangeColor: 0.4
+  _dissolveLimit: {x: 0.5, y: 0.8}
 --- !u!1 &7718042086995542729
 GameObject:
   m_ObjectHideFlags: 0

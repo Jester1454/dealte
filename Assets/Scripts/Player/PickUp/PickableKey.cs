@@ -17,11 +17,10 @@ namespace Player.PickUp
 		[SerializeField] private LightShowAnimation _light;
 		[SerializeField] private float _throwOffset;
 		[SerializeField] private float _animationDuration;
-		[SerializeField] private bool _canPicUpOnAwake = false;
+		[SerializeField] private bool _canPickUpOnAwake = false;
 		[SerializeField] private Collider _pickUpCollider;
-		
+		[SerializeField] private Rigidbody _rigidbody;
 		private LightShowAnimation _currentLight;
-		private Rigidbody _rigidbody;
 		
 		private bool _canPickUp = false;
 		public Transform Transform => transform;
@@ -29,9 +28,7 @@ namespace Player.PickUp
 
 		private void Awake()
 		{
-			_rigidbody = GetComponent<Rigidbody>();
-			
-			if (_canPicUpOnAwake)
+			if (_canPickUpOnAwake)
 			{
 				StartCoroutine(SetThrowState());
 			}
