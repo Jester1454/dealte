@@ -410,6 +410,18 @@ Transform:
   m_Father: {fileID: 1300857745}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &138455728 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8221842793335651435, guid: 92fb4c686d39bea43901551efe124623,
+    type: 3}
+  m_PrefabInstance: {fileID: 697914168771068433}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dd9836812f6ac418ec92344a3b672b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &140146446
 GameObject:
   m_ObjectHideFlags: 0
@@ -5676,7 +5688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &786036482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5709,7 +5721,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7c1fc3971d2fa24498537dfb77190aa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7886,12 +7898,13 @@ GameObject:
   - component: {fileID: 1065652836}
   - component: {fileID: 1065652835}
   - component: {fileID: 1065652834}
+  - component: {fileID: 1065652838}
   m_Layer: 10
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!65 &1065652834
 BoxCollider:
@@ -7925,7 +7938,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 79abd561aa40dc74ababdb08238a0fa3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7969,6 +7982,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 50
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1065652838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065652833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729dae015ed9408589914780b58c59ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _propertyChangeSpeed: 1
+  _propertyLimit: {x: 2, y: -2}
+  _isDecrease: 1
+  _rendererTarget: {fileID: 1065652835}
+  _propertyName: _CutOffHeight
 --- !u!1 &1093670943
 GameObject:
   m_ObjectHideFlags: 0
@@ -51802,7 +51832,7 @@ PrefabInstance:
     - target: {fileID: 391273224220465383, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 920838710810823593, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
@@ -52899,6 +52929,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.07211572
       objectReference: {fileID: 0}
+    - target: {fileID: 8221842793335651433, guid: 92fb4c686d39bea43901551efe124623,
+        type: 3}
+      propertyPath: _healthBehaviour
+      value: 
+      objectReference: {fileID: 138455728}
     - target: {fileID: 8221842793335651438, guid: 92fb4c686d39bea43901551efe124623,
         type: 3}
       propertyPath: m_CollisionDetection
