@@ -980,11 +980,9 @@ MonoBehaviour:
   _navMeshAgent: {fileID: 6305592772605519415}
   _collider: {fileID: 6305592772605519417}
   _rigidbody: {fileID: 6305592772605519416}
-  _finalAngle: {x: -18.6, y: 0, z: 0}
+  _finalAngle: {x: 18.6, y: 180, z: 0}
   _finalScale: {x: 1.3, y: 1.3, z: 1.3}
   _animationDuration: 0.5
-  _vibration: 1
-  _elasticity: 0.2
 --- !u!1 &6320870226291823378
 GameObject:
   m_ObjectHideFlags: 0

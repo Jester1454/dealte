@@ -45,7 +45,10 @@ namespace Player.PickUp
 		
 			if (other.CompareTag(_playerTag))
 			{
-				_uiObject.SetActive(true);
+				if (_uiObject != null)
+				{
+					_uiObject.SetActive(true);
+				}
 			}
 		}
 
@@ -56,7 +59,10 @@ namespace Player.PickUp
 		
 			if (other.CompareTag(_playerTag))
 			{
-				_uiObject.SetActive(true);
+				if (_uiObject != null)
+				{
+					_uiObject.SetActive(true);
+				}
 			}
 		}
 
@@ -67,7 +73,8 @@ namespace Player.PickUp
 			
 			if (other.CompareTag(_playerTag))
 			{
-				_uiObject.SetActive(false);
+				if (_uiObject != null)
+					_uiObject.SetActive(false);
 			}
 		}
 		
@@ -75,8 +82,9 @@ namespace Player.PickUp
 		{
 			if (!_canPickUp)
 				return;
+			if (_uiObject != null)
+				_uiObject.SetActive(false);
 			
-			_uiObject.SetActive(false);
 			StartCoroutine(DestroyLight());
 			
 			_rigidbody.velocity = Vector3.zero;

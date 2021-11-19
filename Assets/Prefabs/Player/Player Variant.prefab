@@ -356,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5001045682821785301}
   _characterController: {fileID: 920609973321501663}
-  _lerpMultiplayer: 1.5
+  _lerpMultiplayer: 3
 --- !u!114 &6512548754110210289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,7 +526,7 @@ MonoBehaviour:
   _movementSettings:
     Acceleration: 25
     Decceleration: 1168.57
-    MaxHorizontalSpeed: 9
+    MaxHorizontalSpeed: 13
     MaxWalkSpeed: 4
     IsometricMovement: 1
   _strafeMovementSettings:
@@ -544,8 +544,8 @@ MonoBehaviour:
     MaxPitchAngle: 75
     _useControlRotation: 0
     _orientRotationToMovement: 1
-    MinRotationSpeed: 48000
-    MaxRotationSpeed: 96000
+    MinRotationSpeed: 480
+    MaxRotationSpeed: 960
   _cameraFollowTarget: {fileID: 0}
   _controlRotationSensitivity: 0
   _animator: {fileID: 6019996985025573915}

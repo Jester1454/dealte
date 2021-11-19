@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8309626255382596528}
   - component: {fileID: 5082272792883292289}
   - component: {fileID: 7572717781644935018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6094845139192675295}
   - component: {fileID: 8180881393761123688}
   - component: {fileID: 7796017180574478109}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: key
   m_TagString: LightSavePoint
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 6611551436903794674}
   - component: {fileID: 7890326613241532658}
   - component: {fileID: 6671584785155135284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5560560707286598379}
   - component: {fileID: 2089662599092931059}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PickLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 2855205034335944959}
   - component: {fileID: 5724416715605884010}
   - component: {fileID: 3887751335769614532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 400512322041904334}
   - component: {fileID: 8763219342937081493}
   - component: {fileID: 7699530407463990405}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7699530407463990405
 MonoBehaviour:
   m_ObjectHideFlags: 0

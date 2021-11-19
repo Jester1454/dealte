@@ -12,7 +12,7 @@ namespace Enemy.EnemyStates
 		
 		protected override bool OnCheck()
 		{
-			return Vector3.Distance(agent.position, _sensorySystem.value.VisibleTarget.transform.position) < _distance.value;
+			return _sensorySystem.value.VisibleTarget != null && Vector3.Distance(agent.position, _sensorySystem.value.VisibleTarget.transform.position) < _distance.value;
 		}
 	}
 }

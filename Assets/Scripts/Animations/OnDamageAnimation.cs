@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Player.Behaviours.AttackSystem;
+using Player.Behaviours.HealthSystem;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -11,7 +11,26 @@ namespace Animations
 		[SerializeField] private float _duration;
 		[SerializeField] private Vector3 _vfxVelocityPower;
 		[SerializeField] private float _minimumVelocity;
+		[SerializeField] private HealthBehaviour _healthBehaviour;
+
+		private void OnEnable() 
+		{
+			_healthBehaviour.OnTakeDamage += OnTakeDamage;
+		}
 		
+		private void OnDisable()
+		{
+			_healthBehaviour.OnTakeDamage -= OnTakeDamage;
+		}
+
+		private void OnTakeDamage(DamageType damageType)
+		{
+			if (damageType == DamageType.Melee)
+			{
+				// StartCoroutine(SpawnAnimation(other.ClosestPointOnBounds(transform.position), (other.ClosestPointOnBounds(transform.position)).normalized));
+			}
+		}
+
 		private IEnumerator SpawnAnimation(Vector3 spawnPosition, Vector3 direction)
 		{
 			var currentAnimation = Instantiate(_visualEffect, spawnPosition, Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y), Vector3.up));
@@ -27,17 +46,6 @@ namespace Animations
 			return new Vector3(Mathf.Max(_minimumVelocity, direction.x * _vfxVelocityPower.x),
 				Mathf.Max(_minimumVelocity, direction.y * _vfxVelocityPower.y),
 				Mathf.Max(_minimumVelocity, direction.z * _vfxVelocityPower.z));
-		}
-		
-
-		private void OnTriggerEnter(Collider other)
-		{
-			var a = other.GetComponent<AttackCollider>();
-
-			if (a != null)
-			{
-				StartCoroutine(SpawnAnimation(other.ClosestPointOnBounds(transform.position), (other.ClosestPointOnBounds(transform.position)).normalized));
-			}
 		}
 	}
 }

@@ -23,6 +23,11 @@ namespace Animations
 		{
 			StartCoroutine(Animation());
 		}
+
+		public IEnumerator PlayCoroutineAnimation()
+		{
+			yield return StartCoroutine(Animation());
+		}
 		
 		private IEnumerator Animation()
 		{

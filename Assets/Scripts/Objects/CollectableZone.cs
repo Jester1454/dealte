@@ -60,7 +60,6 @@ namespace Objects
             if (_occupiedPointData.All(kvp => !kvp.Value))
             {
                 OnFinishCollect?.Invoke();
-                UnityEngine.Debug.LogError("nu vse konchilos huli");
             }
         }
     }
