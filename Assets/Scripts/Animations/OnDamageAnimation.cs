@@ -7,27 +7,17 @@ namespace Animations
 {
 	public class OnDamageAnimation : MonoBehaviour
 	{
+		[SerializeField] private Collider _collider;
 		[SerializeField] private VisualEffect _visualEffect;
 		[SerializeField] private float _duration;
 		[SerializeField] private Vector3 _vfxVelocityPower;
 		[SerializeField] private float _minimumVelocity;
-		[SerializeField] private HealthBehaviour _healthBehaviour;
 
-		private void OnEnable() 
-		{
-			_healthBehaviour.OnTakeDamage += OnTakeDamage;
-		}
-		
-		private void OnDisable()
-		{
-			_healthBehaviour.OnTakeDamage -= OnTakeDamage;
-		}
-
-		private void OnTakeDamage(DamageType damageType)
+		public void PlayAnimation(DamageType damageType, Vector3 senderPosition)
 		{
 			if (damageType == DamageType.Melee)
 			{
-				// StartCoroutine(SpawnAnimation(other.ClosestPointOnBounds(transform.position), (other.ClosestPointOnBounds(transform.position)).normalized));
+				StartCoroutine(SpawnAnimation(_collider.ClosestPointOnBounds(transform.position), (senderPosition - transform.position).normalized));
 			}
 		}
 

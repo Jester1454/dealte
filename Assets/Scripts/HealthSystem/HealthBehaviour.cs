@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using Animations;
 using UnityEngine;
 
 namespace Player.Behaviours.HealthSystem
 {
     public interface IGettingDamage
     {
-        void Damage(float damage, DamageType damageType, bool disableAnimation = false);
+        void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false);
     }
 
     public class HealthBehaviour : MonoBehaviour, IGettingDamage
@@ -17,6 +19,7 @@ namespace Player.Behaviours.HealthSystem
         [SerializeField] private string _takeDamageAnimationKey = "TakeDamage";
         [SerializeField] private bool _invulnerability;
         [SerializeField] private float _invulnerabilityDuration;
+        [SerializeField] private List<OnDamageAnimation> _damageAnimations;
         
         public Action<DamageType> OnTakeDamage;
         public Action OnDeath;
@@ -32,9 +35,10 @@ namespace Player.Behaviours.HealthSystem
         private void Awake()
         {
             _currentHealth = _maxHealth;
+            OnHeal?.Invoke();
         }
 
-        public void Damage(float damage, DamageType damageType, bool disableAnimation = false)
+        public void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false)
         {
             if (_isDead || _isInvulnerability) return;
             
@@ -50,7 +54,7 @@ namespace Player.Behaviours.HealthSystem
             }
             else
             {
-                Damage(disableAnimation, damageType);
+                Damage(disableAnimation, damageType, senderPosition);
             }
         }
 
@@ -65,7 +69,7 @@ namespace Player.Behaviours.HealthSystem
             _isDead = true;
         }
 
-        private void Damage(bool disableAnimation, DamageType damageType)
+        private void Damage(bool disableAnimation, DamageType damageType, Vector3 senderPosition)
         {
             if (!string.IsNullOrEmpty(_takeDamageAnimationKey) && !disableAnimation)
             {
@@ -73,10 +77,21 @@ namespace Player.Behaviours.HealthSystem
             }
                 
             OnTakeDamage?.Invoke(damageType);
-
+            PlayOnDamageAnimations(damageType, senderPosition);
+            
             if (_invulnerability)
             {
                 StartCoroutine(StartInvulnerability());
+            }
+        }
+
+        private void PlayOnDamageAnimations(DamageType damageType, Vector3 senderPosition)
+        {
+            if (_damageAnimations == null) return;
+            
+            foreach (var damageAnimation in _damageAnimations)
+            {
+                damageAnimation.PlayAnimation(damageType, senderPosition);
             }
         }
 

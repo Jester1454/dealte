@@ -462,6 +462,8 @@ MonoBehaviour:
   _takeDamageAnimationKey: TakeDamage
   _invulnerability: 0
   _invulnerabilityDuration: 0
+  _damageAnimations:
+  - {fileID: 8221842793335651433}
 --- !u!114 &8221842793335651434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,12 +494,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a35c4dfd504b39bde60bd03aa5e6c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 8221842793335651439}
   _visualEffect: {fileID: 6851509187530635286, guid: 8aa16ac7bb9043e489661c9a8303b756,
     type: 3}
   _duration: 5
   _vfxVelocityPower: {x: 7, y: 7, z: 7}
   _minimumVelocity: 1
-  _healthBehaviour: {fileID: 8221842793335651435}
 --- !u!114 &8221842793335651432
 MonoBehaviour:
   m_ObjectHideFlags: 0

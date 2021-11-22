@@ -62,27 +62,34 @@ namespace Player.Behaviours.AttackSystem
 			_hitBoxEnable = true;
 		}
 
-		public void OnUpdate(Transform transform)
+		public int OnUpdate(Transform transform)
 		{
-			if (!_hitBoxEnable) return;
+			if (!_hitBoxEnable) return 0;
 
 			var inHitBox = _attackData.HitBox.GetHits(transform.position, transform.forward);
 
+			var hintCount = 0;
 			foreach (var hit in inHitBox)
 			{
-				Damage(hit);
+				var isHit = Damage(hit);
+				if (isHit) hintCount++;
 			}
+
+			return hintCount;
 		}
 		
-		private void Damage(GameObject hitObject)
+		private bool Damage(GameObject hitObject)
 		{
 			var gettingDamage = hitObject.GetComponent<IGettingDamage>();
 			
 			if (gettingDamage != null && gettingDamage != _thisGettingDamage && !_filterObject.Contains(gettingDamage))
 			{
-				gettingDamage.Damage(_attackData.Damage, DamageType.Melee);
+				gettingDamage.Damage(_attackData.Damage, DamageType.Melee, _mono.transform.position);
 				_filterObject.Add(gettingDamage);
+				return true;
 			}
+
+			return false;
 		}
 
 		private IEnumerator PlayVFX(Transform transform)

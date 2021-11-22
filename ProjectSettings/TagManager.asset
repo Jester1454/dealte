@@ -6,11 +6,12 @@ TagManager:
   tags:
   - PickableWeapon
   - LightSavePoint
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullets
   - Water
   - UI
   - Enemy

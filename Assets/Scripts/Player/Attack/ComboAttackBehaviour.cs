@@ -12,7 +12,8 @@ namespace Player.Behaviours.AttackSystem
 		[SerializeField] private Animator _animator;
 		[SerializeField] private AnimatorEvents _animatorEvents;
 		[SerializeField] private List<AttackData> _attacksData;
-
+		[SerializeField] private AimCursor _aimCursor;
+		
 		private readonly List<AttackBehaviour> _attackBehaviours = new List<AttackBehaviour>();
 		private bool _isEnable = false;
 		private IGettingDamage _thisGettingDamage;
@@ -20,6 +21,7 @@ namespace Player.Behaviours.AttackSystem
 		private AttackBehaviour CurrentAttackBehaviour => _attackBehaviours[_currentAttackBehaviourIndex];
 
 		public Action OnFinish;
+		public Action<int> OnEnemyDamage;
 		private bool _transactionToNextAttack = false;
 		private bool _isFinish = true;
 		
@@ -42,7 +44,11 @@ namespace Player.Behaviours.AttackSystem
 			if (!_isEnable) return;
 			if (_currentAttackBehaviourIndex == -1) return;
 			
-			CurrentAttackBehaviour.OnUpdate(transform);
+			var hitCount = CurrentAttackBehaviour.OnUpdate(transform);
+			if (hitCount > 0)
+			{
+				OnEnemyDamage?.Invoke(hitCount);
+			}
 		}
 
 		private void OnAttackFinish()
@@ -61,8 +67,11 @@ namespace Player.Behaviours.AttackSystem
 		private void TransactionToNextAttack()
 		{
 			_currentAttackBehaviourIndex++;
+			
+			StartCoroutine(FastRotateToCursorDirection());
 			CurrentAttackBehaviour.Start(transform);
 			CurrentAttackBehaviour.OnFinish += OnAttackFinish;
+
 			_transactionToNextAttack = false;
 		}
 
@@ -115,9 +124,25 @@ namespace Player.Behaviours.AttackSystem
 		{
 			_currentAttackBehaviourIndex = 0;
 			_animator.SetTrigger(CurrentAttackBehaviour.AttackData.AnimatorKey);
+			
+			StartCoroutine(FastRotateToCursorDirection());
 			CurrentAttackBehaviour.Start(transform);
 			CurrentAttackBehaviour.OnFinish += OnAttackFinish;
+
 			_isFinish = false;
+		}
+		
+		
+		private IEnumerator FastRotateToCursorDirection()
+		{
+			if (_aimCursor != null && _aimCursor.ShowAimCursor)
+			{
+				var dir = _aimCursor.CursorPosition - transform.position;
+				_animator.applyRootMotion = false;
+				transform.rotation = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z), Vector3.up);
+				yield return new WaitForEndOfFrame();
+				_animator.applyRootMotion = true;
+			}
 		}
 
 		public void Enable()

@@ -119,7 +119,7 @@ namespace Player
 			
 			while (_isTakingDamage)
 			{
-				_healthBehaviour.Damage(_damage, DamageType.Light, true);
+				_healthBehaviour.Damage(_damage, DamageType.Light, transform.position, true);
 				yield return rate;
 			}
 		}
