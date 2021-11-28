@@ -14,13 +14,13 @@ namespace Player.PickUp
 	{
 		[SerializeField] private GameObject _uiObject;
 		[SerializeField] private string _playerTag;
-		[SerializeField] private LightShowAnimation _light;
+		[SerializeField] private SavePointShowAnimation _savePoint;
 		[SerializeField] private float _throwOffset;
 		[SerializeField] private float _animationDuration;
 		[SerializeField] private bool _canPickUpOnAwake = false;
 		[SerializeField] private Collider _pickUpCollider;
 		[SerializeField] private Rigidbody _rigidbody;
-		private LightShowAnimation _currentLight;
+		private SavePointShowAnimation _currentSavePoint;
 		
 		private bool _canPickUp = false;
 		public Transform Transform => transform;
@@ -94,9 +94,9 @@ namespace Player.PickUp
 
 		private IEnumerator DestroyLight()
 		{
-			_currentLight.transform.SetParent(null);
-			yield return StartCoroutine(_currentLight.Hide(_animationDuration));
-			Destroy(_currentLight.gameObject);
+			_currentSavePoint.transform.SetParent(null);
+			yield return StartCoroutine(_currentSavePoint.Hide(_animationDuration));
+			Destroy(_currentSavePoint.gameObject);
 		}
 
 		public void SetPickUpStatus(bool value)
@@ -137,10 +137,10 @@ namespace Player.PickUp
 			yield return new WaitForFixedUpdate();
 			
 			transform.rotation = Quaternion.identity;
-			_currentLight = Instantiate(_light, transform.position, Quaternion.Euler(90, 0, 0), transform);
+			_currentSavePoint = Instantiate(_savePoint, transform.position, Quaternion.Euler(90, 0, 0), transform);
 			
-			StartCoroutine(_currentLight.Show(_animationDuration));
-			transform.DOMove(_currentLight.transform.position + new Vector3(0, _throwOffset, 0), _animationDuration, true)
+			StartCoroutine(_currentSavePoint.Show(_animationDuration));
+			transform.DOMove(_currentSavePoint.transform.position + new Vector3(0, _throwOffset, 0), _animationDuration, true)
 			.onComplete += () =>
 			{
 				SetPickUpStatus(true);

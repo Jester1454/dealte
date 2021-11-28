@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Animations;
+using Objects;
 using Player.Behaviours.HealthSystem;
 using UnityEngine;
 
@@ -8,7 +9,6 @@ namespace Enemy
 	public class DamagePointBehaviour : MonoBehaviour
 	{
 		[SerializeField] private HealthBehaviour _healthBehaviour;
-		[SerializeField] private string _savePointTag;
 		[SerializeField] private float _starDamageDelay = 1f;
 		[SerializeField] private float _damageRate = 0.5f;
 		[SerializeField] private float _damage = 0.1f;
@@ -19,7 +19,7 @@ namespace Enemy
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.CompareTag(_savePointTag))
+			if (other.GetComponent<ISavePoint>() != null)
 			{
 				StartDamage();
 			}
@@ -27,7 +27,7 @@ namespace Enemy
 
 		private void OnTriggerStay(Collider other)
 		{
-			if (other.CompareTag(_savePointTag))
+			if (other.GetComponent<ISavePoint>() != null)
 			{
 				StartDamage();
 			}
@@ -35,7 +35,7 @@ namespace Enemy
 
 		private void OnTriggerExit(Collider other)
 		{
-			if (other.CompareTag(_savePointTag))
+			if (other.GetComponent<ISavePoint>() != null)
 			{
 				StopDamage();
 			}

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Animations;
+using Objects;
 using Player.Behaviours.HealthSystem;
-using Player.PickUp;
 using UnityEngine;
 
 namespace Player
@@ -9,7 +9,6 @@ namespace Player
 	public class SavePointBehaviour : MonoBehaviour
 	{
 		[SerializeField] private HealthBehaviour _healthBehaviour;
-		[SerializeField] private string _savePointTag;
 		[SerializeField] private float _starDamageDelay = 1f;
 		[SerializeField] private float _damageRate = 0.5f;
 		[SerializeField] private float _damage = 0.1f;
@@ -29,10 +28,7 @@ namespace Player
 			if (_isDisable)
 				return;
 
-			var pickable = other.gameObject.GetComponent<IPickableObject>();
-			if (pickable != null && !pickable.IsActive) return;
-
-			if (other.CompareTag(_savePointTag))
+			if (other.GetComponent<ISavePoint>() != null)
 			{
 				StopDamage();
 				StartHeal();
@@ -43,11 +39,8 @@ namespace Player
 		{
 			if (_isDisable)
 				return;
-		
-			var pickable = other.gameObject.GetComponent<IPickableObject>();
-			if (pickable != null && !pickable.IsActive) return;
-			
-			if (other.CompareTag(_savePointTag))
+
+			if (other.GetComponent<ISavePoint>() != null)
 			{
 				StopDamage();
 				StartHeal();
@@ -59,7 +52,7 @@ namespace Player
 			if (_isDisable)
 				return;
 			
-			if (other.CompareTag(_savePointTag))
+			if (other.GetComponent<ISavePoint>() != null)
 			{
 				StopHeal();
 				StartDamage();

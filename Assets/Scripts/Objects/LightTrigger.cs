@@ -13,9 +13,7 @@ namespace Objects
         
         private void OnTriggerEnter(Collider other)
         {
-            var pickableObject = other.GetComponent<IPickableObject>();
-
-            if (pickableObject != null && pickableObject.IsActive)
+            if (other.GetComponent<ISavePoint>() != null)
             {
                 OnTrigger?.Invoke(_id);
             }
