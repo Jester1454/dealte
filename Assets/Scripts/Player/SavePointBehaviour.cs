@@ -137,6 +137,23 @@ namespace Player
 		public void Enable()
 		{
 			_isDisable = false;
+			CheckCurrentState();
+		}
+
+		private void CheckCurrentState()
+		{
+			var colliders = Physics.OverlapSphere(transform.position, 2f);
+
+			if(colliders == null) return;
+			foreach (var otherCollider in colliders)
+			{
+				if (otherCollider == null) continue;
+				var savePoints = otherCollider.GetComponents<ISavePoint>();
+
+				if (savePoints == null) continue;
+				StartDamage();
+				return;
+			}
 		}
 	}
 }

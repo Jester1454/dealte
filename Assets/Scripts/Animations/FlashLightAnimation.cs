@@ -29,6 +29,7 @@ namespace Animations
                     
                     foreach (var material in materials)
                     {
+                        if (material == null) yield break;
                         material.SetColor(_emissionColor, _flashColor * currentIntensity);
                     }
 				
@@ -46,6 +47,7 @@ namespace Animations
                     
                     foreach (var material in materials)
                     {
+                        if (material == null) yield break;
                         material.SetColor(_emissionColor, _flashColor * currentIntensity);
                     }
 				

@@ -7,7 +7,7 @@ namespace Objects
 		
 	}
 	
-	public class SavePoint : MonoBehaviour
+	public class SavePoint : MonoBehaviour, ISavePoint
 	{
 		
 	}

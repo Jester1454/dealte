@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBehaviour: {fileID: 3263359060465861016}
-  _savePointTag: LightSavePoint
   _starDamageDelay: 1
   _damageRate: 0.5
   _damage: 0.1
@@ -462,7 +461,7 @@ MonoBehaviour:
       _range: 8
       _visibilityLayers:
         serializedVersion: 2
-        m_Bits: 64
+        m_Bits: 4294967295
       _angle: 90
     _animatorKey: Attack
     _idleDuration: 0
@@ -481,7 +480,7 @@ MonoBehaviour:
       _range: 8
       _visibilityLayers:
         serializedVersion: 2
-        m_Bits: 64
+        m_Bits: 4294967295
       _angle: 70
     _animatorKey: ComboAttack1
     _idleDuration: 0.7
@@ -500,7 +499,7 @@ MonoBehaviour:
       _range: 8
       _visibilityLayers:
         serializedVersion: 2
-        m_Bits: 64
+        m_Bits: 4294967295
       _angle: 30
     _animatorKey: ComboAttack2
     _idleDuration: 1.2

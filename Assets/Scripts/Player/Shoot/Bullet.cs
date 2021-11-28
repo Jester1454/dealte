@@ -36,8 +36,17 @@ namespace Player
 			
 			if (Physics.SphereCast(transform.position, _colliderRadius, transform.forward, out var hitInfo, length))
 			{
-				if (hitInfo.collider == null) return;
-				if (hitInfo.collider.isTrigger) return;
+				if (hitInfo.collider == null)
+				{
+					transform.position = newPosition;
+					return;
+				}
+
+				if (hitInfo.collider.isTrigger)
+				{
+					transform.position = newPosition;
+					return;
+				}
 		
 				var other = hitInfo.transform;
 				var takeDamage = other.gameObject.GetComponent<IGettingDamage>();
