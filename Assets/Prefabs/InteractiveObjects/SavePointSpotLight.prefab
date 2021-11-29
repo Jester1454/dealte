@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 692135956406514441}
   - component: {fileID: 692135956406514440}
+  - component: {fileID: 5452804817846965803}
   m_Layer: 0
   m_Name: SavePointSpotLight
   m_TagString: Untagged
@@ -54,6 +55,21 @@ MonoBehaviour:
   _timerDuration: 0
   _showOnAwake: 0
   _defaultAnimationDuration: 2
+--- !u!114 &5452804817846965803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692135956406514443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7d09503ad849838b6dfc2c8dff8238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trigger: {fileID: 0}
+  _savePointShowAnimation: {fileID: 692135956406514440}
+  _animationDuration: 2
 --- !u!1 &692135956821235504
 GameObject:
   m_ObjectHideFlags: 0

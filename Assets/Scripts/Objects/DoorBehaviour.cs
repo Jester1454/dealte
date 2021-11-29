@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DoorBehaviour : MonoBehaviour
 {
-	[SerializeField] private List<LightTrigger> _triggers;
+	[SerializeField] private List<Trigger> _triggers;
 	[SerializeField] private List<MaterialPropertyChangeAnimation> _animations;
 	[SerializeField] private List<Collider> _colliders;
 	private readonly Dictionary<int, bool> _activatedTriggers = new Dictionary<int, bool>();

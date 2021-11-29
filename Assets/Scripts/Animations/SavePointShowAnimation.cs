@@ -12,31 +12,16 @@ namespace Utils
 		[SerializeField] private Collider _savePointCollider;
 		[SerializeField] private bool _needTimer;
 		[SerializeField] private float _timerDuration;
-		[SerializeField] private bool _showOnAwake;
-		[SerializeField] private float _defaultAnimationDuration;
 		
 		private bool _isShowing = false;
-
-		private void Awake()
-		{
-			if (_showOnAwake)
-			{
-				StartCoroutine(Show(_defaultAnimationDuration));
-			}
-		}
-
-		public IEnumerator Show()
-		{
-			yield return Show(_defaultAnimationDuration);
-		}
-
+		private float _startHeight;
 		public IEnumerator Show(float duration)
 		{
 			if (_isShowing) yield break;
 			
 			_isShowing = true;
 			_savePointCollider.enabled = true;
-
+			_startHeight = transform.position.y;
 			transform.DOMove(transform.transform.position + new Vector3(0, _height, 0), duration);
 			var currentIntensity = _light.intensity;
 			var speed = _targetIntensity / duration;
@@ -61,11 +46,6 @@ namespace Utils
 			StartCoroutine(Hide(hideAnimationDuration));
 		}
 
-		public IEnumerator Hide()
-		{
-			yield return Hide(_defaultAnimationDuration);
-		}
-		
 		public IEnumerator Hide(float duration)
 		{
 			if (!_isShowing) yield break;
@@ -74,6 +54,7 @@ namespace Utils
 			
 			var currentIntensity = _light.intensity;
 			var speed = _targetIntensity / duration;
+			transform.DOMove(transform.transform.position + new Vector3(0, _startHeight, 0), duration);
 
 			while (currentIntensity > 0)
 			{

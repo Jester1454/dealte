@@ -1320,7 +1320,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-139132
+  m_Name: pb_Mesh-2346
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1976,18 +1976,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 321ad56c1c171774a9626de2fb3ff935, type: 3}
---- !u!114 &641894916 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 692135956406514440, guid: f41a52eaeb609f74c85e20dd8be53849,
-    type: 3}
-  m_PrefabInstance: {fileID: 1542274266}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0473130b649f48b68d3acfdf131b9256, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &651013634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,7 +2085,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-139676
+  m_Name: pb_Mesh-2892
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2294,10 +2282,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 667178733}
-  - component: {fileID: 667178735}
   - component: {fileID: 667178734}
   - component: {fileID: 667178731}
   - component: {fileID: 667178730}
+  - component: {fileID: 667178732}
   m_Layer: 0
   m_Name: LightTrigger
   m_TagString: Untagged
@@ -2354,6 +2342,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &667178732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667178729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da9ade7ee3a41efab6a001a5d7f9325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 1
+  _id: 0
+  _healthBehaviour: {fileID: 0}
 --- !u!4 &667178733
 Transform:
   m_ObjectHideFlags: 0
@@ -2382,19 +2385,6 @@ CapsuleCollider:
   m_Height: 0.73
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &667178735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667178729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d45891dec4185442b8559ba0cecab98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _id: 0
 --- !u!1 &680327971
 GameObject:
   m_ObjectHideFlags: 0
@@ -3133,7 +3123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _triggers:
-  - {fileID: 667178735}
+  - {fileID: 667178732}
   _animations:
   - {fileID: 1146234796}
   _colliders:
@@ -3450,9 +3440,9 @@ GameObject:
   - component: {fileID: 1200800856}
   - component: {fileID: 1200800855}
   - component: {fileID: 1200800859}
-  - component: {fileID: 1200800854}
   - component: {fileID: 1200800861}
   - component: {fileID: 1200800860}
+  - component: {fileID: 1200800854}
   m_Layer: 0
   m_Name: DamageTrigger
   m_TagString: Untagged
@@ -3469,12 +3459,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1200800853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07e4994821cb4f29a321624c129dcd86, type: 3}
+  m_Script: {fileID: 11500000, guid: 3da9ade7ee3a41efab6a001a5d7f9325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 0
+  _id: 0
   _healthBehaviour: {fileID: 1200800859}
-  _savePointShowAnimation: {fileID: 641894916}
-  _animationDuration: 2
 --- !u!65 &1200800855
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4110,6 +4100,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SavePointSpotLight (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5452804817846965803, guid: f41a52eaeb609f74c85e20dd8be53849,
+        type: 3}
+      propertyPath: _trigger
+      value: 
+      objectReference: {fileID: 1200800854}
     - target: {fileID: 8096132399329304752, guid: f41a52eaeb609f74c85e20dd8be53849,
         type: 3}
       propertyPath: m_Mesh
@@ -41291,8 +41286,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 692135956406514440, guid: f41a52eaeb609f74c85e20dd8be53849,
         type: 3}
+      propertyPath: _needTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 692135956406514440, guid: f41a52eaeb609f74c85e20dd8be53849,
+        type: 3}
       propertyPath: _showOnAwake
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 692135956406514440, guid: f41a52eaeb609f74c85e20dd8be53849,
+        type: 3}
+      propertyPath: _timerDuration
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 692135956406514441, guid: f41a52eaeb609f74c85e20dd8be53849,
         type: 3}
@@ -41353,6 +41358,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SavePointSpotLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452804817846965803, guid: f41a52eaeb609f74c85e20dd8be53849,
+        type: 3}
+      propertyPath: _showOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8096132399329304752, guid: f41a52eaeb609f74c85e20dd8be53849,
         type: 3}
