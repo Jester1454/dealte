@@ -15,7 +15,7 @@ namespace Player
 		[SerializeField] private CharacterMovement _characterMovement;
 		[SerializeField] private ComboAttackBehaviour _comboAttackBehaviour;
 		[SerializeField] private DodgeRollBehaviour _dodgeRollBehaviour;
-		[SerializeField] private HealthBehaviour _healthBehaviour;
+		[SerializeField] private PlayerHealthBehaviour _healthBehaviour;
 		[SerializeField] private WakeUpBehavior _wakeUpBehavior;
 		[SerializeField] private PickUpWeaponBehaviour _pickUpWeaponBehaviour;
 		[SerializeField] private SavePointBehaviour _savePointBehaviour;

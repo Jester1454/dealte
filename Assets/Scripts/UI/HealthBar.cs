@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Player.Behaviours.HealthSystem;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +11,7 @@ namespace UI
         [SerializeField] private Image _damageBar;
         [SerializeField] private float _animationDuration = 0.3f;
         
-        private HealthBehaviour _healthBehaviour;
+        private PlayerHealthBehaviour _healthBehaviour;
 
         private void Awake()
         {
@@ -20,7 +19,7 @@ namespace UI
             _damageBar.fillAmount = 0f;
         }
 
-        public void Init(HealthBehaviour healthBehaviour)
+        public void Init(PlayerHealthBehaviour healthBehaviour)
         {
             _healthBehaviour = healthBehaviour;
             _healthBar.fillAmount = GetFillAmount();

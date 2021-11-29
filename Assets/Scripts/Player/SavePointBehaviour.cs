@@ -10,18 +10,23 @@ namespace Player
 	{
 		[SerializeField] private HealthBehaviour _healthBehaviour;
 		[SerializeField] private float _starDamageDelay = 1f;
-		[SerializeField] private float _damageRate = 0.5f;
-		[SerializeField] private float _damage = 0.1f;
+		[SerializeField] private float _timeToDamage = 0.5f;
+		[SerializeField] private float _damage = 1f;
+		[SerializeField] private bool _canHeal;
 		[SerializeField] private float _healRate = 0.5f;
 		[SerializeField] private float _heal = 0.1f;
 		[SerializeField] private float _starHealDelay = 1f;
 		[SerializeField] private DissolveAnimation _dissolveAnimation;
-
+		
 		private bool _isDisable = true;
 		private bool _isTakingDamage;
 		private bool _isHeal;
 		private Coroutine _damageCoroutine;
 		private Coroutine _healCoroutine;
+		private float _currentTimeToDamage;
+
+		public float TimeToDamage => _timeToDamage;
+		public float CurrentTimeToDamage => _currentTimeToDamage;
 
 		private void OnTriggerEnter(Collider other)
 		{
@@ -93,8 +98,8 @@ namespace Player
 
 		private void StartHeal()
 		{
-			if (_isHeal)
-				return;
+			if (!_canHeal) return;
+			if (_isHeal) return;
 			
 			_isHeal = true;
 			_healCoroutine = StartCoroutine(Heal());
@@ -103,17 +108,25 @@ namespace Player
 		private IEnumerator Damage()
 		{
 			yield return new WaitForSeconds(_starDamageDelay);
-			var rate = new WaitForSeconds(_damageRate);
-			
+			var rate = new WaitForSeconds(_timeToDamage);
+			_currentTimeToDamage = _timeToDamage;
+
 			if (_dissolveAnimation != null)
 			{
 				_dissolveAnimation.StartAnimation();
 			}
 			
-			while (_isTakingDamage)
+			while (_isTakingDamage && _currentTimeToDamage > 0)
 			{
-				_healthBehaviour.Damage(_damage, DamageType.Light, transform.position, true);
-				yield return rate;
+				_currentTimeToDamage -= Time.deltaTime;
+
+				if (_currentTimeToDamage <= 0 && _isTakingDamage)
+				{
+					_healthBehaviour.Damage(_damage, DamageType.Light, transform.position, true);
+					_currentTimeToDamage = _timeToDamage;
+				}
+				
+				yield return null;
 			}
 		}
 		
@@ -121,7 +134,7 @@ namespace Player
 		{
 			yield return new WaitForSeconds(_starHealDelay);
 			var rate = new WaitForSeconds(_healRate);
-
+			
 			while (!_isTakingDamage)
 			{
 				_healthBehaviour.Heal(_heal);

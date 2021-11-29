@@ -13,21 +13,21 @@ namespace Player.Behaviours.HealthSystem
 
     public class HealthBehaviour : MonoBehaviour, IGettingDamage
     {
-        [SerializeField] private float _maxHealth;
-        [SerializeField] private Animator _animator;
-        [SerializeField] private string _dieAnimationKey = "Die";
-        [SerializeField] private string _takeDamageAnimationKey = "TakeDamage";
-        [SerializeField] private bool _invulnerability;
-        [SerializeField] private float _invulnerabilityDuration;
-        [SerializeField] private List<OnDamageAnimation> _damageAnimations;
+        [SerializeField] protected float _maxHealth;
+        [SerializeField] protected Animator _animator;
+        [SerializeField] protected string _dieAnimationKey = "Die";
+        [SerializeField] protected string _takeDamageAnimationKey = "TakeDamage";
+        [SerializeField] protected bool _invulnerability;
+        [SerializeField] protected float _invulnerabilityDuration;
+        [SerializeField] protected List<OnDamageAnimation> _damageAnimations;
         
         public Action<DamageType> OnTakeDamage;
         public Action OnDeath;
         public Action OnHeal;
         
-        private bool _isDead = false;
-        private float _currentHealth;
-        private bool _isInvulnerability = false;
+        protected bool _isDead = false;
+        protected float _currentHealth;
+        protected bool _isInvulnerability = false;
 
         public float CurrentHealth => _currentHealth;
         public float MaxHealth => _maxHealth;
@@ -38,7 +38,7 @@ namespace Player.Behaviours.HealthSystem
             OnHeal?.Invoke();
         }
 
-        public void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false)
+        public virtual void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false)
         {
             if (_isDead || _isInvulnerability) return;
             
@@ -58,7 +58,7 @@ namespace Player.Behaviours.HealthSystem
             }
         }
 
-        private void Death()
+        protected void Death()
         {
             if (!string.IsNullOrEmpty(_dieAnimationKey))
             {
@@ -69,7 +69,7 @@ namespace Player.Behaviours.HealthSystem
             _isDead = true;
         }
 
-        private void Damage(bool disableAnimation, DamageType damageType, Vector3 senderPosition)
+        protected void Damage(bool disableAnimation, DamageType damageType, Vector3 senderPosition)
         {
             if (!string.IsNullOrEmpty(_takeDamageAnimationKey) && !disableAnimation)
             {
@@ -95,7 +95,7 @@ namespace Player.Behaviours.HealthSystem
             }
         }
 
-        public void Heal(float healValue)
+        public virtual void Heal(float healValue)
         {
             if (Mathf.Approximately(_currentHealth, _maxHealth))
                 return;

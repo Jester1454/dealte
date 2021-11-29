@@ -232,10 +232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a261a9ada6723c44a4a2097b891fff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBehaviour: {fileID: 3263359060465861016}
+  _healthBehaviour: {fileID: 3124699836579088104}
   _starDamageDelay: 1
-  _damageRate: 0.5
+  _timeToDamage: 0.5
   _damage: 0.1
+  _canHeal: 0
   _healRate: 1.5
   _heal: 0.1
   _starHealDelay: 1
@@ -255,7 +256,7 @@ MonoBehaviour:
   _animations:
   - {fileID: 2274915878254113148}
   - {fileID: 8823617930369635237}
-  _healthBehaviour: {fileID: 3263359060465861016}
+  _healthBehaviour: {fileID: 3124699836579088104}
   _duration: 0.5
   _loopsCount: 3
 --- !u!114 &2581664104724016909
@@ -276,25 +277,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _cursorHeight: 1
---- !u!114 &3263359060465861016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787002118026716693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6dd9836812f6ac418ec92344a3b672b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 10
-  _animator: {fileID: 5001045682821785301}
-  _dieAnimationKey: Die
-  _takeDamageAnimationKey: TakeDamage
-  _invulnerability: 1
-  _invulnerabilityDuration: 0.5
-  _damageAnimations: []
 --- !u!114 &3547844994519932687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +398,7 @@ MonoBehaviour:
   _characterMovement: {fileID: 7864310142015151238}
   _comboAttackBehaviour: {fileID: 7699140112683871278}
   _dodgeRollBehaviour: {fileID: 9012469090036572595}
-  _healthBehaviour: {fileID: 3263359060465861016}
+  _healthBehaviour: {fileID: 3124699836579088104}
   _wakeUpBehavior: {fileID: 1236131630855601541}
   _pickUpWeaponBehaviour: {fileID: 6637306531594853732}
   _savePointBehaviour: {fileID: 2070565073528231216}
@@ -588,6 +570,25 @@ MonoBehaviour:
   _animatorEvents: {fileID: 1311767742470368828}
   _hands: {fileID: 7297505340969726710}
   _characterBehaviour: {fileID: 6964517916834939805}
+--- !u!114 &3124699836579088104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787002118026716693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32aed9ab787446369abaa1f9c419e86c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 5
+  _animator: {fileID: 5001045682821785301}
+  _dieAnimationKey: Die
+  _takeDamageAnimationKey: TakeDamage
+  _invulnerability: 1
+  _invulnerabilityDuration: 0.5
+  _damageAnimations: []
 --- !u!114 &2274915878254113148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +602,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 192636943620736534}
+  _targetIntensity: 5
+  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
+--- !u!114 &8823617930369635237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478531243913567011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesh: {fileID: 4693415449183331167}
   _targetIntensity: 5
   _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1 &2662582852354578967
@@ -870,21 +886,6 @@ Transform:
   m_Father: {fileID: 6706897239067255589}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &8823617930369635237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478531243913567011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179a652ab0b6aeb4791187ffc1890d51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mesh: {fileID: 4693415449183331167}
-  _targetIntensity: 5
-  _flashColor: {r: 0.284, g: 0.097792454, b: 0.097792454, a: 1}
 --- !u!1001 &1445054205329365828
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Player.Behaviours.HealthSystem;
 using UnityEngine;
 
-[RequireComponent(typeof(HealthBehaviour))]
+[RequireComponent(typeof(PlayerHealthBehaviour))]
 public class ShakeCameraOnDamage : MonoBehaviour
 {
 	[SerializeField] private List<ShakeDamageData> _shakeDamageDatas;
