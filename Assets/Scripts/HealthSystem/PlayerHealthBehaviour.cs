@@ -8,12 +8,6 @@ namespace Player.Behaviours.HealthSystem
 {
 	public class PlayerHealthBehaviour : HealthBehaviour
 	{
-		private void Awake()
-		{
-			_currentHealth = _maxHealth;
-			OnHeal?.Invoke();
-		}
-
 		public override void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false)
 		{
 			if (_isDead || _isInvulnerability) return;
@@ -30,7 +24,7 @@ namespace Player.Behaviours.HealthSystem
 			}
 			else
 			{
-				Damage(disableAnimation, damageType, senderPosition);
+				Damage(damage, disableAnimation, damageType, senderPosition);
 			}
 		}
 
@@ -38,7 +32,8 @@ namespace Player.Behaviours.HealthSystem
 		{
 			if (Mathf.Approximately(_currentHealth, _maxHealth))
 				return;
-            
+			
+			healValue = Mathf.FloorToInt(healValue);
 			if (healValue + _currentHealth > _maxHealth)
 			{
 				_currentHealth = _maxHealth;
@@ -47,7 +42,7 @@ namespace Player.Behaviours.HealthSystem
 			{
 				_currentHealth += healValue;
 			}
-			OnHeal?.Invoke();
+			OnHeal?.Invoke(healValue);
 		}
 	}
 }

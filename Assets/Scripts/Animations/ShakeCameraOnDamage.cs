@@ -16,7 +16,7 @@ public class ShakeCameraOnDamage : MonoBehaviour
 		_healthBehaviour.OnTakeDamage += OnTakeDamage;
 	}
 
-	private void OnTakeDamage(DamageType damageType)
+	private void OnTakeDamage(float damage, DamageType damageType)
 	{
 		var data = _shakeDamageDatas.Find(x => x.DamageType == damageType);
 		CinemachineCameraShaker.Instance.ShakeCamera(data.ShakeDuration, data.Amplitude, data.Frequency);

@@ -1,60 +1,76 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Player;
 using Player.Behaviours.HealthSystem;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
     public class HealthBar : MonoBehaviour
     {
-        [SerializeField] private Image _healthBar;
-        [SerializeField] private Image _damageBar;
-        [SerializeField] private float _animationDuration = 0.3f;
-        
+        [SerializeField] private HealthSegment _segment;
+        [SerializeField] private Transform _parent;
+        private readonly List<HealthSegment> _healthSegments = new List<HealthSegment>();
         private PlayerHealthBehaviour _healthBehaviour;
+        private SavePointBehaviour _savePointBehaviour;
 
-        private void Awake()
-        {
-            _healthBar.fillAmount = 0f;
-            _damageBar.fillAmount = 0f;
-        }
-
-        public void Init(PlayerHealthBehaviour healthBehaviour)
+        public void Init(PlayerHealthBehaviour healthBehaviour, SavePointBehaviour savePointBehaviour)
         {
             _healthBehaviour = healthBehaviour;
-            _healthBar.fillAmount = GetFillAmount();
-            _damageBar.fillAmount = GetFillAmount();
-            _healthBehaviour = healthBehaviour;
-            _healthBehaviour.OnTakeDamage += OnTakeDamage;
+            _savePointBehaviour = savePointBehaviour;
+            _healthBehaviour.OnTakeDamage += OnDamage;
             _healthBehaviour.OnHeal += OnHeal;
-        }
 
-        private void OnHeal()
-        {
-            _damageBar.fillAmount = GetFillAmount();
-
-            _healthBar.DOFillAmount(GetFillAmount(), _animationDuration);
-        }
-
-        private void OnTakeDamage(DamageType damageType)
-        {
-            _healthBar.fillAmount = GetFillAmount();
-            _damageBar.DOFade(0, _animationDuration).onComplete += () =>
+            for (int i = 0; i < _healthBehaviour.MaxHealth; i++)
             {
-                _damageBar.fillAmount = GetFillAmount();
-                var color = _damageBar.color;
-                _damageBar.color = new Color(color.r, color.g, color.b, 1f);;
-            };
+                var segment = Instantiate(_segment, _parent);
+                segment.Heal();
+                _healthSegments.Add(segment);
+            }
         }
 
-        private float GetFillAmount()
+        private void Update()
         {
-            return _healthBehaviour.CurrentHealth / _healthBehaviour.MaxHealth;
+            if (_savePointBehaviour.CurrentTimeToDamage <= _savePointBehaviour.TimeToDamage)
+            {
+               var segment = _healthSegments.LastOrDefault(x => x.IsFull);
+               if (segment != null)
+               {
+                   segment.UpdateFill(_savePointBehaviour.CurrentTimeToDamage / _savePointBehaviour.TimeToDamage);
+               }
+            }
+        }
+
+        private void OnHeal(float healValue)
+        {
+            var segmentCount = Mathf.CeilToInt(healValue);
+            foreach (var segment in _healthSegments)
+            {
+                if (segment.IsFull) continue;
+            
+                segment.Heal();
+                segmentCount--;
+                if(segmentCount <= 0) return;
+            }
+        }
+
+        private void OnDamage(float damage, DamageType type)
+        {
+            var segmentCount = Mathf.CeilToInt(damage);
+            for (var i = _healthSegments.Count - 1; i >= 0; i--)
+            {
+                var segment = _healthSegments[i];
+                if (!segment.IsFull) continue;
+
+                segment.Damage();
+                segmentCount--;
+                if (segmentCount <= 0) return;
+            }
         }
 
         private void OnDisable()
         {
-            _healthBehaviour.OnTakeDamage -= OnTakeDamage;
+            _healthBehaviour.OnTakeDamage -= OnDamage;
             _healthBehaviour.OnHeal -= OnHeal;
         }
     }

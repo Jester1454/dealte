@@ -26,7 +26,7 @@ namespace Animations
 			}
 		}
 
-		private void OnTakeDamage(DamageType damageType)
+		private void OnTakeDamage(float damage, DamageType damageType)
 		{
 			if (damageType == DamageType.Melee)
 			{

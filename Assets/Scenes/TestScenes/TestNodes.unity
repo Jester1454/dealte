@@ -42838,6 +42838,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2922413842842082128, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922413842842082128, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922413842842082128, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922413842842082128, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276963760429006544, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276963760429006544, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276963760429006544, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276963760429006544, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174846128454162369, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174846128454162369, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174846128454162369, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174846128454162369, guid: 9faffb7bb319c7a47a56f19e7726e242,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9faffb7bb319c7a47a56f19e7726e242, type: 3}
 --- !u!1001 &6614242285038950747

@@ -163,7 +163,7 @@ namespace Player
 			var healthBar = FindObjectOfType<HealthBar>();
 			if (healthBar != null)
 			{
-				healthBar.Init(_healthBehaviour);
+				healthBar.Init(_healthBehaviour, _savePointBehaviour);
 			}
 		}
 		

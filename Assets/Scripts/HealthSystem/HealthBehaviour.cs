@@ -21,9 +21,9 @@ namespace Player.Behaviours.HealthSystem
         [SerializeField] protected float _invulnerabilityDuration;
         [SerializeField] protected List<OnDamageAnimation> _damageAnimations;
         
-        public Action<DamageType> OnTakeDamage;
+        public Action<float, DamageType> OnTakeDamage;
         public Action OnDeath;
-        public Action OnHeal;
+        public Action<float> OnHeal;
         
         protected bool _isDead = false;
         protected float _currentHealth;
@@ -35,7 +35,6 @@ namespace Player.Behaviours.HealthSystem
         private void Awake()
         {
             _currentHealth = _maxHealth;
-            OnHeal?.Invoke();
         }
 
         public virtual void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false)
@@ -43,6 +42,7 @@ namespace Player.Behaviours.HealthSystem
             if (_isDead || _isInvulnerability) return;
             
             _currentHealth -= damage;
+
             if (Math.Abs(damage) < Mathf.Epsilon)
             {
                 return;
@@ -54,7 +54,7 @@ namespace Player.Behaviours.HealthSystem
             }
             else
             {
-                Damage(disableAnimation, damageType, senderPosition);
+                Damage(damage, disableAnimation, damageType, senderPosition);
             }
         }
 
@@ -69,14 +69,13 @@ namespace Player.Behaviours.HealthSystem
             _isDead = true;
         }
 
-        protected void Damage(bool disableAnimation, DamageType damageType, Vector3 senderPosition)
+        protected void Damage(float damage, bool disableAnimation, DamageType damageType, Vector3 senderPosition)
         {
             if (!string.IsNullOrEmpty(_takeDamageAnimationKey) && !disableAnimation)
             {
                 _animator.SetTrigger(Animator.StringToHash(_takeDamageAnimationKey));
             }
-                
-            OnTakeDamage?.Invoke(damageType);
+            OnTakeDamage?.Invoke(damage, damageType);
             PlayOnDamageAnimations(damageType, senderPosition);
             
             if (_invulnerability)
@@ -108,7 +107,7 @@ namespace Player.Behaviours.HealthSystem
             {
                 _currentHealth += healValue;
             }
-            OnHeal?.Invoke();
+            OnHeal?.Invoke(healValue);
         }
 
         private IEnumerator StartInvulnerability()

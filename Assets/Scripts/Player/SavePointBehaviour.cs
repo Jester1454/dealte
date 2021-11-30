@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Animations;
 using Objects;
 using Player.Behaviours.HealthSystem;
@@ -27,6 +28,11 @@ namespace Player
 
 		public float TimeToDamage => _timeToDamage;
 		public float CurrentTimeToDamage => _currentTimeToDamage;
+
+		private void Awake()
+		{
+			_currentTimeToDamage = _timeToDamage;
+		}
 
 		private void OnTriggerEnter(Collider other)
 		{
@@ -76,6 +82,8 @@ namespace Player
 		private void StopDamage()
 		{
 			_isTakingDamage = false;
+			_currentTimeToDamage = _timeToDamage;
+
 			if (_damageCoroutine != null)
 			{
 				StopCoroutine(_damageCoroutine);
