@@ -7,11 +7,11 @@ namespace UI
 {
     public class AmmoView : MonoBehaviour
     {
-        [SerializeField] private Image _bulletViewPrefab;
+        [SerializeField] private BulletView _bulletViewPrefab;
         [SerializeField] private Transform _bulletParent;
         
         private ShootBehavior _shootBehavior;
-        private readonly List<GameObject> _bulletsView = new List<GameObject>();
+        private readonly List<BulletView> _bulletsView = new List<BulletView>();
         
         public void Init(ShootBehavior shootBehavior)
         {
@@ -21,7 +21,7 @@ namespace UI
             for (int i = 0; i < _shootBehavior.MaxAmmo; i++)
             {
                 var bullet = Instantiate(_bulletViewPrefab, _bulletParent);
-                _bulletsView.Add(bullet.gameObject);
+                _bulletsView.Add(bullet);
             }
         }
 
@@ -31,7 +31,7 @@ namespace UI
 
             foreach (var bullet in _bulletsView)
             {
-                bullet.gameObject.SetActive(index > 0);
+                bullet.SetActive(index > 0);
                 index--;
             }
         }

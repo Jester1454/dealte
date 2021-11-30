@@ -84,6 +84,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a263ebdc935d83247bd2712b6d84bd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletViewPrefab: {fileID: 3236364164836049597, guid: c7a3e73c63219704280938f6631e7b26,
+  _bulletViewPrefab: {fileID: 6765491977001645420, guid: c7a3e73c63219704280938f6631e7b26,
     type: 3}
   _bulletParent: {fileID: 8585709733128281005}
