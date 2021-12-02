@@ -15,6 +15,7 @@ namespace Player.Behaviours.HealthSystem
     {
         [SerializeField] protected float _maxHealth;
         [SerializeField] protected float _maxLightArmor;
+        [SerializeField] protected bool _lightDamageOnlyforLightArmor;
         [SerializeField] protected Animator _animator;
         [SerializeField] protected string _dieAnimationKey = "Die";
         [SerializeField] protected string _takeDamageAnimationKey = "TakeDamage";
@@ -62,6 +63,8 @@ namespace Player.Behaviours.HealthSystem
             }
             else
             {
+                if (damageType == DamageType.Light && _lightDamageOnlyforLightArmor) return;
+                
                 _currentHealth -= damage;
             }
 
