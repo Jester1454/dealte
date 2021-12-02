@@ -333,7 +333,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 6726395563682238121, guid: c3325f21155868f43b7a935f1d3f78a3,
     type: 3}
   _bulletSpeed: 25
-  _bulletRange: 25
+  _bulletRange: 50
   _timeBetweenShot: 0.2
   _startDelay: 0.2
   _barrel: {fileID: 2301668805769000638}
@@ -341,9 +341,9 @@ MonoBehaviour:
   _scatterX: {x: 0, y: 0}
   _scatterY: {x: 0, y: 0}
   _maxAmmo: 3
-  _shakeDuration: 0
-  _amplitude: 0
-  _frequency: 0
+  _shakeDuration: 0.4
+  _amplitude: 0.1
+  _frequency: 5
 --- !u!114 &6019996985025573915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,12 +466,14 @@ MonoBehaviour:
       _angle: 90
     _animatorKey: Attack
     _idleDuration: 0
+    _needVfx: 1
     _vfxObject: {fileID: 2938086252598602903, guid: 8ad8eb6d6bf60f74098aad05b4e778a4,
       type: 3}
     _vfxPositionOffset: {x: 0, y: 0, z: 0}
     _vfxRotationOffset: {x: -270, y: 0, z: -50}
     _vfxDuration: 0
     _vfxPlayDelay: 0
+    _needShake: 1
     _shakeDuration: 0.4
     _amplitude: 0.1
     _frequency: 5
@@ -485,12 +487,14 @@ MonoBehaviour:
       _angle: 70
     _animatorKey: ComboAttack1
     _idleDuration: 0.7
+    _needVfx: 1
     _vfxObject: {fileID: 2938086252598602903, guid: 8ad8eb6d6bf60f74098aad05b4e778a4,
       type: 3}
     _vfxPositionOffset: {x: 0, y: 0, z: 0}
     _vfxRotationOffset: {x: -90, y: 0, z: 131.42}
     _vfxDuration: 0
     _vfxPlayDelay: 0
+    _needShake: 1
     _shakeDuration: 0.4
     _amplitude: 0.1
     _frequency: 5
@@ -504,12 +508,14 @@ MonoBehaviour:
       _angle: 30
     _animatorKey: ComboAttack2
     _idleDuration: 1.2
+    _needVfx: 1
     _vfxObject: {fileID: 6137934648165198116, guid: ae744bb182234a04d84b0abdc0511276,
       type: 3}
     _vfxPositionOffset: {x: 0, y: 2.5, z: 0}
     _vfxRotationOffset: {x: 0, y: 180, z: 0}
     _vfxDuration: 1
     _vfxPlayDelay: 0.5
+    _needShake: 1
     _shakeDuration: 0.4
     _amplitude: 0.1
     _frequency: 5
@@ -569,10 +575,10 @@ MonoBehaviour:
   _rendererList:
   - {fileID: 192636943620736534}
   - {fileID: 4693415449183331167}
-  _dissolveColor: {r: 1, g: 0.00000024835268, b: 0, a: 1}
+  _dissolveColor: {r: 1, g: 1, b: 1, a: 1}
   _dissolveIntensity: 10
-  _dissolveChangeColor: 0.4
-  _dissolveLimit: {x: 0, y: 0.8}
+  _dissolveChangeColor: 0.5
+  _dissolveLimit: {x: 0.4, y: 0.8}
 --- !u!114 &9012469090036572595
 MonoBehaviour:
   m_ObjectHideFlags: 0

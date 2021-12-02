@@ -8,9 +8,9 @@ namespace Player.Behaviours.AttackSystem
 	[Serializable]
 	public class SegmentHitBox
 	{
-		[SerializeField] private float _range;
-		[SerializeField] private LayerMask _visibilityLayers;
-		[SerializeField] private float _angle;
+		[SerializeField] public float _range;
+		[SerializeField] public LayerMask _visibilityLayers;
+		[SerializeField] public float _angle;
 
 		private readonly Collider[] _colliders = new Collider[50];
 

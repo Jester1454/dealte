@@ -1,4 +1,5 @@
 ﻿using System;
+using Player;
 using Player.Behaviours.HealthSystem;
 using UnityEngine;
 
@@ -36,7 +37,8 @@ namespace Enemy.EnemyBehaviours.SensorySystems
 
 		private void OnTakeDamage(float damage, DamageType damageType)
 		{
-			Scan(true);
+			_targetIsSearched = true;
+			VisibleTarget = FindObjectOfType<CharacterBehaviour>().gameObject;
 		}
 
 		private void Update()

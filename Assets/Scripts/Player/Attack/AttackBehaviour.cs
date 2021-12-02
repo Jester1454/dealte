@@ -38,9 +38,17 @@ namespace Player.Behaviours.AttackSystem
 			_animatorEvents.OnHit += OnHit;
 			_animatorEvents.OnStartAttack += OnEventStartAttack;
 			_filterObject.Clear();
+			
 			_mono.StopCoroutine(PlayVFX(transform));
-			_mono.StartCoroutine(PlayVFX(transform));
-			CinemachineCameraShaker.Instance.ShakeCamera(_attackData.ShakeDuration, _attackData.Amplitude, _attackData.Frequency);
+			if (_attackData.NeedVfx)
+			{
+				_mono.StartCoroutine(PlayVFX(transform));
+			}
+		
+			if (_attackData.NeedShake)
+			{
+				CinemachineCameraShaker.Instance.ShakeCamera(_attackData.ShakeDuration, _attackData.Amplitude, _attackData.Frequency);
+			}
 		}
 
 		private void OnFinishAttack()
@@ -60,6 +68,12 @@ namespace Player.Behaviours.AttackSystem
 		private void OnEventStartAttack()
 		{
 			_hitBoxEnable = true;
+		}
+
+		public void Stop()
+		{
+			_isProcessAttack = false;
+			_hitBoxEnable = false;
 		}
 
 		public int OnUpdate(Transform transform)

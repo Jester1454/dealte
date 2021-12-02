@@ -1,9 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Enemy.EnemyBehaviours.SensorySystems;
 using NodeCanvas.Framework;
-using ParadoxNotion;
 using ParadoxNotion.Design;
+using ParadoxNotion.Services;
 using Player.Behaviours.AttackSystem;
 using Player.Behaviours.HealthSystem;
 using RPGCharacterAnimsFREE;
@@ -15,30 +14,16 @@ namespace Enemy.EnemyStates
 	public class MeleeAttack : ActionTask<Transform>
 	{
 		[RequiredField] public BBParameter<Animator> _animator;
-		[RequiredField] public BBParameter<List<AttackCollider>> _attackColliders;
 		[RequiredField] public BBParameter<SensorySystem> _sensorySystem;
 		[RequiredField] public BBParameter<NavMeshAgent> _agent;
 		[RequiredField] public BBParameter<AnimatorEvents> _animatorEvents;
-		[RequiredField] public BBParameter<string> _attackAnimatorKey;
-		public BBParameter<float> _damage;
+		[RequiredField] public BBParameter<AttackData> _attackData;
+		[RequiredField] public BBParameter<HealthBehaviour> _healthBehaviour;
 		public BBParameter<float> _rotationSpeed;
 		public BBParameter<float> _delayBetweenAttack;
-		public BBParameter<float> _beforeBetweenAttack;
+		public BBParameter<float> _delayBeforeAttack;
 		public BBParameter<Vector3> _offsetRotation;
-
-		private void OnDamage(IGettingDamage gettingDamage)
-		{
-			gettingDamage.Damage(_damage.value, DamageType.Melee, agent.position);
-		}
-
-		private void SetActiveAttackCollider(bool value)
-		{
-			foreach (var attackCollider in _attackColliders.value)
-			{
-				attackCollider.SetActive(value);
-			}
-		}
-
+		private AttackBehaviour _attackBehaviour;
 		protected override void OnExecute()
 		{
 			StartCoroutine(AttackBeforeDelay());
@@ -46,21 +31,15 @@ namespace Enemy.EnemyStates
 
 		private IEnumerator AttackBeforeDelay()
 		{
-			yield return new WaitForSeconds(_beforeBetweenAttack.value);
+			yield return new WaitForSeconds(_delayBeforeAttack.value);
 			Attack();
 		}
 
 		private void StopCurrentAttack()
 		{
-			_animator.value.ResetTrigger(_attackAnimatorKey.value);
-
-			foreach (var attackCollider in _attackColliders.value)
-			{
-				attackCollider.OnDamage -= OnDamage;
-			}
-
-			SetActiveAttackCollider(false);
-			_animatorEvents.value.OnFinishAttack -= OnFinishAttack;
+			_animator.value.ResetTrigger(_attackData.value.AnimatorKey);
+			_attackBehaviour.OnFinish -= OnFinishAttack;
+			_attackBehaviour.Stop();
 		}
 
 		private void OnFinishAttack()
@@ -77,6 +56,7 @@ namespace Enemy.EnemyStates
 
 		protected override void OnUpdate()
 		{
+			_attackBehaviour?.OnUpdate(agent);
 			RotateTowards(_sensorySystem.value.VisibleTarget.transform);
 		}
 
@@ -90,24 +70,26 @@ namespace Enemy.EnemyStates
 
 		private void Attack()
 		{
-			_animatorEvents.value.OnFinishAttack += OnFinishAttack;
-			foreach (var attackCollider in _attackColliders.value)
-			{
-				attackCollider.OnDamage += OnDamage;
-			}
+			_attackBehaviour = new AttackBehaviour(MonoManager.current, _attackData.value, _healthBehaviour.value, _animatorEvents.value);
 
 			if (_agent.value.isOnNavMesh)
 			{
 				_agent.value.isStopped = true;
 			}
-			SetActiveAttackCollider(true);
-
-			_animator.value.SetTrigger(_attackAnimatorKey.value);
+			_attackBehaviour.Start(agent);
+			_attackBehaviour.OnFinish += OnFinishAttack;
+			_animator.value.SetTrigger(_attackData.value.AnimatorKey);
 		}
 
 		protected override void OnStop()
 		{
 			StopCurrentAttack();
+		}
+
+		public override void OnDrawGizmosSelected()
+		{
+			Gizmos.color = _attackData.value.DebugColor;
+			Gizmos.DrawWireMesh(_attackData.value.HitBox.CreateSegmentMesh(), agent.position, agent.rotation);
 		}
 	}
 }
