@@ -14,6 +14,7 @@ namespace Player.Behaviours.HealthSystem
     public class HealthBehaviour : MonoBehaviour, IGettingDamage
     {
         [SerializeField] protected float _maxHealth;
+        [SerializeField] protected float _maxLightArmor;
         [SerializeField] protected Animator _animator;
         [SerializeField] protected string _dieAnimationKey = "Die";
         [SerializeField] protected string _takeDamageAnimationKey = "TakeDamage";
@@ -27,6 +28,7 @@ namespace Player.Behaviours.HealthSystem
         
         protected bool _isDead = false;
         protected float _currentHealth;
+        protected float _currenLightArmor;
         protected bool _isInvulnerability = false;
 
         public float CurrentHealth => _currentHealth;
@@ -35,20 +37,35 @@ namespace Player.Behaviours.HealthSystem
         private void Awake()
         {
             _currentHealth = _maxHealth;
+            _currenLightArmor = _maxLightArmor;
         }
 
         public virtual void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false)
         {
             if (_isDead || _isInvulnerability) return;
             
-            _currentHealth -= damage;
-
             if (Math.Abs(damage) < Mathf.Epsilon)
             {
                 return;
             }
-            
-            if (_currentHealth <= 0)
+
+            if (_currenLightArmor > 0)
+            {
+                if (damageType == DamageType.Light)
+                {
+                    _currenLightArmor -= damage;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                _currentHealth -= damage;
+            }
+
+            if (_currentHealth <= 0 && _currenLightArmor <= 0)
             {
                 Death();
             }
