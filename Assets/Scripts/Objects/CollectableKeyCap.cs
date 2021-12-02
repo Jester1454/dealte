@@ -11,7 +11,6 @@ namespace Objects
 		[SerializeField] private Animator _animator;
 		[SerializeField] private int _index;
 		[SerializeField] private NavMeshAgent _navMeshAgent;
-		[SerializeField] private Collider _collider;
 		[SerializeField] private Rigidbody _rigidbody;
 		[SerializeField] private Vector3 _finalAngle;
 		[SerializeField] private Vector3 _finalScale;
@@ -27,7 +26,6 @@ namespace Objects
 			_animator.Update(0f);
 			_animator.enabled = false;
 			_navMeshAgent.enabled = false;
-			_collider.enabled = false;
 			_rigidbody.detectCollisions = false;
 		
 			transform.DOMove(target.position, _animationDuration);

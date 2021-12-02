@@ -772,13 +772,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6305592772605519418}
-  - component: {fileID: 6305592772605519417}
   - component: {fileID: 6305592772605519416}
   - component: {fileID: 6305592772605519415}
   - component: {fileID: 6305592772605519414}
   - component: {fileID: 6305592772605519413}
   - component: {fileID: 6305592772605519412}
   - component: {fileID: 7278304764473437292}
+  - component: {fileID: 8399580418939420816}
   m_Layer: 0
   m_Name: WalkableKey
   m_TagString: Untagged
@@ -801,20 +801,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6305592772605519417
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6305592772605519411}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &6305592772605519416
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -924,16 +910,14 @@ MonoBehaviour:
   _parentBlackboard: {fileID: 0}
   _serializedBlackboard: '{"_variables":{"Animator":{"_value":1,"_name":"Animator","_id":"ffb8f16d-6662-41cd-9c99-a3d4fe13a319","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Animator,
     UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"Rigidbody":{"_value":2,"_name":"Rigidbody","_id":"d20e307e-5d2c-42fe-b143-b911f9493b8c","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Rigidbody,
-    UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"Collider":{"_value":3,"_name":"Collider","_id":"d7118b0c-3ff7-470f-9246-de3c54c779e2","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Collider,
-    UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"NavMeshAgent":{"_value":4,"_name":"NavMeshAgent","_id":"64187586-3b38-4d4f-a9a1-05bbb8d2e5eb","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.AI.NavMeshAgent,
+    UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"NavMeshAgent":{"_value":3,"_name":"NavMeshAgent","_id":"64187586-3b38-4d4f-a9a1-05bbb8d2e5eb","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.AI.NavMeshAgent,
     UnityEngine.AIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"Sensory
-    System":{"_value":5,"_name":"Sensory System","_id":"b54bad4d-2c45-4df2-966e-a3e3e01cc0f6","$type":"NodeCanvas.Framework.Variable`1[[Enemy.EnemyBehaviours.SensorySystems.SensorySystem,
+    System":{"_value":4,"_name":"Sensory System","_id":"b54bad4d-2c45-4df2-966e-a3e3e01cc0f6","$type":"NodeCanvas.Framework.Variable`1[[Enemy.EnemyBehaviours.SensorySystems.SensorySystem,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
   _objectReferences:
   - {fileID: 0}
   - {fileID: 6660707044751325077}
   - {fileID: 6305592772605519416}
-  - {fileID: 6305592772605519417}
   - {fileID: 6305592772605519415}
   - {fileID: 6305592772605519414}
   _serializedVariables:
@@ -947,11 +931,6 @@ MonoBehaviour:
     _references:
     - {fileID: 0}
     - {fileID: 6305592772605519416}
-  - _json: '{"_value":1,"_name":"Collider","_id":"d7118b0c-3ff7-470f-9246-de3c54c779e2","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Collider,
-      UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
-    _references:
-    - {fileID: 0}
-    - {fileID: 6305592772605519417}
   - _json: '{"_value":1,"_name":"NavMeshAgent","_id":"64187586-3b38-4d4f-a9a1-05bbb8d2e5eb","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.AI.NavMeshAgent,
       UnityEngine.AIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references:
@@ -978,11 +957,23 @@ MonoBehaviour:
   _animator: {fileID: 6660707044751325077}
   _index: 0
   _navMeshAgent: {fileID: 6305592772605519415}
-  _collider: {fileID: 6305592772605519417}
   _rigidbody: {fileID: 6305592772605519416}
   _finalAngle: {x: 18.6, y: 180, z: 0}
   _finalScale: {x: 1.3, y: 1.3, z: 1.3}
   _animationDuration: 0.5
+--- !u!65 &8399580418939420816
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305592772605519411}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6320870226291823378
 GameObject:
   m_ObjectHideFlags: 0
