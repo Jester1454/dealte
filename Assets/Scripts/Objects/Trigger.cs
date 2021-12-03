@@ -86,7 +86,6 @@ namespace Objects
             if (other.GetComponent<CharacterBehaviour>() != null)
             {
                 OnTrigger?.Invoke(_id);
-                UnityEngine.Debug.LogError("ti pidor");
                 _isTriggered = true;
             }
         }
