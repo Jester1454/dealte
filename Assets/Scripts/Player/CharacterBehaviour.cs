@@ -22,6 +22,8 @@ namespace Player
 		[SerializeField] private ShootAimBehaviour _aimBehaviour;
 		[SerializeField] private ShootBehavior _shootBehaviour;
 		[SerializeField] private AimCursor _aimCursor;
+		[SerializeField] private PickUpMedKitBehaviour _pickUpMedKitBehaviour;
+		[SerializeField] private HealBehaviour _healBehaviour;
 		
 		private PlayerControls _playerControls;
 		private Vector2 _cameraInput;
@@ -65,6 +67,7 @@ namespace Player
 			_playerControls.Gameplay.Aim.started += context => StartAiming();
 			_playerControls.Gameplay.Aim.canceled += context => FinishAiming();
 			_playerControls.Gameplay.Shoot.started += context => StartCoroutine(Shoot());
+			_playerControls.Gameplay.Heal.started += context => Heal();
 			
 			if (_currentBehaviourState == CharacterBehaviourState.Rest)
 			{
@@ -80,7 +83,12 @@ namespace Player
 				EnableWeaponBehaviours();
 			}
 		}
-		
+
+		private void Heal()
+		{
+			_healBehaviour.Heal();
+		}
+
 		private void StartAiming()
 		{
 			if (!_aimBehaviour.IsEnable)
@@ -156,6 +164,7 @@ namespace Player
 		{
 			InitHealthBar();
 			InitAmmoBar();
+			InitMedKitView();
 		}
 
 		private void InitHealthBar()
@@ -173,6 +182,15 @@ namespace Player
 			if (ammoView != null)
 			{
 				ammoView.Init(_shootBehaviour);
+			}
+		}
+				
+		private void InitMedKitView()
+		{
+			var ammoView = FindObjectOfType<MedKitView>();
+			if (ammoView != null)
+			{
+				ammoView.Init(_pickUpMedKitBehaviour);
 			}
 		}
 		
@@ -201,6 +219,11 @@ namespace Player
 				_stopMovementInput = true;
 				_pickUpWeaponBehaviour.OnFinishPickUpWeapon += FinishPickUpWeapon;
 				_pickUpWeaponBehaviour.PickUpWeapon();
+			}
+
+			if (_pickUpMedKitBehaviour.IsEnabled)
+			{
+				_pickUpMedKitBehaviour.PickUp();
 			}
 		}
 
@@ -319,6 +342,8 @@ namespace Player
 			_aimBehaviour.Enable();
 			_shootBehaviour.Enable();
 			_savePointBehaviour.Enable();
+			_pickUpMedKitBehaviour.Enable();
+			_healBehaviour.Enable();
 			InitHUD();
 		}
 
@@ -331,6 +356,8 @@ namespace Player
 			_shootBehaviour.Disable();
 			_pickUpWeaponBehaviour.Disable();
 			_savePointBehaviour.Disable();
+			_pickUpMedKitBehaviour.Disable();
+			_healBehaviour.Disable();
 		}
 	}
 

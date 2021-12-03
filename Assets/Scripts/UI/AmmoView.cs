@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using Player;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
     public class AmmoView : MonoBehaviour
     {
-        [SerializeField] private BulletView _bulletViewPrefab;
+        [SerializeField] private TwoStateView _bulletView;
         [SerializeField] private Transform _bulletParent;
         
         private ShootBehavior _shootBehavior;
-        private readonly List<BulletView> _bulletsView = new List<BulletView>();
+        private readonly List<TwoStateView> _bulletsView = new List<TwoStateView>();
         
         public void Init(ShootBehavior shootBehavior)
         {
@@ -20,7 +19,7 @@ namespace UI
 
             for (int i = 0; i < _shootBehavior.MaxAmmo; i++)
             {
-                var bullet = Instantiate(_bulletViewPrefab, _bulletParent);
+                var bullet = Instantiate(_bulletView, _bulletParent);
                 _bulletsView.Add(bullet);
             }
         }

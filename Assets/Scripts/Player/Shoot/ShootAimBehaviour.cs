@@ -83,7 +83,8 @@ namespace Player
 				return;
 			}
 
-			var targetRotation = Quaternion.LookRotation(new Vector3(aimInput.x, 0, aimInput.y), Vector3.up);
+			var targetRotation = Quaternion.
+				LookRotation(new Vector3(aimInput.x, 0, aimInput.y), Vector3.up);
 
 			var newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
 			transform.rotation = newRotation;
