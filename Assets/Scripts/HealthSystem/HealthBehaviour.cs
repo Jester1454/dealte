@@ -80,7 +80,7 @@ namespace Player.Behaviours.HealthSystem
 
         protected void Death()
         {
-            if (!string.IsNullOrEmpty(_dieAnimationKey))
+            if (!string.IsNullOrEmpty(_dieAnimationKey) && _animator != null)
             {
                 _animator.SetTrigger(Animator.StringToHash(_dieAnimationKey));
             }
@@ -91,7 +91,7 @@ namespace Player.Behaviours.HealthSystem
 
         protected void Damage(float damage, bool disableAnimation, DamageType damageType, Vector3 senderPosition)
         {
-            if (!string.IsNullOrEmpty(_takeDamageAnimationKey) && !disableAnimation)
+            if (!string.IsNullOrEmpty(_takeDamageAnimationKey) && !disableAnimation && _animator != null)
             {
                 _animator.SetTrigger(Animator.StringToHash(_takeDamageAnimationKey));
             }
