@@ -21,6 +21,7 @@ namespace Objects
 		{
 			_propertyChangeAnimation.PlayAnimation();
 			transform.DOScale(_scaleTargetAnimation, _animationDuration);
+			Destroy(gameObject, _animationDuration);
 		}
 
 		private void OnDisable()

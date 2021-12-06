@@ -8,6 +8,7 @@ namespace Player.Behaviours.HealthSystem
 {
     public interface IGettingDamage
     {
+        float CurrentHealth { get; }
         void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false);
     }
 
@@ -29,7 +30,7 @@ namespace Player.Behaviours.HealthSystem
         
         protected bool _isDead = false;
         protected float _currentHealth;
-        protected float _currenLightArmor;
+        protected float _currentLightArmor;
         protected bool _isInvulnerability = false;
 
         public float CurrentHealth => _currentHealth;
@@ -38,7 +39,7 @@ namespace Player.Behaviours.HealthSystem
         private void Awake()
         {
             _currentHealth = _maxHealth;
-            _currenLightArmor = _maxLightArmor;
+            _currentLightArmor = _maxLightArmor;
         }
 
         public virtual void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false)
@@ -50,11 +51,11 @@ namespace Player.Behaviours.HealthSystem
                 return;
             }
 
-            if (_currenLightArmor > 0)
+            if (_currentLightArmor > 0)
             {
                 if (damageType == DamageType.Light)
                 {
-                    _currenLightArmor -= damage;
+                    _currentLightArmor -= damage;
                 }
                 else
                 {
@@ -68,7 +69,7 @@ namespace Player.Behaviours.HealthSystem
                 _currentHealth -= damage;
             }
 
-            if (_currentHealth <= 0 && _currenLightArmor <= 0)
+            if (_currentHealth <= 0 && _currentLightArmor <= 0)
             {
                 Death();
             }

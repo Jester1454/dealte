@@ -10,7 +10,8 @@ namespace Animations
 		[SerializeField] private Collider _collider;
 		[SerializeField] private VisualEffect _visualEffect;
 		[SerializeField] private float _duration;
-		[SerializeField] private Vector3 _vfxVelocityPower;
+		[SerializeField] private Vector3 _vfxMinVelocityPower;
+		[SerializeField] private Vector3 _vfxMaxVelocityPower;
 		[SerializeField] private float _minimumVelocity;
 
 		public void PlayAnimation(DamageType damageType, Vector3 senderPosition)
@@ -33,9 +34,9 @@ namespace Animations
 
 		private Vector3 GetVelocity(Vector3 direction)
 		{
-			return new Vector3(Mathf.Max(_minimumVelocity, direction.x * _vfxVelocityPower.x),
-				Mathf.Max(_minimumVelocity, direction.y * _vfxVelocityPower.y),
-				Mathf.Max(_minimumVelocity, direction.z * _vfxVelocityPower.z));
+			return new Vector3(Mathf.Max(_minimumVelocity, direction.x * Random.Range(_vfxMinVelocityPower.x, _vfxMaxVelocityPower.x)),
+				Mathf.Max(_minimumVelocity, Random.Range(_vfxMinVelocityPower.y, _vfxMaxVelocityPower.y)),
+				Mathf.Max(_minimumVelocity, Random.Range(_vfxMinVelocityPower.z, _vfxMaxVelocityPower.z)));
 		}
 	}
 }

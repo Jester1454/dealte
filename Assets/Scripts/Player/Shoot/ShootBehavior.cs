@@ -74,6 +74,8 @@ namespace Player
 		
 		public IEnumerator Shoot(Vector3 aimPosition, bool isPlayer = false)
 		{
+			if (!_isEnable) yield break;
+			
 			if (!CheckCanShoot(isPlayer))
 				yield break;
 

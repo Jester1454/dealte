@@ -96,7 +96,7 @@ namespace Player.Behaviours.AttackSystem
 		{
 			var gettingDamage = hitObject.GetComponent<IGettingDamage>();
 			
-			if (gettingDamage != null && gettingDamage != _thisGettingDamage && !_filterObject.Contains(gettingDamage))
+			if (gettingDamage != null && gettingDamage != _thisGettingDamage && !_filterObject.Contains(gettingDamage) && gettingDamage.CurrentHealth > 0)
 			{
 				gettingDamage.Damage(_attackData.Damage, DamageType.Melee, _mono.transform.position);
 				_filterObject.Add(gettingDamage);

@@ -19,6 +19,7 @@ namespace UI
             _healthBehaviour = healthBehaviour;
             _savePointBehaviour = savePointBehaviour;
             _healthBehaviour.OnTakeDamage += OnDamage;
+            _healthBehaviour.OnDeath += OnDeath;
             _healthBehaviour.OnHeal += OnHeal;
 
             for (int i = 0; i < _healthBehaviour.MaxHealth; i++)
@@ -29,15 +30,23 @@ namespace UI
             }
         }
 
+        private void OnDeath()
+        {
+            foreach (var segment in _healthSegments)
+            {
+                segment.Damage();
+            }
+        }
+
         private void Update()
         {
-            if (_savePointBehaviour.CurrentTimeToDamage <= _savePointBehaviour.TimeToDamage)
+            if (_healthBehaviour.CurrentHealth <= 0) return;
+            if (!(_savePointBehaviour.CurrentTimeToDamage <= _savePointBehaviour.TimeToDamage)) return;
+            
+            var segment = _healthSegments.LastOrDefault(x => x.IsFull);
+            if (segment != null)
             {
-               var segment = _healthSegments.LastOrDefault(x => x.IsFull);
-               if (segment != null)
-               {
-                   segment.UpdateFill(_savePointBehaviour.CurrentTimeToDamage / _savePointBehaviour.TimeToDamage);
-               }
+                segment.UpdateFill(_savePointBehaviour.CurrentTimeToDamage / _savePointBehaviour.TimeToDamage);
             }
         }
 
@@ -70,6 +79,7 @@ namespace UI
         {
             _healthBehaviour.OnTakeDamage -= OnDamage;
             _healthBehaviour.OnHeal -= OnHeal;
+            _healthBehaviour.OnDeath -= OnDeath;
         }
     }
 }

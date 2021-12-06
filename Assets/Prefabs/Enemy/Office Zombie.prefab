@@ -472,7 +472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 5
-  _maxLightArmot: 0
+  _maxLightArmor: 0
+  _lightDamageOnlyforLightArmor: 0
   _animator: {fileID: 6396774571256961063}
   _dieAnimationKey: Die
   _takeDamageAnimationKey: TakeDamage
@@ -514,7 +515,8 @@ MonoBehaviour:
   _visualEffect: {fileID: 6851509187530635286, guid: 8aa16ac7bb9043e489661c9a8303b756,
     type: 3}
   _duration: 5
-  _vfxVelocityPower: {x: 7, y: 7, z: 7}
+  _vfxMinVelocityPower: {x: 4, y: 4, z: 4}
+  _vfxMaxVelocityPower: {x: 8, y: 8, z: 8}
   _minimumVelocity: 1
 --- !u!114 &8221842793335651432
 MonoBehaviour:

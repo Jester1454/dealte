@@ -48,6 +48,14 @@ namespace Player
 			_comboAttackBehaviour.Disable();
 			_dodgeRollBehaviour.Disable();
 			_savePointBehaviour.Disable();
+			_wakeUpBehavior.Disable();
+			_pickUpWeaponBehaviour.Disable();
+			_aimBehaviour.Disable();
+			_shootBehaviour.Disable();
+			_pickUpMedKitBehaviour.Disable();
+			_healBehaviour.Disable();
+			_aimCursor.Disable();
+			_characterMovement.Stop();
 		}
 		
 		private void Awake()
@@ -110,9 +118,6 @@ namespace Player
 
 			if (!_shootBehaviour.IsEnable)
 				return;
-			//
-			// if (_shootBehaviour.CurrentAmmo <= 0)
-			// 	return;
 
 			if (_currentBehaviourState != CharacterBehaviourState.Shoot &&
 			    _currentBehaviourState != CharacterBehaviourState.Movement) return;
@@ -145,7 +150,7 @@ namespace Player
 		
 		private IEnumerator Shoot()
 		{
-			if (_currentBehaviourState == CharacterBehaviourState.Shoot)
+			if (_currentBehaviourState == CharacterBehaviourState.Shoot || _currentBehaviourState == CharacterBehaviourState.Death)
 				yield break;
 			
 			_characterMovement.Stop();
@@ -271,16 +276,9 @@ namespace Player
 			if (!_dodgeRollBehaviour.IsEnable)
 				return;
 			
-			if (_currentBehaviourState == CharacterBehaviourState.DodgeRoll)
+			if (_currentBehaviourState != CharacterBehaviourState.Movement || _currentBehaviourState != CharacterBehaviourState.Aiming)
 				return;
 			
-			if (_currentBehaviourState == CharacterBehaviourState.Shoot)
-				return;
-			if (_currentBehaviourState == CharacterBehaviourState.Attack)
-				return;
-			if (_currentBehaviourState == CharacterBehaviourState.PickUp) 
-				return;
-
 			CancelAiming();
 			_currentBehaviourState = CharacterBehaviourState.DodgeRoll;
 			_dodgeRollBehaviour.MakeDodgeRoll();
@@ -375,6 +373,8 @@ namespace Player
 			_savePointBehaviour.Enable();
 			_pickUpMedKitBehaviour.Enable();
 			_healBehaviour.Enable();
+			_aimCursor.Enable();
+
 			InitHUD();
 		}
 
@@ -389,6 +389,7 @@ namespace Player
 			_savePointBehaviour.Disable();
 			_pickUpMedKitBehaviour.Disable();
 			_healBehaviour.Disable();
+			_aimCursor.Disable();
 		}
 	}
 
