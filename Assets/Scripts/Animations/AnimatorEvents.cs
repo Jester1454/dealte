@@ -23,7 +23,9 @@ namespace RPGCharacterAnimsFREE
         [NonSerialized] public Action OnFinishThrowing;
         [NonSerialized] public Action OnWakeUpFinish;
         [NonSerialized] public Action OnPickUpWeaponFinish;
-
+        public event Action OnFinishMedKitPickUp;
+        public event Action OnHealFinished;
+        
         public void StartAttack()
         {
             OnStartAttack?.Invoke();
@@ -87,6 +89,16 @@ namespace RPGCharacterAnimsFREE
         public void FinishWeaponPickUp()
         {
             OnPickUpWeaponFinish?.Invoke();
+        }
+
+        public void FinishMedKitPickUp()
+        {
+            OnFinishMedKitPickUp?.Invoke();
+        }
+
+        public void FinishHeal()
+        {
+            OnHealFinished?.Invoke();
         }
     }
 }

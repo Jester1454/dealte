@@ -51,6 +51,6 @@ Material:
         a: 1}
     - Color_786a4e07f9df4f88a607f8ab4e31df86: {r: 0, g: 0, b: 0, a: 1}
     - _BaseColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 0}
-    - _EdgeColor: {r: 1.592157, g: 0.4313726, b: 0.4313726, a: 0}
+    - _EdgeColor: {r: 0.7490196, g: 0.20392157, b: 0.20392157, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

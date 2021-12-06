@@ -1,4 +1,5 @@
 ﻿using System;
+using RPGCharacterAnimsFREE;
 using UnityEngine;
 
 namespace Player.PickUp
@@ -7,18 +8,23 @@ namespace Player.PickUp
 	{
 		[SerializeField] private int _maxKitCount;
 		[SerializeField] private Animator _animator;
+		[SerializeField] private AnimatorEvents _animatorEvents;
 		
 		private int _currentKitCount;
 		private IPickableMedKit _currentPickableMedKit;
 		private Vector3 _currentMedKitPosition;
-			private static readonly int _pickUpAnimatorKey = Animator.StringToHash("PickUp");
+		private static readonly int _pickUpAnimatorKey = Animator.StringToHash("PickUp");
 
 		public int CurrentKitCount => _currentKitCount;
 		public int MaxKitCount => _maxKitCount;
 		public event Action OnMedKitCountChanged;
+		public event Action OnPickUpFinish;
 		
 		private bool _isEnabled;
 		public bool IsEnabled => _isEnabled;
+		private bool _isProcessing;
+
+		public bool CanPickUp => !(_isProcessing || !_isEnabled || _currentKitCount >= _maxKitCount || _currentPickableMedKit == null);
 		
 		public void Enable()
 		{
@@ -32,6 +38,8 @@ namespace Player.PickUp
 		
 		private void OnTriggerEnter(Collider other)
 		{
+			if (_isProcessing) return;
+
 			var pickableObject = other.GetComponent<IPickableMedKit>();
 
 			if (pickableObject != null)
@@ -43,6 +51,8 @@ namespace Player.PickUp
     
 		private void OnTriggerExit(Collider other)
 		{
+			if (_isProcessing) return;
+			
 			var pickableObject = other.GetComponent<IPickableMedKit>();
 
 			if (_currentPickableMedKit == pickableObject)
@@ -53,16 +63,23 @@ namespace Player.PickUp
 
 		public void PickUp()
 		{
-			if (!_isEnabled) return;
-			if (_currentKitCount >= _maxKitCount) return;
-			if (_currentPickableMedKit == null) return;
+			if (!CanPickUp) return;
 			
+			_isProcessing = true;
+			_animator.SetTrigger(_pickUpAnimatorKey);
+			transform.rotation = Quaternion.LookRotation(_currentMedKitPosition, Vector3.up);
+			_animatorEvents.OnFinishMedKitPickUp += AnimatorEventsOnOnFinishMedKitPickUp;
+		}
+
+		private void AnimatorEventsOnOnFinishMedKitPickUp()
+		{
 			_currentPickableMedKit.PickUp();
 			_currentPickableMedKit = null;
 			_currentKitCount++;
-			_animator.SetTrigger(_pickUpAnimatorKey);
-			transform.rotation = Quaternion.LookRotation(_currentMedKitPosition, Vector3.up);
 			OnMedKitCountChanged?.Invoke();
+			OnPickUpFinish?.Invoke();
+			_animatorEvents.OnFinishMedKitPickUp -= AnimatorEventsOnOnFinishMedKitPickUp;
+			_isProcessing = false;
 		}
 
 		public void UseHealMedKit()

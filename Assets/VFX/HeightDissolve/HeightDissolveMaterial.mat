@@ -40,7 +40,7 @@ Material:
     - Vector1_73aa22fec824465c96411ead5097d84c: 0
     - Vector1_c2885eec96b84c5e8419b05e72d8c318: 2
     - Vector1_ded4d25209c24dc790c43b087e358eb0: 25
-    - _CutOffHeight: 2
+    - _CutOffHeight: 1.4
     m_Colors:
     - Color_282e1cf572a946bd995b18719d67d1a3: {r: 0.8078432, g: 0.83921576, b: 0.854902,
         a: 1}

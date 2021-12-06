@@ -47,10 +47,16 @@ namespace UI
             foreach (var segment in _healthSegments)
             {
                 if (segment.IsFull) continue;
-            
-                segment.Heal();
-                segmentCount--;
-                if(segmentCount <= 0) return;
+                
+                if (segmentCount <= 0)
+                {
+                    segment.UpdateFill(1);
+                }
+                else
+                {
+                    segment.Heal();
+                    segmentCount--;   
+                }
             }
         }
 

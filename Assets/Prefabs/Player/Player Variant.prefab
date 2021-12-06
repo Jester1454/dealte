@@ -194,6 +194,23 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 2.3, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &522989014647747750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787002118026716693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b78a21f88c246dd9ed755adf4ef82f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pickUpMedKitBehaviour: {fileID: 8819425491925226514}
+  _healthBehaviour: {fileID: 3124699836579088104}
+  _animator: {fileID: 5001045682821785301}
+  _ikHands: {fileID: 7297505340969726710}
+  _animatorEvents: {fileID: 1311767742470368828}
 --- !u!114 &1236131630855601541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,6 +600,21 @@ MonoBehaviour:
   _dissolveIntensity: 10
   _dissolveChangeColor: 0.5
   _dissolveLimit: {x: 0.4, y: 0.8}
+--- !u!114 &8819425491925226514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787002118026716693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5c37bc04324486beebadc986663f87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxKitCount: 3
+  _animator: {fileID: 5001045682821785301}
+  _animatorEvents: {fileID: 1311767742470368828}
 --- !u!114 &9012469090036572595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,34 +631,6 @@ MonoBehaviour:
   _animatorEvents: {fileID: 1311767742470368828}
   _hands: {fileID: 7297505340969726710}
   _characterBehaviour: {fileID: 6964517916834939805}
---- !u!114 &8819425491925226514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787002118026716693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5c37bc04324486beebadc986663f87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxKitCount: 3
-  _animator: {fileID: 5001045682821785301}
---- !u!114 &522989014647747750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787002118026716693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b78a21f88c246dd9ed755adf4ef82f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pickUpMedKitBehaviour: {fileID: 8819425491925226514}
-  _healthBehaviour: {fileID: 3124699836579088104}
 --- !u!114 &2274915878254113148
 MonoBehaviour:
   m_ObjectHideFlags: 0

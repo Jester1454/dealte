@@ -86,7 +86,21 @@ namespace Player
 
 		private void Heal()
 		{
+			if (!_healBehaviour.IsEnabled || !_healBehaviour.CanHeal) return;	
+			if (_currentBehaviourState != CharacterBehaviourState.Movement) return;
+			
+			_stopMovementInput = true;
+			_characterMovement.Stop();
 			_healBehaviour.Heal();
+			_currentBehaviourState = CharacterBehaviourState.Healing;
+			_healBehaviour.OnHealFinish += OnHealFinish;
+		}
+
+		private void OnHealFinish()
+		{
+			_currentBehaviourState = CharacterBehaviourState.Movement;
+			_stopMovementInput = false;
+			_characterMovement.Continue(false);
 		}
 
 		private void StartAiming()
@@ -219,12 +233,25 @@ namespace Player
 				_stopMovementInput = true;
 				_pickUpWeaponBehaviour.OnFinishPickUpWeapon += FinishPickUpWeapon;
 				_pickUpWeaponBehaviour.PickUpWeapon();
+				return;
 			}
 
-			if (_pickUpMedKitBehaviour.IsEnabled)
-			{
-				_pickUpMedKitBehaviour.PickUp();
-			}
+			if (!_pickUpMedKitBehaviour.IsEnabled || _currentBehaviourState != CharacterBehaviourState.Movement || !_pickUpMedKitBehaviour.CanPickUp) return;
+			
+			_currentBehaviourState = CharacterBehaviourState.PickUp;
+			_stopMovementInput = true;
+			_characterMovement.Stop();
+				
+			_pickUpMedKitBehaviour.PickUp();
+			_pickUpMedKitBehaviour.OnPickUpFinish += PickUpMedKitBehaviourOnOnPickUpFinish;
+		}
+
+		private void PickUpMedKitBehaviourOnOnPickUpFinish()
+		{
+			_stopMovementInput = false;
+			_characterMovement.Continue(false);
+			_currentBehaviourState = CharacterBehaviourState.Movement;
+			_pickUpMedKitBehaviour.OnPickUpFinish -= PickUpMedKitBehaviourOnOnPickUpFinish;
 		}
 
 		private void FinishPickUpWeapon()
@@ -251,6 +278,8 @@ namespace Player
 				return;
 			if (_currentBehaviourState == CharacterBehaviourState.Attack)
 				return;
+			if (_currentBehaviourState == CharacterBehaviourState.PickUp) 
+				return;
 
 			CancelAiming();
 			_currentBehaviourState = CharacterBehaviourState.DodgeRoll;
@@ -276,7 +305,9 @@ namespace Player
 			
 			if (_currentBehaviourState == CharacterBehaviourState.Shoot)
 				return;
-			
+			if (_currentBehaviourState == CharacterBehaviourState.PickUp) 
+				return;
+
 			CancelAiming();
 			_currentBehaviourState = CharacterBehaviourState.Attack;
 
@@ -370,5 +401,7 @@ namespace Player
 		Death,
 		Aiming,
 		Shoot,
+		PickUp,
+		Healing
 	}
 }

@@ -33,7 +33,7 @@ namespace UI
             };
         }
 
-        public void UpdateFill(float value) //неправильно, надо реагировать на то, когда это начнется и когда закончится
+        public void UpdateFill(float value)
         {
             _damageBar.fillAmount = 1f;
             _healthBar.fillAmount = value;
