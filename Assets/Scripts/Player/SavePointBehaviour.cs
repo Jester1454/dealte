@@ -32,6 +32,12 @@ namespace Player
 		private void Awake()
 		{
 			_currentTimeToDamage = _timeToDamage;
+			_healthBehaviour.OnHeal += OnHeal;
+		}
+
+		private void OnHeal(float value)
+		{
+			_currentTimeToDamage = _timeToDamage;
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -116,7 +122,6 @@ namespace Player
 		private IEnumerator Damage()
 		{
 			yield return new WaitForSeconds(_starDamageDelay);
-			var rate = new WaitForSeconds(_timeToDamage);
 			_currentTimeToDamage = _timeToDamage;
 
 			if (_dissolveAnimation != null)
@@ -165,7 +170,7 @@ namespace Player
 		{
 			var colliders = Physics.OverlapSphere(transform.position, 2f);
 
-			if(colliders == null) return;
+			if (colliders == null) return;
 			foreach (var otherCollider in colliders)
 			{
 				if (otherCollider == null) continue;
@@ -175,6 +180,12 @@ namespace Player
 				StartDamage();
 				return;
 			}
+		}
+
+
+		private void OnDisable()
+		{
+			_healthBehaviour.OnHeal -= OnHeal;
 		}
 	}
 }

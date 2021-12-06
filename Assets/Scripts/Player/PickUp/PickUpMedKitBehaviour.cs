@@ -69,11 +69,11 @@ namespace Player.PickUp
 			_animator.SetTrigger(_pickUpAnimatorKey);
 			transform.rotation = Quaternion.LookRotation(_currentMedKitPosition, Vector3.up);
 			_animatorEvents.OnFinishMedKitPickUp += AnimatorEventsOnOnFinishMedKitPickUp;
+			_currentPickableMedKit.PickUp();
 		}
 
 		private void AnimatorEventsOnOnFinishMedKitPickUp()
 		{
-			_currentPickableMedKit.PickUp();
 			_currentPickableMedKit = null;
 			_currentKitCount++;
 			OnMedKitCountChanged?.Invoke();

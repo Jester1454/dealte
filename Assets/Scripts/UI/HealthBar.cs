@@ -46,17 +46,9 @@ namespace UI
             var segmentCount = Mathf.CeilToInt(healValue);
             foreach (var segment in _healthSegments)
             {
-                if (segment.IsFull) continue;
-                
-                if (segmentCount <= 0)
-                {
-                    segment.UpdateFill(1);
-                }
-                else
-                {
-                    segment.Heal();
-                    segmentCount--;   
-                }
+                segment.Heal();
+                segmentCount--;
+                if (segmentCount <= 0) return;
             }
         }
 

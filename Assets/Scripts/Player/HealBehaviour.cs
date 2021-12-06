@@ -14,6 +14,8 @@ namespace Player
 		[SerializeField] private Animator _animator;
 		[SerializeField] private IKHands _ikHands;
 		[SerializeField] private AnimatorEvents _animatorEvents;
+		[SerializeField] private GameObject _vfxPrefab;
+		[SerializeField] private float _animationDuration;
 		
 		private static readonly int _healAnimatorKey = Animator.StringToHash("IsHeal");
 		public event Action OnHealFinish;
@@ -44,10 +46,17 @@ namespace Player
 			_pickUpMedKitBehaviour.UseHealMedKit();
 			_healthBehaviour.Heal(_healthBehaviour.MaxHealth);
 			_animator.SetTrigger(_healAnimatorKey);
+			PlayVfx();
 			_ikHands.SetIKOff();
 			_animatorEvents.OnHealFinished += AnimatorEventsOnOnHealFinished;
 		}
 
+		private void PlayVfx()
+		{
+			var vfx = Instantiate(_vfxPrefab, transform);
+			Destroy(vfx, _animationDuration);
+		}
+		
 		private void AnimatorEventsOnOnHealFinished()
 		{
 			_ikHands.SetIKOn();

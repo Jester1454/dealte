@@ -22,7 +22,6 @@ namespace UI
 
         public void Heal()
         {
-            if(_isFull) return;
             _isFull = true;
             
             _damageBar.fillAmount = 0f;
@@ -41,7 +40,7 @@ namespace UI
 
         public void Damage()
         {
-            if(!_isFull) return;
+            if (!_isFull) return;
             
             _isFull = false;
             _healthBar.fillAmount = 0f;
