@@ -16,15 +16,11 @@ namespace Player
 
 		public bool ShowAimCursor => _showAimCursor;
 		public Vector3 CursorPosition => _currentCursor.position;
-		
-		private void Awake()
-		{
-			_playerInput = FindObjectOfType<PlayerInput>();
-			_characterBehaviour = FindObjectOfType<CharacterBehaviour>();
-		}
 
 		public void Enable()
 		{
+			_playerInput = FindObjectOfType<PlayerInput>();
+			_characterBehaviour = FindObjectOfType<CharacterBehaviour>();
 			UpdateShowAimCursorStatus(_playerInput);
 		}
 
@@ -54,7 +50,7 @@ namespace Player
 
 		private void UpdateShowAimCursorStatus(PlayerInput obj)
 		{
-			_showAimCursor = _playerInput.currentControlScheme == _characterBehaviour.PlayerControls.KeyboardAndMouseScheme.name;
+			_showAimCursor = obj.currentControlScheme == _characterBehaviour.PlayerControls.KeyboardAndMouseScheme.name;
 		}
 		
 		private void OnInputDeviceChange(PlayerInput obj)

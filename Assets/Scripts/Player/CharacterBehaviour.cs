@@ -150,7 +150,10 @@ namespace Player
 		
 		private IEnumerator Shoot()
 		{
-			if (_currentBehaviourState == CharacterBehaviourState.Shoot || _currentBehaviourState == CharacterBehaviourState.Death)
+			if (_currentBehaviourState == CharacterBehaviourState.Shoot)
+				yield break;
+			
+			if (_currentBehaviourState == CharacterBehaviourState.Death)
 				yield break;
 			
 			_characterMovement.Stop();
@@ -276,7 +279,7 @@ namespace Player
 			if (!_dodgeRollBehaviour.IsEnable)
 				return;
 			
-			if (_currentBehaviourState != CharacterBehaviourState.Movement || _currentBehaviourState != CharacterBehaviourState.Aiming)
+			if (_currentBehaviourState != CharacterBehaviourState.Movement)
 				return;
 			
 			CancelAiming();
