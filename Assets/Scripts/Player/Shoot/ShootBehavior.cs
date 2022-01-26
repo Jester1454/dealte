@@ -40,6 +40,7 @@ namespace Player
 		private static readonly int _shootAnimationKey = Animator.StringToHash("IsCast");
 
 		public Action CurrentAmmoChanged { get; set; }
+		public Vector3 BarrelPosition => _barrel.position;
 
 		public int CurrentAmmo
 		{
@@ -71,8 +72,8 @@ namespace Player
 		{
 			CurrentAmmo = _maxAmmo;
 		}
-		
-		public IEnumerator Shoot(Vector3 aimPosition, bool isPlayer = false)
+
+		public IEnumerator Shoot(Vector3 aimPosition, bool isPlayer = false, Vector3? endPosition = null)
 		{
 			if (!_isEnable) yield break;
 			
@@ -89,6 +90,11 @@ namespace Player
 			
 			_canShoot = false;
 			transform.rotation = Quaternion.LookRotation(new Vector3(aimPosition.x, 0, aimPosition.z), Vector3.up);
+
+			if (endPosition.HasValue)
+			{
+				aimPosition = endPosition.Value - _barrel.position;
+			}
 
 			var bullet = Instantiate(_bulletPrefab, _barrel.position, Quaternion.identity);
 			

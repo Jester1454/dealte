@@ -162,7 +162,7 @@ namespace Player
 			if (_aimCursor.ShowAimCursor)
 			{
 				_currentBehaviourState = CharacterBehaviourState.Shoot;
-				yield return _shootBehaviour.Shoot(_aimCursor.CursorPosition - transform.position, true);
+				yield return _shootBehaviour.Shoot(_aimCursor.CursorPosition - transform.position, true, _aimCursor.CursorPosition);
 			}
 			else
 			{
