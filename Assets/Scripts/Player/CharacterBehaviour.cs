@@ -24,7 +24,7 @@ namespace Player
 		[SerializeField] private AimCursor _aimCursor;
 		[SerializeField] private PickUpMedKitBehaviour _pickUpMedKitBehaviour;
 		[SerializeField] private HealBehaviour _healBehaviour;
-		
+		[SerializeField] private RestoreAmmoBehaviour _restoreAmmoBehaviour;
 		private PlayerControls _playerControls;
 		private Vector2 _cameraInput;
 		private Vector2 _moveInput;
@@ -52,6 +52,7 @@ namespace Player
 			_pickUpWeaponBehaviour.Disable();
 			_aimBehaviour.Disable();
 			_shootBehaviour.Disable();
+			_restoreAmmoBehaviour.Disable();
 			_pickUpMedKitBehaviour.Disable();
 			_healBehaviour.Disable();
 			_aimCursor.Disable();
@@ -162,7 +163,7 @@ namespace Player
 			if (_aimCursor.ShowAimCursor)
 			{
 				_currentBehaviourState = CharacterBehaviourState.Shoot;
-				yield return _shootBehaviour.Shoot(_aimCursor.CursorPosition - transform.position, true, _aimCursor.CursorPosition);
+				yield return _shootBehaviour.Shoot(_aimCursor.CursorPosition - transform.position, true, false, _aimCursor.CursorPosition);
 			}
 			else
 			{
@@ -373,6 +374,7 @@ namespace Player
 			_dodgeRollBehaviour.Enable();
 			_aimBehaviour.Enable();
 			_shootBehaviour.Enable();
+			_restoreAmmoBehaviour.Enable();
 			_savePointBehaviour.Enable();
 			_pickUpMedKitBehaviour.Enable();
 			_healBehaviour.Enable();
@@ -388,6 +390,7 @@ namespace Player
 			_dodgeRollBehaviour.Disable();
 			_aimBehaviour.Disable();
 			_shootBehaviour.Disable();
+			_restoreAmmoBehaviour.Disable();
 			_pickUpWeaponBehaviour.Disable();
 			_savePointBehaviour.Disable();
 			_pickUpMedKitBehaviour.Disable();

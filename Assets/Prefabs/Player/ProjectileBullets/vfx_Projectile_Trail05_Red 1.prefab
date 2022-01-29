@@ -19899,8 +19899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a635106c2d4441658a67630eb2d068af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colliderRadius: 1
+  _colliderRadius: 1.5
   _animator: {fileID: 1356922577231086272}
+  _side: 0
 --- !u!114 &1356922577231086272
 MonoBehaviour:
   m_ObjectHideFlags: 0

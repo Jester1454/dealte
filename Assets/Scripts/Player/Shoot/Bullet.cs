@@ -10,6 +10,7 @@ namespace Player
 	{
 		[SerializeField] private float _colliderRadius;
 		[SerializeField] private BulletEffectAnimator _animator;
+		[SerializeField] private Side _side = Side.Enemy;
 		
 		private Vector3 _velocity = Vector3.zero;
 		private float _damage;
@@ -50,6 +51,11 @@ namespace Player
 		
 				var other = hitInfo.transform;
 				var takeDamage = other.gameObject.GetComponent<IGettingDamage>();
+				if (takeDamage?.Side == _side)
+				{
+					Destroy(gameObject);
+					return;
+				}
 				takeDamage?.Damage(_damage, DamageType.Melee, transform.position);
 				Destroy(gameObject);
 				

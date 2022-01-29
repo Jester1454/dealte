@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using Player.Animations;
-using Player.Behaviours.AttackSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +8,6 @@ namespace Player
 {
 	public class ShootBehavior : MonoBehaviour
 	{
-		[SerializeField] private ComboAttackBehaviour _attackBehaviour;
 		[SerializeField] private Animator _animator;
 		[SerializeField] private IKHands _ikHands;
 
@@ -45,7 +43,7 @@ namespace Player
 		public int CurrentAmmo
 		{
 			get => _currentAmmo;
-			private set
+			set
 			{
 				_currentAmmo = value > _maxAmmo ? _maxAmmo : value;
 				CurrentAmmoChanged?.Invoke();
@@ -59,13 +57,11 @@ namespace Player
 		public void Enable()
 		{
 			_isEnable = true;
-			_attackBehaviour.OnEnemyDamage += OnEnemyDamage;
 		}
 
 		public void Disable()
 		{
 			_isEnable = false;
-			_attackBehaviour.OnEnemyDamage -= OnEnemyDamage;
 		}
 		
 		private void Start()
@@ -73,7 +69,7 @@ namespace Player
 			CurrentAmmo = _maxAmmo;
 		}
 
-		public IEnumerator Shoot(Vector3 aimPosition, bool isPlayer = false, Vector3? endPosition = null)
+		public IEnumerator Shoot(Vector3 aimPosition, bool isPlayer = false, bool heightConsider = false, Vector3? endPosition = null)
 		{
 			if (!_isEnable) yield break;
 			
@@ -104,7 +100,11 @@ namespace Player
 			}
 			
 			aimPosition += new Vector3(Random.Range(_scatterX.x, _scatterX.y), 0, Random.Range(_scatterY.x, _scatterY.y));
-			aimPosition.y = 0;
+
+			if (!heightConsider)
+			{
+				aimPosition.y = 0;
+			}
 			bullet.StartShot(aimPosition.normalized * _bulletSpeed, _damage);
 			Destroy(bullet.gameObject, _bulletRange / (aimPosition.normalized.magnitude * _bulletSpeed));
 			
@@ -115,18 +115,16 @@ namespace Player
 			
 			yield return StartCoroutine(ShotCooldown());
 		}
-		
-		
-		private void OnEnemyDamage(int hitCount)
-		{
-			CurrentAmmo += hitCount;
-		}
 
 		private IEnumerator ShotCooldown()
 		{
 			yield return new WaitForSeconds(_timeBetweenShot);
 			_canShoot = true;
-			_ikHands.SetIKOn();
+
+			if (_ikHands != null)
+			{
+				_ikHands.SetIKOn();
+			}
 		}
 
 		private bool CheckCanShoot(bool isPlayer)
@@ -149,6 +147,8 @@ namespace Player
 		
 		private void OnDrawGizmos()
 		{
+			if (_barrel == null) return;
+			
 			Gizmos.color = Color.red;
 			Gizmos.DrawWireSphere(_barrel.transform.position, _bulletRange);
 		}

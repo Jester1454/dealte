@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4898927148635826}
   m_Layer: 0
-  m_Name: vfx_Muzzle_Orb01_Red_Mobile
+  m_Name: vfx_Muzzle_Orb01_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

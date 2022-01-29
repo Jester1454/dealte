@@ -6,8 +6,15 @@ using UnityEngine;
 
 namespace Player.Behaviours.HealthSystem
 {
+    public enum Side
+    {
+        Ally,
+        Enemy
+    }
+    
     public interface IGettingDamage
     {
+        Side Side { get; }
         float CurrentHealth { get; }
         void Damage(float damage, DamageType damageType, Vector3 senderPosition, bool disableAnimation = false);
     }
@@ -23,7 +30,7 @@ namespace Player.Behaviours.HealthSystem
         [SerializeField] protected bool _invulnerability;
         [SerializeField] protected float _invulnerabilityDuration;
         [SerializeField] protected List<OnDamageAnimation> _damageAnimations;
-        
+        [SerializeField] private Side _side = Side.Enemy;
         public Action<float, DamageType> OnTakeDamage;
         public Action OnDeath;
         public Action<float> OnHeal;
@@ -33,6 +40,7 @@ namespace Player.Behaviours.HealthSystem
         protected float _currentLightArmor;
         protected bool _isInvulnerability = false;
 
+        public Side Side => _side;
         public float CurrentHealth => _currentHealth;
         public float MaxHealth => _maxHealth;
 

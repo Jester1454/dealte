@@ -13,6 +13,7 @@ namespace UI
         private readonly List<HealthSegment> _healthSegments = new List<HealthSegment>();
         private PlayerHealthBehaviour _healthBehaviour;
         private SavePointBehaviour _savePointBehaviour;
+        private bool _isInit = false;
 
         public void Init(PlayerHealthBehaviour healthBehaviour, SavePointBehaviour savePointBehaviour)
         {
@@ -28,6 +29,8 @@ namespace UI
                 segment.Heal();
                 _healthSegments.Add(segment);
             }
+
+            _isInit = true;
         }
 
         private void OnDeath()
@@ -40,6 +43,8 @@ namespace UI
 
         private void Update()
         {
+            if (!_isInit) return;
+            
             if (_healthBehaviour.CurrentHealth <= 0) return;
             if (!(_savePointBehaviour.CurrentTimeToDamage <= _savePointBehaviour.TimeToDamage)) return;
             

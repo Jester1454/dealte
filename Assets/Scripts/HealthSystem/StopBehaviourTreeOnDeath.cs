@@ -18,7 +18,7 @@ namespace Player.Behaviours.HealthSystem
         {
             var graphOwner = GetComponent<GraphOwner>();
             
-            if(graphOwner != null)
+            if (graphOwner != null)
             {
                 graphOwner.PauseBehaviour();
                 graphOwner.StopBehaviour();   
