@@ -8,7 +8,7 @@ namespace Utils.Grass
 {
 	[RequireComponent(typeof(MeshFilter))]
 	[RequireComponent(typeof(MeshRenderer))]
-	[ExecuteInEditMode]
+	// [ExecuteInEditMode]
 	public class GeometryGrassPainter : MonoBehaviour
 	{
 		private Mesh mesh;

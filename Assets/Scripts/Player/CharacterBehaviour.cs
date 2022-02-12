@@ -217,6 +217,7 @@ namespace Player
 			}
 		}
 		
+		[ContextMenu("Wake Up")]
 		public void WakeUp()
 		{
 			InitHUD();

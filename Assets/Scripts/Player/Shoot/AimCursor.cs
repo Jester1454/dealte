@@ -22,17 +22,13 @@ namespace Player
 			_playerInput = FindObjectOfType<PlayerInput>();
 			_characterBehaviour = FindObjectOfType<CharacterBehaviour>();
 			UpdateShowAimCursorStatus(_playerInput);
+			OnInputDeviceChange(_playerInput);
+			_playerInput.onControlsChanged += OnInputDeviceChange;
 		}
 
 		public void Disable()
 		{
 			_showAimCursor = false;
-		}
-
-		private void Start()
-		{
-			OnInputDeviceChange(_playerInput);
-			_playerInput.onControlsChanged += OnInputDeviceChange;
 		}
 
 		private void Update()
@@ -48,9 +44,11 @@ namespace Player
 			}
 		}
 
-		private void UpdateShowAimCursorStatus(PlayerInput obj)
+		private void UpdateShowAimCursorStatus(PlayerInput input)
 		{
-			_showAimCursor = obj.currentControlScheme == _characterBehaviour.PlayerControls.KeyboardAndMouseScheme.name;
+			if (input == null) return;
+			
+			_showAimCursor = input.currentControlScheme == _characterBehaviour.PlayerControls.KeyboardAndMouseScheme.name;
 		}
 		
 		private void OnInputDeviceChange(PlayerInput obj)
@@ -73,7 +71,7 @@ namespace Player
 			}
 		}
 
-		void OnDisable()
+		private void OnDisable()
 		{
 			_playerInput.onControlsChanged -= OnInputDeviceChange;
 		}

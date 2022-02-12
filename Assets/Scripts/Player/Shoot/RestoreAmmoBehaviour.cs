@@ -21,7 +21,10 @@ namespace Player
 		public void Disable()
 		{
 			_isEnable = false;
-			_attackBehaviour.OnEnemyDamage -= OnEnemyDamage;
+			if (_attackBehaviour != null)
+			{
+				_attackBehaviour.OnEnemyDamage -= OnEnemyDamage;
+			}
 		}
 		
 		private void OnEnemyDamage(int hitCount)
